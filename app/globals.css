@@ -1,0 +1,68 @@
+@import "tailwindcss";
+
+/*
+  Palette sampled from Loftus Construction's own material.
+  girder and steel come from their photography, slate and steel-grey are the
+  two colors already present in their existing stylesheet.
+*/
+@theme {
+  --color-girder: #191d21;
+  --color-girder-soft: #232830;
+  --color-slate: #364f6d;
+  --color-slate-deep: #2a3e56;
+  --color-steel: #aab1b9;
+  --color-concrete: #d3d3d3;
+  --color-chalk: #f4f3f0;
+  --color-ink: #24282d;
+  --color-ink-soft: #5b6169;
+
+  --font-display: var(--font-source-serif), Georgia, "Times New Roman", serif;
+  --font-body: var(--font-archivo), "Helvetica Neue", Arial, sans-serif;
+}
+
+:root {
+  --ink-muted: #5b6169;
+  --hairline: #d8d6d0;
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  background: var(--color-chalk);
+  color: var(--color-ink);
+  font-family: var(--font-body);
+  font-size: 16px;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+
+h1,
+h2,
+h3 {
+  font-family: var(--font-display);
+  font-weight: 600;
+  text-wrap: balance;
+  letter-spacing: -0.005em;
+}
+
+a:focus-visible,
+button:focus-visible {
+  outline: 2px solid var(--color-slate);
+  outline-offset: 3px;
+}
+
+.tnum {
+  font-variant-numeric: tabular-nums;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    transition-duration: 0.001ms !important;
+  }
+}
