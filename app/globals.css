@@ -23,10 +23,24 @@
 :root {
   --ink-muted: #5b6169;
   --hairline: #d8d6d0;
+  /* Height of the pinned bar. Header.tsx keeps this current from the live
+     element; this value is only what the first paint scrolls against. */
+  --header-h: 96px;
+}
+
+@media (min-width: 1024px) {
+  :root {
+    --header-h: 76px;
+  }
 }
 
 html {
   -webkit-text-size-adjust: 100%;
+}
+
+/* Every anchor target clears the pinned bar, plus a little air. */
+[id] {
+  scroll-margin-top: calc(var(--header-h) + 12px);
 }
 
 body {

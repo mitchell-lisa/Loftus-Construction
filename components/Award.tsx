@@ -1,5 +1,5 @@
 import Image from "next/image";
-import Rule from "./Rule";
+import { Flank } from "./Rule";
 import { business } from "@/lib/business";
 
 export default function Award() {
@@ -10,10 +10,11 @@ export default function Award() {
     <section className="bg-slate text-white">
       <div className="mx-auto grid max-w-6xl items-center gap-8 px-5 py-12 lg:grid-cols-[1fr_0.85fr] lg:py-14">
         <div>
-          <Rule tone="dark" width={56} thickness={3} gap={5} className="mb-5" />
-          <p className="text-[17px] font-semibold leading-snug">
-            {title}, {year}
-          </p>
+          <Flank tone="dark" thickness={3} gap={5} className="mb-1">
+            <p className="text-[17px] font-semibold leading-snug">
+              {title}, {year}
+            </p>
+          </Flank>
           <p className="mt-1 text-[15px] text-[#c6d2e2]">{body}</p>
           <p className="mt-4 max-w-[58ch] text-[15.5px] leading-relaxed text-[#dbe3ee]">
             {detail}

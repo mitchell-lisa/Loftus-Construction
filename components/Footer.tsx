@@ -1,12 +1,13 @@
-import Rule from "./Rule";
+import { Flank } from "./Rule";
 import { business } from "@/lib/business";
 
 export default function Footer() {
   return (
     <footer className="bg-girder text-steel">
       <div className="mx-auto max-w-6xl px-5 pb-28 pt-12 lg:pb-12">
-        <Rule tone="dark" width={72} className="mb-6" />
-        <p className="text-[16px] font-semibold text-white">{business.legalName}</p>
+        <Flank tone="dark" className="mb-1">
+          <p className="text-[16px] font-semibold text-white">{business.legalName}</p>
+        </Flank>
         <p className="mt-1 text-[15px]">{business.descriptor}</p>
         <p className="mt-4 text-[15px]">
           {business.street}, {business.city}, {business.state} {business.zip}

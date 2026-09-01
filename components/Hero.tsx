@@ -27,7 +27,7 @@ export default function Hero() {
 
         <div className="absolute inset-x-0 bottom-0">
           <div className="mx-auto max-w-6xl px-5 pb-8 lg:pb-10">
-            <Rule tone="dark" width={84} className="mb-5" />
+            <Rule tone="dark" side="both" width={84} className="mb-5" />
             <h1 className="max-w-[15ch] text-[clamp(1.9rem,6.2vw,3.2rem)] leading-[1.06] drop-shadow-[0_2px_10px_rgba(15,18,21,0.85)]">
               Bridge, culvert and dam construction
             </h1>
