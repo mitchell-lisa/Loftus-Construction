@@ -28,9 +28,15 @@ export default function Hero() {
         <div className="absolute inset-x-0 bottom-0">
           <div className="mx-auto max-w-6xl px-5 pb-8 lg:pb-10">
             <Rule tone="dark" side="both" width={84} className="mb-5" />
-            <h1 className="max-w-[15ch] text-[clamp(1.9rem,6.2vw,3.2rem)] leading-[1.06] drop-shadow-[0_2px_10px_rgba(15,18,21,0.85)]">
-              Bridge, culvert and dam construction
+            <h1 className="max-w-[19ch] text-[clamp(1.75rem,5.6vw,3rem)] leading-[1.06] drop-shadow-[0_2px_10px_rgba(15,18,21,0.85)]">
+              Design-build, preconstruction, construction
             </h1>
+            {/* The delivery methods lead, but the cover still has to say what
+                gets built, which is what the structure line carries. */}
+            <p className="mt-3 max-w-[52ch] text-[clamp(0.95rem,2.4vw,1.05rem)] leading-snug [text-wrap:balance] text-concrete drop-shadow-[0_2px_8px_rgba(15,18,21,0.9)]">
+              Bridges, culverts, retaining walls, foundations, structural
+              rehabilitation and dams
+            </p>
             <a
               href={business.phoneHref}
               data-primary="true"
