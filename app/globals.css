@@ -1,36 +1,37 @@
 @import "tailwindcss";
 
 /*
-  Palette sampled from Loftus Construction's own material.
-  girder and steel come from their photography, slate and steel-grey are the
-  two colors already present in their existing stylesheet.
+  Brand blue is sampled from the current logo PNG (interior pixels cluster
+  near #0000c8 and #0016e4). #0014e0 sits in that family.
+  The dimensional-letters mark is a different navy (#222e61) and is not recolored.
+  girder is the near-black used for the preview bar. steel and concrete stay
+  neutral so photographs are not tinted.
 */
 @theme {
   --color-girder: #191d21;
   --color-girder-soft: #232830;
-  --color-slate: #364f6d;
-  --color-slate-deep: #2a3e56;
+  --color-brand: #0014e0;
   --color-steel: #aab1b9;
   --color-concrete: #d3d3d3;
   --color-chalk: #f4f3f0;
-  --color-ink: #24282d;
-  --color-ink-soft: #5b6169;
+  --color-ink: #1c1e22;
+  --color-ink-soft: #5c6168;
 
   --font-display: var(--font-source-serif), Georgia, "Times New Roman", serif;
   --font-body: var(--font-archivo), "Helvetica Neue", Arial, sans-serif;
 }
 
 :root {
-  --ink-muted: #5b6169;
+  --ink-muted: #5c6168;
   --hairline: #d8d6d0;
   /* Height of the pinned bar. Header.tsx keeps this current from the live
      element; this value is only what the first paint scrolls against. */
-  --header-h: 96px;
+  --header-h: 128px;
 }
 
 @media (min-width: 1024px) {
   :root {
-    --header-h: 76px;
+    --header-h: 112px;
   }
 }
 
@@ -64,12 +65,28 @@ h3 {
 
 a:focus-visible,
 button:focus-visible {
-  outline: 2px solid var(--color-slate);
+  outline: 2px solid var(--color-brand);
   outline-offset: 3px;
 }
 
 .tnum {
   font-variant-numeric: tabular-nums;
+}
+
+dialog.photo-dialog {
+  width: min(960px, calc(100vw - 1.5rem));
+  max-height: calc(100vh - 1.5rem);
+  max-width: calc(100vw - 1.5rem);
+  margin: auto;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  overflow: visible;
+  color: white;
+}
+
+dialog.photo-dialog::backdrop {
+  background: rgba(20, 22, 26, 0.94);
 }
 
 @media (prefers-reduced-motion: reduce) {

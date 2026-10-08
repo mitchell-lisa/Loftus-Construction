@@ -8,10 +8,10 @@ export default function DemoBanner() {
   if (business.status !== "demo" || hidden) return null;
 
   return (
-    <div className="bg-slate-deep text-white">
+    <div className="bg-girder text-white">
       <div className="mx-auto flex max-w-6xl items-start gap-4 px-5 py-2.5 text-[13px] leading-snug sm:items-center">
         <p className="flex-1">
-          Preview built on spec by {business.builder.name}. Not the official website
+          Preview built by {business.builder.name}. This is not the official website
           of {business.legalName}
         </p>
         <button

@@ -1,7 +1,26 @@
 # Loftus Construction, Inc. research profile
 
-Status: demo / spec rebuild. Researched 2026-08-31. Every line carries its source.
-Nothing in this file may appear on the site unless it has a source next to it.
+Status: demo preview for a paying client. Researched 2026-08-31. Asset update 2026-10-08.
+Every line carries its source. Nothing in this file may appear on the site unless it has a source next to it.
+
+## Update 2026-10-08, files from Ryan Loftus
+
+Ryan Loftus sent logos and jobsite photographs on 8 October 2026 (upload account rloft24@gmail.com, folder owned by mitchell@mjlcollective.com). He is the client contact on this engagement. No title, biography, or staff role for Ryan was included for publication, so his name is not added to the team. The 2019 team page remains the only staff source.
+
+Used on the site, and only as described in `ASSETS.md`:
+
+- Current logo, raster PNG, bright blue. Header.
+- Dimensional-letters vector, fill `#222e61`, brick arch over the wordmark. Footer. Not recolored.
+- Brownsville photographs: a concrete bridge deck pour, plus one frame of broken concrete and an excavator beside the river.
+- University Avenue photographs: steel bridge underside, stone pier, stone and glass building, grated deck.
+
+Not published, because they were not supplied or are not safe to state:
+
+- Project owner, scope, contract value, street address, city beyond the folder name, or dates for Brownsville and University Avenue. Photo captions describe only what is visible. Capture times in the file inventory are not treated as project dates.
+- GPS. Originals that had coordinates were stripped before this repo received them. No coordinates are stored here.
+- The handwritten field sketch `university-avenue-01`.
+- The 25th anniversary mark (1994 to 2019). It is not a current anniversary.
+- License, insurance, bonding, hours, reviews, and a current staff roster. Still unknown. Still null.
 
 ## Identity
 

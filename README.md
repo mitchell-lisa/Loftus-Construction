@@ -1,8 +1,13 @@
 # Loftus Construction, Inc. website
 
-A speculative rebuild of loftusconstruction.com, built by MJL Collective from
-public sources only. Status is `demo`: the site is noindexed, carries a preview
-banner naming the builder, and contains no forms.
+A preview site for Loftus Construction, built by MJL Collective. Public facts
+still come from the sources in `PROFILE.md`. Logos and the Brownsville and
+University Avenue photographs were supplied by Ryan Loftus on 8 Oct 2026.
+Which files are on the page, and which were left out, is `ASSETS.md`.
+
+Status stays `demo`: the site is noindexed, carries a preview banner naming
+the builder, and contains no forms. Do not promote a preview deployment to
+production.
 
 ## Stack
 
@@ -51,13 +56,14 @@ Palette, sampled rather than guessed:
 
 | Token | Hex | Source |
 |---|---|---|
-| girder | `#191d21` | oxidized steel in their own project photography |
-| slate | `#364f6d` | already present in their existing stylesheet |
-| steel | `#aab1b9` | already present in their existing stylesheet |
-| concrete | `#d3d3d3` | new deck concrete, Strasburg Railroad photograph |
-| chalk | `#f4f3f0` | fresh pour, bridge deck photograph |
+| brand | `#0014e0` | current logo PNG, between interior blues `#0000c8` and `#0016e4` |
+| girder | `#191d21` | near-black for the preview bar |
+| steel | `#aab1b9` | neutral grey from the old stylesheet |
+| concrete | `#d3d3d3` | photo placeholder behind images while they load |
+| chalk | `#f4f3f0` | page background |
 
-Photography is the company's own, taken from their current site. It is genuine
-but low resolution, capped at 1140 pixels wide, and the layout is built to sit
-within that limit. Replacing these files with owner-supplied originals improves
-every section without any code change.
+The header uses `logos/current-logo.png` in its own blue. The footer uses
+`logos/dimensional-letters.svg`, which is navy `#222e61` and is not recolored.
+The 25th anniversary mark is not on the site. Photography is the jobsite set
+listed in `ASSETS.md`. Older low-resolution files from loftusconstruction.com
+are not used.

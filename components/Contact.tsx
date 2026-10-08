@@ -3,7 +3,7 @@ import { business } from "@/lib/business";
 
 export default function Contact() {
   return (
-    <Section id="contact" className="bg-chalk">
+    <Section id="contact" className="bg-white">
       <SectionHeading sub="Call the office to discuss a project or request a proposal.">
         Contact
       </SectionHeading>
@@ -21,7 +21,7 @@ export default function Contact() {
               href={business.directionsUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-block border-b border-slate py-1 text-[15.5px] text-slate hover:border-ink hover:text-ink"
+              className="inline-block border-b border-brand py-1 text-[15.5px] text-brand hover:border-ink hover:text-ink"
             >
               Get directions
             </a>
@@ -32,7 +32,7 @@ export default function Contact() {
           <a
             href={business.phoneHref}
             data-primary="true"
-            className="inline-flex min-h-11 items-center border-b-2 border-slate pb-1 text-[26px] font-semibold text-ink hover:border-ink"
+            className="inline-flex min-h-11 items-center border-b-2 border-brand pb-1 text-[26px] font-semibold text-brand hover:border-ink hover:text-ink"
           >
             {business.phone}
           </a>
@@ -44,7 +44,7 @@ export default function Contact() {
           <p className="mt-2 text-[15.5px]">
             <a
               href={`mailto:${business.email}`}
-              className="inline-block border-b border-slate py-1 text-slate hover:border-ink hover:text-ink"
+              className="inline-block border-b border-brand py-1 text-brand hover:border-ink hover:text-ink"
             >
               {business.email}
             </a>

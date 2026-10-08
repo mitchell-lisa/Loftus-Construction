@@ -46,10 +46,10 @@ export const metadata: Metadata = {
     locale: "en_US",
     images: [
       {
-        url: "/images/strasburg-railroad-bridge.webp",
-        width: 1140,
-        height: 355,
-        alt: "Completed main track bridge replacement for the Strasburg Railroad at Gap, Pennsylvania",
+        url: business.hero.src,
+        width: business.hero.width,
+        height: business.hero.height,
+        alt: business.hero.alt,
       },
     ],
   },

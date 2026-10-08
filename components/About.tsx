@@ -3,14 +3,14 @@ import { business } from "@/lib/business";
 
 export default function About() {
   return (
-    <Section id="about" className="bg-chalk">
+    <Section id="about" className="bg-white">
       <SectionHeading sub={`Heavy civil contractor in ${business.city}, New Jersey, building for public agencies across Pennsylvania, New Jersey and Delaware since ${business.foundedYear}.`}>
         About the firm
       </SectionHeading>
 
       <div className="grid gap-10 lg:grid-cols-[1.1fr_0.9fr]">
         <div>
-          <blockquote className="border-l-2 border-slate pl-4 text-[16.5px] leading-relaxed text-ink">
+          <blockquote className="border-l-2 border-brand pl-4 text-[16.5px] leading-relaxed text-ink">
             {business.mission}
           </blockquote>
           <div className="mt-6 space-y-4 text-[15.5px] text-[color:var(--ink-muted)]">
@@ -26,7 +26,7 @@ export default function About() {
           {business.team.map((person) => (
             <div key={person.name}>
               <h3 className="text-[17px] text-ink">{person.name}</h3>
-              <p className="text-[14px] text-slate">{person.title}</p>
+              <p className="text-[14px] text-brand">{person.title}</p>
               <p className="mt-2 max-w-[52ch] text-[15px] text-[color:var(--ink-muted)]">
                 {person.bio}
               </p>

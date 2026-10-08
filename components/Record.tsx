@@ -11,8 +11,8 @@ export default function Record() {
       </SectionHeading>
 
       {current ? (
-        <div className="mb-8 border-l-2 border-[#b8891f] bg-[#f6ecd6] px-5 py-4">
-          <p className="text-[14.5px] font-semibold text-[#7a5308]">
+        <div className="mb-8 border-l-2 border-brand px-5 py-1">
+          <p className="text-[14.5px] font-semibold text-ink">
             Under contract now
           </p>
           <p className="mt-1 text-[16.5px] text-ink">{current.name}</p>

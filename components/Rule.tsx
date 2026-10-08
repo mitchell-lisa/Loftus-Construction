@@ -25,7 +25,7 @@ type Tone = "light" | "dark" | "slate";
 type Side = "left" | "right" | "both";
 
 const toneClass: Record<Tone, string> = {
-  light: "bg-girder",
+  light: "bg-brand",
   dark: "bg-white",
   slate: "bg-steel",
 };

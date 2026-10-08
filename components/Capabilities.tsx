@@ -5,9 +5,7 @@ import { business } from "@/lib/business";
 export default function Capabilities() {
   return (
     <Section id="capabilities" className="bg-chalk">
-      <SectionHeading sub="Loftus Construction provides comprehensive construction services for commercial, governmental and industrial clients.">
-        What we build
-      </SectionHeading>
+      <SectionHeading>What we build</SectionHeading>
 
       <div className="grid gap-x-10 gap-y-10 sm:grid-cols-2 lg:grid-cols-3">
         {business.capabilities.map((group) => (

@@ -1,6 +1,7 @@
 import DemoBanner from "@/components/DemoBanner";
 import Header from "@/components/Header";
 import Hero from "@/components/Hero";
+import Projects from "@/components/Projects";
 import Capabilities from "@/components/Capabilities";
 import Record from "@/components/Record";
 import Award from "@/components/Award";
@@ -17,6 +18,7 @@ export default function Page() {
       <Header />
       <main>
         <Hero />
+        <Projects />
         <Capabilities />
         <Record />
         <Award />

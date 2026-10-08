@@ -7,11 +7,11 @@ import { business } from "@/lib/business";
  */
 export default function StickyCall() {
   return (
-    <div className="fixed inset-x-0 bottom-0 z-40 border-t border-white/15 bg-girder/97 backdrop-blur-[2px] lg:hidden">
+    <div className="fixed inset-x-0 bottom-0 z-40 border-t border-[color:var(--hairline)] bg-white lg:hidden">
       <a
         href={business.phoneHref}
         data-primary="true"
-        className="flex min-h-14 items-center justify-center gap-2 px-5 text-[17px] font-semibold text-white"
+        className="flex min-h-14 items-center justify-center gap-2 px-5 text-[17px] font-semibold text-brand"
       >
         Call {business.phone}
       </a>

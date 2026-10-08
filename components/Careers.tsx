@@ -1,4 +1,3 @@
-import Image from "next/image";
 import { Section, SectionHeading } from "./Section";
 import { business } from "@/lib/business";
 
@@ -8,19 +7,8 @@ export default function Careers() {
 
   return (
     <>
-      <div className="mx-auto w-full max-w-[1140px]">
-        <Image
-          src="/images/bridge-deck-pour.webp"
-          alt="Loftus crews finishing a bridge deck pour"
-          width={1140}
-          height={355}
-          sizes="(min-width: 1140px) 1140px, 100vw"
-          className="h-auto w-full"
-        />
-      </div>
-
-      <Section id="careers" className="bg-white">
-        <SectionHeading sub="Loftus Construction is always looking for motivated, creative and dedicated professionals with a strong focus on the future.">
+      <Section id="careers" className="bg-chalk">
+        <SectionHeading sub="A one-year program for recent graduates, preferably in civil engineering.">
           Careers
         </SectionHeading>
 
@@ -44,7 +32,7 @@ export default function Careers() {
             <p className="mt-3 text-[15.5px]">
               <a
                 href={`mailto:${business.careersEmail}`}
-                className="inline-block border-b border-slate py-1 text-slate hover:border-ink hover:text-ink"
+                className="inline-block border-b border-brand py-1 text-brand hover:border-ink hover:text-ink"
               >
                 {business.careersEmail}
               </a>
