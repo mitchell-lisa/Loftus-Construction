@@ -62,7 +62,7 @@ Palette, sampled rather than guessed:
 | girder | `#191d21` | near-black for the preview bar |
 | steel | `#aab1b9` | neutral grey from the old stylesheet |
 | concrete | `#d3d3d3` | photo placeholder behind images while they load |
-| chalk | `#f4f3f0` | page background |
+| chalk | `#f2f4f6` | cool gray section bands |
 
 The header uses `logos/current-logo.png` in its own blue. The footer uses
 `logos/dimensional-letters.svg`, which is navy `#222e61` and is not recolored.

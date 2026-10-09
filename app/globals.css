@@ -12,10 +12,10 @@
   --color-girder: #191d21;
   --color-steel: #8b9098;
   --color-concrete: #d3d3d3;
-  --color-chalk: #f3f0e8;
+  --color-chalk: #f2f4f6;
   --color-ink: #1c1e22;
-  --color-paper: #f3f0e8;
-  --color-rule: #cfc8bc;
+  --color-paper: #ffffff;
+  --color-rule: #d5d8de;
 
   --font-display: var(--font-newsreader), Georgia, "Times New Roman", serif;
   --font-body: var(--font-public-sans), "Helvetica Neue", Arial, sans-serif;
@@ -23,7 +23,7 @@
 
 :root {
   --ink-muted: #4e545c;
-  --hairline: #d5d2cb;
+  --hairline: #d5d8de;
   --header-h: 124px;
   --banner-h: 56px;
 }
