@@ -28,7 +28,7 @@ export default function DemoBanner() {
   if (business.status !== "demo" || hidden) return null;
 
   return (
-    <div ref={ref} className="bg-navy text-white">
+    <div ref={ref} data-banner="true" className="on-dark bg-navy text-white">
       <div className="mx-auto flex max-w-6xl items-start gap-4 px-5 py-2.5 text-[13.5px] leading-snug sm:items-center">
         <p className="flex-1">
           Preview built by {business.builder.name}. This is not the official website of{" "}

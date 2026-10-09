@@ -8,16 +8,17 @@ Only the files in the first table are in the repo.
 
 | File | Where |
 |---|---|
-| `public/images/logos/current-logo.png` | Header wordmark. `components/Header.tsx`. |
-| `public/images/logos/dimensional-letters.svg` | Footer mark on the white footer. `components/Footer.tsx`. |
-| `public/images/jobs/brownsville-06.jpg` | Homepage hero and the Open Graph image. Side elevation, so a short phone crop still shows the span. `components/Hero.tsx`, `app/layout.tsx`. Not repeated in the gallery. |
-| `public/images/jobs/brownsville-05.jpg` | Brownsville lead photograph. `components/Projects.tsx` via `lib/business.ts`. |
-| `public/images/jobs/brownsville-03.jpg` | Brownsville gallery. |
+| `public/images/logos/current-logo-white.png` | Header wordmark on the dark chrome. The current logo with its alpha kept and the ink set to white. `components/Header.tsx`. |
+| `public/images/logos/current-logo.png` | Source wordmark. Not placed. The white file above is this image recolored. |
+| `public/images/logos/dimensional-letters-white.svg` | Footer mark on the dark chrome. `components/Footer.tsx`. |
+| `public/images/logos/dimensional-letters.svg` | Source sign, navy `#222e61`. Not placed. The white file above is this drawing recolored. |
+| `public/images/jobs/brownsville-16.jpg` | Homepage hero, the Open Graph image, and the Brownsville gallery. Overhead of the deck. |
+| `public/images/jobs/brownsville-05.jpg` | Brownsville card on the homepage and the projects index, and the Brownsville lead photograph. |
+| `public/images/jobs/brownsville-03.jpg` | Capabilities page lead, and the Brownsville gallery. |
 | `public/images/jobs/brownsville-11.jpg` | Brownsville gallery. |
-| `public/images/jobs/brownsville-16.jpg` | Brownsville gallery. |
 | `public/images/jobs/brownsville-untitled-01.jpg` | Brownsville gallery. Broken concrete and machines beside the river. |
 | `public/images/jobs/university-avenue-untitled-01.jpg` | University Avenue lead photograph. |
-| `public/images/jobs/university-avenue-untitled-02.jpg` | University Avenue gallery. |
+| `public/images/jobs/university-avenue-untitled-02.jpg` | Projects index lead, and the University Avenue gallery. |
 | `public/images/jobs/university-avenue-untitled-03.jpg` | University Avenue gallery. |
 | `public/images/jobs/university-avenue-untitled-04.jpg` | University Avenue gallery. |
 | `public/images/jobs/university-avenue-07.jpg` | University Avenue gallery. One grating detail. |
@@ -29,7 +30,7 @@ Only the files in the first table are in the repo.
 | File | Why |
 |---|---|
 | `logos/25th-anniversary.png` | The mark reads 1994 to 2019. It is not a current anniversary, and the source is a raster with a fringe on dark backgrounds. |
-| `logos/dimensional-letters.png` | Same art as `dimensional-letters.svg`. The SVG is the one on the page. |
+| `logos/dimensional-letters.png` | Same art as `dimensional-letters.svg`. The page uses the white SVG. |
 
 ### Brownsville
 
@@ -53,7 +54,8 @@ The hero and five gallery frames cover a side elevation, a wide view, the deck d
 | `brownsville-19.jpg` | Same pour moment as 08 and 11. |
 | `brownsville-20.jpg` | Tighter paver frame. Faces are not identifiable, and 11 already shows the machine. |
 | `brownsville-21.jpg` | Approach with trucks. Plates are not readable, and the view repeats the deck shots. |
-| `brownsville-22.jpg` | Another side elevation. The homepage uses `brownsville-06.jpg`. |
+| `brownsville-06.jpg` | Side elevation. The homepage uses the overhead frame, `brownsville-16.jpg`. |
+| `brownsville-22.jpg` | Another side elevation. The homepage uses the overhead frame. |
 | `brownsville/untitled/brownsville-untitled-02.jpg` | Backlit and hazy. Left out on purpose. |
 | `brownsville/untitled/brownsville-untitled-03.jpg` | High context frame. The structure is clearer in the frames that are used. |
 | `brownsville/untitled/brownsville-untitled-04.jpg` | Wide context of the same earlier visit. `untitled-01` is the frame that shows the work. |

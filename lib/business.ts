@@ -393,8 +393,8 @@ export const business: Business = {
   ],
 
   hero: {
-    src: "/images/jobs/brownsville-06.jpg",
-    alt: "Side view of a concrete bridge on piers over a river, Brownsville",
+    src: "/images/jobs/brownsville-16.jpg",
+    alt: "Overhead view of a concrete bridge deck, with crew and a truck on the span over a river, Brownsville",
     width: 2400,
     height: 1800,
   },

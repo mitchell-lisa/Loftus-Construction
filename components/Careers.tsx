@@ -1,4 +1,4 @@
-import { Section, SectionHeading } from "./Section";
+import { Section } from "./Section";
 import { business } from "@/lib/business";
 
 export default function Careers() {
@@ -6,19 +6,20 @@ export default function Careers() {
   const { program, blurb, philosophy } = business.careers;
 
   return (
-    <Section id="careers" className="bg-white">
-      <SectionHeading>Careers</SectionHeading>
-      <div className="mt-8 grid gap-10 lg:grid-cols-2">
+    <Section className="bg-white">
+      <div className="grid gap-12 lg:grid-cols-2">
         <div>
-          <h3 className="text-[1.45rem] text-navy">{program}</h3>
-          <p className="mt-3 max-w-[52ch] text-[17px] text-[color:var(--ink-muted)]">{blurb}</p>
-          <p className="mt-4 max-w-[52ch] text-[17px] text-[color:var(--ink-muted)]">
+          <h2 className="text-[clamp(1.8rem,2.4vw,2.3rem)] leading-none text-navy">{program}</h2>
+          <p className="mt-4 max-w-[52ch] text-[17px] leading-relaxed text-ink">{blurb}</p>
+          <p className="mt-4 max-w-[52ch] text-[17px] leading-relaxed text-ink">
             The firm describes its hiring approach as {philosophy}.
           </p>
         </div>
         <div>
-          <h3 className="text-[1.45rem] text-navy">Sending a resume</h3>
-          <p className="mt-3 max-w-[46ch] text-[17px] text-[color:var(--ink-muted)]">
+          <h2 className="text-[clamp(1.8rem,2.4vw,2.3rem)] leading-none text-navy">
+            Sending a resume
+          </h2>
+          <p className="mt-4 max-w-[46ch] text-[17px] leading-relaxed text-ink">
             Resumes go to {business.careersContact} by mail, fax or email.
           </p>
           <p className="mt-4">
@@ -32,9 +33,7 @@ export default function Careers() {
           {business.fax ? (
             <p className="mt-2 text-[16px] text-[color:var(--ink-muted)]">Fax {business.fax}</p>
           ) : null}
-          <p className="mt-4 text-[15px] text-[color:var(--ink-muted)]">
-            An equal opportunity employer.
-          </p>
+          <p className="mt-4 text-[15px] text-[color:var(--ink-muted)]">An equal opportunity employer.</p>
         </div>
       </div>
     </Section>

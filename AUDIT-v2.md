@@ -90,3 +90,15 @@ The copy is not the problem. Words like "solutions" were already pulled. The lay
 5. Make the bid path obvious: phone, email, and a request-for-quote form that is labeled as a demo and does not submit.
 6. Take the 2019 bios off the page. Leave owner, scope, dates, current team, testimonials, and license and insurance as nulls in code, with no filler on the screen.
 7. Keep noindex, the preview banner, alt text, one h1 per page, and Ryan's photographs only.
+
+## Round 5 self-critique
+
+Checked against the standard of a top-tier heavy civil site: a dark bar, a real wordmark, full-bleed work, and a record you can read without hunting. Three things fell short of that and were fixed.
+
+The phone hero was river and sky. `brownsville-16.jpg` is a tall aerial, and a nearly square crop showed the whole frame, with the deck as a thin band. The mobile image now locks on the deck, the crew, and the truck. The wide desktop crop is unchanged. The headline, the phone number, and Request a bid stay on the first screen.
+
+The record title used the same deep bottom padding as the full-viewport hero, which only exists so the bid button clears the phone bar. On this page that padding was empty navy, and the table started late. The padding is gone. At desktop width the contract table begins on the first screen. At phone width each contract is a stack, so the owner and the value are not cut off at the right edge.
+
+The homepage followed the Brownsville hero with another Brownsville frame. The next frame is University Avenue.
+
+The header wordmark was measured, not redrawn. It sits inside the bar, on the same left edge as the page grid, and it is the current logo with the ink set to white. The speed lines are still in the file. White and `#c5cad3` on chrome `#12162a` clear WCAG AA. Logo blue is not used as type on that bar.

@@ -4,22 +4,17 @@ export function Section({
   id,
   children,
   className = "",
+  compact = false,
 }: {
   id?: string;
   children: ReactNode;
   className?: string;
+  compact?: boolean;
 }) {
+  const pad = compact ? "px-5 py-8 lg:py-12" : "px-5 py-16 lg:py-24";
   return (
     <section id={id} className={className}>
-      <div className="mx-auto max-w-6xl px-5 py-14 lg:py-20">{children}</div>
+      <div className={`mx-auto max-w-6xl ${pad}`}>{children}</div>
     </section>
-  );
-}
-
-export function SectionHeading({ children }: { children: ReactNode }) {
-  return (
-    <h2 className="max-w-[14ch] text-[clamp(2.4rem,5vw,3.8rem)] leading-[0.95] text-navy">
-      {children}
-    </h2>
   );
 }

@@ -1,5 +1,5 @@
 import Divider from "./Divider";
-import { Section, SectionHeading } from "./Section";
+import { Section } from "./Section";
 import { business } from "@/lib/business";
 
 /**
@@ -8,19 +8,12 @@ import { business } from "@/lib/business";
  */
 export default function About() {
   return (
-    <Section id="about" className="bg-chalk">
-      <SectionHeading>About the firm</SectionHeading>
-      <p className="mt-4 max-w-[54ch] text-[17px] text-[color:var(--ink-muted)]">
-        Heavy civil contractor in {business.city}, New Jersey, building for public
-        agencies across Pennsylvania, New Jersey and Delaware since {business.foundedYear}.
-      </p>
-
-      <Divider className="mt-10" />
-      <blockquote className="mt-6 max-w-[28ch] text-[clamp(1.45rem,2.4vw,1.85rem)] leading-snug text-navy">
+    <Section className="bg-white">
+      <blockquote className="max-w-[28ch] text-[clamp(1.55rem,2.6vw,2.05rem)] leading-snug text-navy">
         {business.mission}
       </blockquote>
-
-      <div className="mt-8 max-w-[66ch] space-y-4 text-[17px] text-[color:var(--ink-muted)]">
+      <Divider className="mt-10" />
+      <div className="mt-8 max-w-[66ch] space-y-4 text-[17px] leading-relaxed text-ink">
         {business.history.map((paragraph) => (
           <p key={paragraph.slice(0, 32)}>{paragraph}</p>
         ))}

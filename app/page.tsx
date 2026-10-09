@@ -1,18 +1,19 @@
 import type { Metadata } from "next";
 import Hero from "@/components/Hero";
+import HomeBands from "@/components/HomeBands";
 import { business } from "@/lib/business";
-import Projects from "@/components/Projects";
-import Capabilities from "@/components/Capabilities";
-import Record from "@/components/Record";
-import Award from "@/components/Award";
-import Qualifications from "@/components/Qualifications";
-import About from "@/components/About";
-import Careers from "@/components/Careers";
-import Contact from "@/components/Contact";
+
+const description =
+  "Heavy civil contractor in Cinnaminson, New Jersey. Bridges, culverts, retaining walls, foundations, structural rehabilitation and dams for PennDOT, the Pennsylvania Turnpike Commission, NJDOT, NJ Transit and the City of Philadelphia since 1994.";
+
+const title = `${business.legalName} | Heavy civil bridge construction, ${business.city} NJ`;
 
 export const metadata: Metadata = {
+  description,
   alternates: { canonical: "/" },
   openGraph: {
+    title,
+    description,
     url: "/",
     images: [
       {
@@ -27,16 +28,9 @@ export const metadata: Metadata = {
 
 export default function Page() {
   return (
-    <main>
+    <>
       <Hero />
-      <Projects />
-      <Capabilities />
-      <Record />
-      <Award />
-      <Qualifications />
-      <About />
-      <Careers />
-      <Contact />
-    </main>
+      <HomeBands />
+    </>
   );
 }

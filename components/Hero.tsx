@@ -8,27 +8,28 @@ export default function Hero() {
   return (
     <section
       id="top"
-      className="grid h-[calc(100svh-var(--header-h)-var(--banner-h))] min-h-[520px] grid-rows-[minmax(160px,1fr)_auto] bg-navy text-white"
+      className="on-dark grid h-[calc(100svh-var(--header-h)-var(--banner-h))] min-h-[520px] grid-rows-[minmax(160px,1fr)_auto] bg-navy text-white"
     >
-      <div className="relative min-h-0 bg-navy">
+      <div className="relative min-h-0 overflow-hidden bg-navy">
         <Image
           src={hero.src}
           alt={hero.alt}
           fill
           priority
-          sizes="100vw"
-          className="object-cover object-[center_36%] lg:object-[center_46%]"
+          sizes="(max-width: 1023px) 280vw, 100vw"
+          className="origin-[center_58%] scale-[2.8] object-cover lg:origin-center lg:scale-100 lg:object-[center_46%]"
         />
         <Divider className="absolute inset-x-0 bottom-0" />
       </div>
 
       <div className="bg-navy px-5 pb-20 pt-4 lg:px-8 lg:pb-8 lg:pt-6">
         <div className="mx-auto flex max-w-6xl flex-col gap-4 lg:flex-row lg:items-end lg:justify-between lg:gap-10">
-          <h1 className="max-w-[11ch] text-[clamp(2.35rem,5.4vw,4.8rem)] leading-[0.9] lg:max-w-[12ch]">
-            Heavy civil construction since {business.foundedYear}
+          <h1 className="max-w-[14ch] text-[clamp(2.4rem,5.2vw,4.75rem)] leading-[0.9]">
+            Heavy civil construction{" "}
+            <span className="whitespace-nowrap">since {business.foundedYear}</span>
           </h1>
           <div className="max-w-sm shrink-0 lg:pb-1">
-            <p className="text-[17px] leading-snug text-white/90 lg:text-[19px]">
+            <p className="text-[17px] leading-snug text-[#d5d8e2] lg:text-[19px]">
               Bridges, culverts, retaining walls, foundations, structural rehabilitation
               and dams. {business.city}, {business.state}.
             </p>
@@ -41,8 +42,8 @@ export default function Hero() {
                 {business.phone}
               </a>
               <a
-                href="/#contact"
-                className="inline-flex min-h-11 items-center bg-brand px-4 text-[16px] font-semibold text-white"
+                href="/contact"
+                className="inline-flex min-h-11 items-center bg-brand px-4 text-[16px] font-semibold text-white hover:bg-[#0012c4]"
               >
                 Request a bid
               </a>

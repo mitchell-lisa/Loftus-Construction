@@ -33,7 +33,7 @@ export default function RfqForm() {
               name={field.name}
               type={field.type}
               autoComplete="off"
-              className="mt-1 block min-h-11 w-full border border-navy/25 bg-white px-3 text-[16px] text-ink"
+              className="mt-1 block min-h-11 w-full border border-rule bg-white px-3 text-[16px] text-ink hover:border-navy"
             />
           </label>
         ))}
@@ -42,13 +42,13 @@ export default function RfqForm() {
           <textarea
             name="message"
             rows={5}
-            className="mt-1 block w-full border border-navy/25 bg-white px-3 py-2 text-[16px] text-ink"
+            className="mt-1 block w-full border border-rule bg-white px-3 py-2 text-[16px] text-ink hover:border-navy"
           />
         </label>
       </div>
       <button
         type="submit"
-        className="mt-5 inline-flex min-h-11 items-center bg-navy px-5 text-[16px] font-semibold text-white"
+        className="mt-5 inline-flex min-h-11 items-center bg-navy px-5 text-[16px] font-semibold text-white hover:bg-[#1a274f]"
       >
         Submit request
       </button>

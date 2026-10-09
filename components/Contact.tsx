@@ -1,18 +1,14 @@
-import Divider from "./Divider";
-import { Section, SectionHeading } from "./Section";
+import { Section } from "./Section";
 import RfqForm from "./RfqForm";
 import { business } from "@/lib/business";
 
 export default function Contact() {
   return (
-    <>
-    <Divider />
-    <Section id="contact" className="bg-chalk">
-      <SectionHeading>Contact</SectionHeading>
-      <div className="mt-8 grid gap-12 lg:grid-cols-2">
+    <Section className="bg-chalk">
+      <div className="grid gap-14 lg:grid-cols-2">
         <div>
           <p className="text-[17px] font-semibold text-navy">{business.legalName}</p>
-          <address className="mt-3 not-italic text-[17px] leading-relaxed text-[color:var(--ink-muted)]">
+          <address className="mt-3 not-italic text-[17px] leading-relaxed text-ink">
             {business.street}
             <br />
             {business.city}, {business.state} {business.zip}
@@ -49,13 +45,12 @@ export default function Contact() {
           </p>
         </div>
         <div>
-          <h3 className="text-[1.45rem] text-navy">Request a bid</h3>
+          <h2 className="text-[clamp(1.8rem,2.4vw,2.3rem)] leading-none text-navy">Request a bid</h2>
           <div className="mt-4">
             <RfqForm />
           </div>
         </div>
       </div>
     </Section>
-    </>
   );
 }

@@ -48,11 +48,12 @@ else needs to change.
 ## Design notes
 
 The three speed lines beside LOFTUS are the site's motif. They run out of the
-logo across the header, cross the photographs, mark the active section, and
-open the project spreads. They live in `components/Divider.tsx`. Colors are in
-`COLOR.md`. On a phone, Menu opens the section list.
+logo across the header, cross the photographs, and mark the current page.
+They live in `components/Divider.tsx`. Colors are in `COLOR.md`. On a phone,
+Menu opens the page list.
 Headlines are Newsreader. Body and navigation are Public Sans. Navy `#222e61`
-is the dimensional sign. Brand blue `#0014e0` is the current wordmark.
+is the dimensional sign. Brand blue `#0014e0` is the current wordmark. Chrome
+`#12162a` is the header, footer, and phone bar.
 
 Palette, sampled rather than guessed:
 
@@ -64,8 +65,9 @@ Palette, sampled rather than guessed:
 | concrete | `#d3d3d3` | photo placeholder behind images while they load |
 | chalk | `#f2f4f6` | cool gray section bands |
 
-The header uses `logos/current-logo.png` in its own blue. The footer uses
-`logos/dimensional-letters.svg`, which is navy `#222e61` and is not recolored.
+The header uses `logos/current-logo-white.png`, the current wordmark recolored
+white for the dark bar. The footer uses `logos/dimensional-letters-white.svg`.
+The blue and navy source files stay in the repo and are not placed on the chrome.
 The 25th anniversary mark is not on the site. Photography is the jobsite set
 listed in `ASSETS.md`. Older low-resolution files from loftusconstruction.com
 are not used.

@@ -9,6 +9,8 @@
 @theme {
   --color-navy: #222e61;
   --color-brand: #0014e0;
+  --color-chrome: #12162a;
+  --color-chrome-muted: #c5cad3;
   --color-girder: #191d21;
   --color-steel: #8b9098;
   --color-concrete: #d3d3d3;
@@ -71,6 +73,33 @@ input:focus-visible,
 textarea:focus-visible {
   outline: 2px solid var(--color-brand);
   outline-offset: 3px;
+}
+
+.on-dark :is(a, button, input, textarea, summary):focus-visible {
+  outline-color: #ffffff;
+}
+
+.on-dark .skip-link:focus-visible {
+  outline-color: #12162a;
+}
+
+.skip-link {
+  position: absolute;
+  left: 1rem;
+  top: 0.75rem;
+  z-index: 60;
+  transform: translateY(-160%);
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  background: #ffffff;
+  color: #12162a;
+  padding: 0.5rem 0.75rem;
+  font-weight: 600;
+}
+
+.skip-link:focus {
+  transform: none;
 }
 
 .tnum {

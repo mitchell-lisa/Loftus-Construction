@@ -71,7 +71,9 @@ export default function RootLayout({
       <body>
         <DemoBanner />
         <Header />
-        {children}
+        <main id="content" tabIndex={-1} className="outline-none">
+          {children}
+        </main>
         <Footer />
         <StickyCall />
         <script

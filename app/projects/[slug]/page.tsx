@@ -103,8 +103,8 @@ export default async function ProjectPage({ params }: Props) {
   const sequence = frames[project.slug] ?? [];
 
   return (
-    <main>
-      <section className="grid h-[calc(100svh-var(--header-h)-var(--banner-h))] min-h-[520px] grid-rows-[minmax(180px,1fr)_auto] bg-navy text-white">
+    <>
+      <section className="on-dark grid h-[calc(100svh-var(--header-h)-var(--banner-h))] min-h-[520px] grid-rows-[minmax(180px,1fr)_auto] bg-navy text-white">
         <div className="relative min-h-0 bg-navy">
           <Image
             src={lead.src}
@@ -125,7 +125,7 @@ export default async function ProjectPage({ params }: Props) {
               <p className="text-[1.2rem] leading-snug text-white">{line}</p>
               <p className="mt-4">
                 <Link
-                  href="/#projects"
+                  href="/projects"
                   className="inline-flex min-h-11 items-center border-b-2 border-white text-white"
                 >
                   All projects
@@ -159,6 +159,6 @@ export default async function ProjectPage({ params }: Props) {
           );
         })}
       </div>
-    </main>
+    </>
   );
 }
