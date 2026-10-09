@@ -14,6 +14,19 @@ const nav = [
   { label: "Contact", href: "/#contact" },
 ];
 
+function ActiveMark({ on }: { on: boolean }) {
+  return (
+    <span
+      aria-hidden="true"
+      className={`mt-1 flex w-full flex-col gap-[3px] ${on ? "" : "invisible"}`}
+    >
+      <span className="block h-[2px] w-full bg-brand" />
+      <span className="block h-px w-full bg-brand" />
+      <span className="block h-px w-full bg-brand" />
+    </span>
+  );
+}
+
 export default function Header() {
   const ref = useRef<HTMLElement>(null);
   const [active, setActive] = useState("");
@@ -38,22 +51,33 @@ export default function Header() {
   }, [open]);
 
   useEffect(() => {
-    const sections = nav
-      .map((item) => document.getElementById(item.href.split("#")[1]))
-      .filter((el): el is HTMLElement => el !== null);
-    if (sections.length === 0) return;
-
-    const io = new IntersectionObserver(
-      (entries) => {
-        const hit = entries
-          .filter((entry) => entry.isIntersecting)
-          .sort((a, b) => a.boundingClientRect.top - b.boundingClientRect.top)[0];
-        if (hit) setActive(`#${hit.target.id}`);
-      },
-      { rootMargin: "-45% 0px -50% 0px", threshold: 0 },
-    );
-    sections.forEach((section) => io.observe(section));
-    return () => io.disconnect();
+    const update = () => {
+      const hero = document.getElementById("top");
+      if (hero && hero.getBoundingClientRect().bottom > window.innerHeight * 0.55) {
+        setActive("");
+        return;
+      }
+      const header = parseFloat(
+        getComputedStyle(document.documentElement).getPropertyValue("--header-h"),
+      );
+      const mark = window.scrollY + (Number.isFinite(header) ? header : 100) + 32;
+      let current = "";
+      for (const item of nav) {
+        const id = item.href.split("#")[1];
+        const el = document.getElementById(id);
+        if (!el) continue;
+        const top = el.getBoundingClientRect().top + window.scrollY;
+        if (top <= mark) current = `#${id}`;
+      }
+      setActive(current);
+    };
+    update();
+    window.addEventListener("scroll", update, { passive: true });
+    window.addEventListener("resize", update);
+    return () => {
+      window.removeEventListener("scroll", update);
+      window.removeEventListener("resize", update);
+    };
   }, []);
 
   useEffect(() => {
@@ -77,18 +101,13 @@ export default function Header() {
     setActive(`#${id}`);
   };
 
-  const itemClass = (on: boolean) =>
-    `inline-flex min-h-11 items-center border-b-2 ${
-      on ? "border-brand text-brand" : "border-transparent hover:text-brand"
-    }`;
-
   return (
     <header ref={ref} className="sticky top-0 z-50 bg-white text-navy">
-      <div className="mx-auto flex max-w-6xl items-center gap-4 px-5 py-3">
+      <div className="mx-auto flex max-w-[1440px] items-center gap-4 px-5 py-3">
         <a
           href="/#top"
           onClick={jump("/#top")}
-          className="flex min-h-11 min-w-0 flex-1 items-center lg:w-[300px] lg:flex-none"
+          className="flex min-h-11 min-w-0 flex-1 items-center lg:w-[280px] lg:flex-none"
         >
           <Image
             src="/images/logos/current-logo.png"
@@ -96,10 +115,16 @@ export default function Header() {
             width={1200}
             height={285}
             loading="eager"
-            sizes="(min-width: 1024px) 300px, 220px"
-            className="h-auto w-full max-w-[220px] lg:max-w-none"
+            sizes="(min-width: 1024px) 280px, 210px"
+            className="h-auto w-full max-w-[210px] lg:max-w-none"
           />
         </a>
+
+        <div aria-hidden="true" className="hidden min-w-16 flex-1 flex-col justify-center gap-[5px] lg:flex">
+          <span className="block h-[3px] w-full bg-brand" />
+          <span className="block h-[2px] w-full bg-brand" />
+          <span className="block h-px w-full bg-brand" />
+        </div>
 
         <button
           type="button"
@@ -111,7 +136,7 @@ export default function Header() {
           {open ? "Close" : "Menu"}
         </button>
 
-        <nav className="ml-auto hidden items-center gap-x-4 text-[15px] lg:flex">
+        <nav className="ml-auto hidden items-end gap-x-4 text-[15px] lg:flex">
           {nav.map((item) => {
             const on = active === `#${item.href.split("#")[1]}`;
             return (
@@ -120,18 +145,22 @@ export default function Header() {
                 href={item.href}
                 onClick={jump(item.href)}
                 aria-current={on ? "true" : undefined}
-                className={itemClass(on)}
+                className={`inline-flex min-h-11 flex-col justify-center whitespace-nowrap ${
+                  on ? "text-brand" : "hover:text-brand"
+                }`}
               >
                 {item.label}
+                <ActiveMark on={on} />
               </a>
             );
           })}
           <a
             href={business.phoneHref}
             data-primary="true"
-            className="inline-flex min-h-11 items-center font-semibold text-brand"
+            className="inline-flex min-h-11 flex-col justify-center whitespace-nowrap font-semibold text-brand"
           >
             {business.phone}
+            <ActiveMark on={false} />
           </a>
         </nav>
       </div>
@@ -146,9 +175,12 @@ export default function Header() {
                 href={item.href}
                 onClick={jump(item.href)}
                 aria-current={on ? "true" : undefined}
-                className={`${itemClass(on)} w-full`}
+                className={`inline-flex min-h-11 w-full flex-col justify-center ${
+                  on ? "text-brand" : ""
+                }`}
               >
                 {item.label}
+                <ActiveMark on={on} />
               </a>
             );
           })}
@@ -162,7 +194,7 @@ export default function Header() {
         </nav>
       ) : null}
 
-      <Divider />
+      <Divider className="lg:hidden" />
     </header>
   );
 }

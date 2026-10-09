@@ -7,6 +7,61 @@ import { business, projectBySlug } from "@/lib/business";
 
 type Props = { params: Promise<{ slug: string }> };
 
+const frames: Record<string, { index: number; className: string; position: string; sizes: string }[]> = {
+  brownsville: [
+    {
+      index: 1,
+      className: "col-span-full aspect-[16/9]",
+      position: "object-[center_55%]",
+      sizes: "100vw",
+    },
+    {
+      index: 2,
+      className: "col-span-full aspect-[4/5] lg:col-span-5 lg:aspect-auto lg:min-h-[680px]",
+      position: "object-center",
+      sizes: "(min-width: 1024px) 42vw, 100vw",
+    },
+    {
+      index: 3,
+      className: "col-span-full aspect-[16/10] lg:col-span-7 lg:aspect-auto lg:min-h-[680px]",
+      position: "object-[center_40%]",
+      sizes: "(min-width: 1024px) 58vw, 100vw",
+    },
+    {
+      index: 4,
+      className: "col-span-full aspect-[2/1]",
+      position: "object-[center_48%]",
+      sizes: "100vw",
+    },
+  ],
+  "university-avenue": [
+    {
+      index: 1,
+      className: "col-span-full aspect-[16/9]",
+      position: "object-center",
+      sizes: "100vw",
+    },
+    {
+      index: 2,
+      className: "col-span-full aspect-[16/10] lg:col-span-7 lg:aspect-auto lg:min-h-[680px]",
+      position: "object-center",
+      sizes: "(min-width: 1024px) 58vw, 100vw",
+    },
+    {
+      index: 4,
+      className: "col-span-full aspect-square lg:col-span-5 lg:aspect-auto lg:min-h-[680px]",
+      position: "object-center",
+      sizes: "(min-width: 1024px) 42vw, 100vw",
+    },
+    {
+      index: 3,
+      className: "col-span-full aspect-[2/1]",
+      position: "object-[center_60%]",
+      sizes: "100vw",
+    },
+  ],
+};
+
 export function generateStaticParams() {
   return business.photoProjects.map((project) => ({ slug: project.slug }));
 }
@@ -41,66 +96,68 @@ export default async function ProjectPage({ params }: Props) {
   const project = projectBySlug(slug);
   if (!project) notFound();
 
-  const [lead, ...rest] = project.photos;
-  const split = project.summary.indexOf(". ");
-  const line = split === -1 ? project.summary : project.summary.slice(0, split + 1);
-  const restCopy = split === -1 ? "" : project.summary.slice(split + 2);
-  const crop =
-    project.slug === "brownsville"
-      ? "object-cover object-[center_58%] lg:object-[center_48%]"
-      : "object-cover object-center";
+  const lead = project.photos[0];
+  const cut = project.summary.indexOf(". ");
+  const line = cut === -1 ? project.summary : project.summary.slice(0, cut + 1);
+  const rest = cut === -1 ? "" : project.summary.slice(cut + 2);
+  const sequence = frames[project.slug] ?? [];
 
   return (
     <main>
-      <section className="grid h-[calc(100svh-var(--header-h)-var(--banner-h))] min-h-[460px] grid-rows-[auto_auto_minmax(0,1fr)] bg-navy text-white lg:grid-cols-2 lg:grid-rows-1">
-        <div className="px-5 pb-5 pt-5 lg:flex lg:flex-col lg:justify-center lg:px-12 lg:py-12">
-          <h1 className="max-w-[12ch] text-[clamp(2.4rem,5vw,4.4rem)] leading-[0.92]">
-            {project.name}
-          </h1>
-          <p className="mt-4 max-w-[34ch] text-[1.2rem] leading-snug text-white">{line}</p>
-          <p className="mt-6">
-            <Link
-              href="/#projects"
-              className="inline-flex min-h-11 items-center border-b-2 border-white text-white"
-            >
-              All projects
-            </Link>
-          </p>
-          <Divider tone="white" className="mt-6 hidden lg:flex" />
-        </div>
-        <Divider tone="white" className="lg:hidden" />
-        <div className="relative min-h-[160px] bg-navy lg:min-h-0">
+      <section className="grid h-[calc(100svh-var(--header-h)-var(--banner-h))] min-h-[520px] grid-rows-[minmax(180px,1fr)_auto] bg-navy text-white">
+        <div className="relative min-h-0 bg-navy">
           <Image
             src={lead.src}
             alt={lead.alt}
             fill
             priority
-            sizes="(min-width: 1024px) 50vw, 100vw"
-            className={crop}
+            sizes="100vw"
+            className="object-cover object-[center_46%]"
           />
+          <Divider className="absolute inset-x-0 bottom-0" />
+        </div>
+        <div className="bg-navy px-5 pb-20 pt-4 lg:px-8 lg:pb-8 lg:pt-6">
+          <div className="mx-auto flex max-w-6xl flex-col gap-4 lg:flex-row lg:items-end lg:justify-between">
+            <h1 className="max-w-[12ch] text-[clamp(2.6rem,6vw,4.8rem)] leading-[0.9]">
+              {project.name}
+            </h1>
+            <div className="max-w-md lg:pb-1">
+              <p className="text-[1.2rem] leading-snug text-white">{line}</p>
+              <p className="mt-4">
+                <Link
+                  href="/#projects"
+                  className="inline-flex min-h-11 items-center border-b-2 border-white text-white"
+                >
+                  All projects
+                </Link>
+              </p>
+            </div>
+          </div>
         </div>
       </section>
 
-      {restCopy ? (
+      {rest ? (
         <div className="mx-auto max-w-6xl px-5 py-10">
-          <p className="max-w-[62ch] text-[17px] leading-relaxed text-[color:var(--ink-muted)]">
-            {restCopy}
-          </p>
+          <p className="max-w-[46ch] text-[1.15rem] leading-relaxed text-navy">{rest}</p>
         </div>
       ) : null}
 
-      <div className="flex flex-col gap-10 pb-16">
-        {rest.map((photo) => (
-          <Image
-            key={photo.src}
-            src={photo.src}
-            alt={photo.alt}
-            width={photo.width}
-            height={photo.height}
-            sizes="100vw"
-            className="h-auto w-full"
-          />
-        ))}
+      <div className="grid lg:grid-cols-12">
+        {sequence.map((frame) => {
+          const photo = project.photos[frame.index];
+          if (!photo) return null;
+          return (
+            <div key={photo.src} className={`relative bg-concrete ${frame.className}`}>
+              <Image
+                src={photo.src}
+                alt={photo.alt}
+                fill
+                sizes={frame.sizes}
+                className={`object-cover ${frame.position}`}
+              />
+            </div>
+          );
+        })}
       </div>
     </main>
   );

@@ -18,7 +18,7 @@ export function Section({
 
 export function SectionHeading({ children }: { children: ReactNode }) {
   return (
-    <h2 className="max-w-[18ch] text-[clamp(1.85rem,3.6vw,2.7rem)] leading-[1.05] text-navy">
+    <h2 className="max-w-[14ch] text-[clamp(2.4rem,5vw,3.8rem)] leading-[0.95] text-navy">
       {children}
     </h2>
   );

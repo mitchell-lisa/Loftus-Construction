@@ -47,10 +47,10 @@ else needs to change.
 
 ## Design notes
 
-The header edge, the first screen, and the breaks between bands use three equal
-speed lines, the stripes beside LOFTUS on the current wordmark. They live in
-`components/Divider.tsx`. The first screen locks the headline and the phone to a
-navy panel beside a Brownsville frame. On a phone, Menu opens the section list.
+The three speed lines beside LOFTUS are the site's motif. They run out of the
+logo across the header, cross the photographs, mark the active section, and
+open the project spreads. They live in `components/Divider.tsx`. Colors are in
+`COLOR.md`. On a phone, Menu opens the section list.
 Headlines are Newsreader. Body and navigation are Public Sans. Navy `#222e61`
 is the dimensional sign. Brand blue `#0014e0` is the current wordmark.
 

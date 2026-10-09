@@ -1,3 +1,4 @@
+import Divider from "./Divider";
 import { Section, SectionHeading } from "./Section";
 import { business } from "@/lib/business";
 
@@ -14,7 +15,8 @@ export default function About() {
         agencies across Pennsylvania, New Jersey and Delaware since {business.foundedYear}.
       </p>
 
-      <blockquote className="mt-8 max-w-[48ch] border-l-2 border-brand pl-4 text-[1.25rem] leading-snug text-navy">
+      <Divider className="mt-10" />
+      <blockquote className="mt-6 max-w-[28ch] text-[clamp(1.45rem,2.4vw,1.85rem)] leading-snug text-navy">
         {business.mission}
       </blockquote>
 

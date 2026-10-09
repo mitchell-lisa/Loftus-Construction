@@ -9,7 +9,6 @@ import Qualifications from "@/components/Qualifications";
 import About from "@/components/About";
 import Careers from "@/components/Careers";
 import Contact from "@/components/Contact";
-import Divider from "@/components/Divider";
 
 export const metadata: Metadata = {
   alternates: { canonical: "/" },
@@ -31,15 +30,12 @@ export default function Page() {
     <main>
       <Hero />
       <Projects />
-      <Divider />
       <Capabilities />
-      <Divider />
       <Record />
       <Award />
       <Qualifications />
       <About />
       <Careers />
-      <Divider />
       <Contact />
     </main>
   );

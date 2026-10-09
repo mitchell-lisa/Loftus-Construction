@@ -1,9 +1,12 @@
+import Divider from "./Divider";
 import { Section, SectionHeading } from "./Section";
 import RfqForm from "./RfqForm";
 import { business } from "@/lib/business";
 
 export default function Contact() {
   return (
+    <>
+    <Divider />
     <Section id="contact" className="bg-chalk">
       <SectionHeading>Contact</SectionHeading>
       <div className="mt-8 grid gap-12 lg:grid-cols-2">
@@ -53,5 +56,6 @@ export default function Contact() {
         </div>
       </div>
     </Section>
+    </>
   );
 }
