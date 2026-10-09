@@ -46,7 +46,7 @@ export default function Contact() {
           </p>
         </div>
         <div>
-          <h3 className="text-[1.45rem] text-navy">Request for quote</h3>
+          <h3 className="text-[1.45rem] text-navy">Request a bid</h3>
           <div className="mt-4">
             <RfqForm />
           </div>

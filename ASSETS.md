@@ -10,7 +10,7 @@ Only the files in the first table are in the repo.
 |---|---|
 | `public/images/logos/current-logo.png` | Header wordmark. `components/Header.tsx`. |
 | `public/images/logos/dimensional-letters.svg` | Footer mark on the white footer. `components/Footer.tsx`. |
-| `public/images/jobs/brownsville-15.jpg` | Homepage hero only, and the Open Graph image. `components/Hero.tsx`, `app/layout.tsx`. Not repeated in the gallery. |
+| `public/images/jobs/brownsville-06.jpg` | Homepage hero and the Open Graph image. Side elevation, so a short phone crop still shows the span. `components/Hero.tsx`, `app/layout.tsx`. Not repeated in the gallery. |
 | `public/images/jobs/brownsville-05.jpg` | Brownsville lead photograph. `components/Projects.tsx` via `lib/business.ts`. |
 | `public/images/jobs/brownsville-03.jpg` | Brownsville gallery. |
 | `public/images/jobs/brownsville-11.jpg` | Brownsville gallery. |
@@ -40,7 +40,7 @@ The hero and five gallery frames cover a side elevation, a wide view, the deck d
 | `brownsville-01.jpg` | Same pour, closer to frames already used. |
 | `brownsville-02.jpg` | Down-the-deck view. `brownsville-03.jpg` is the one used. |
 | `brownsville-04.jpg` | Equipment detail. `brownsville-11.jpg` is the one used. |
-| `brownsville-06.jpg` | Side elevation. The hero, `brownsville-15.jpg`, is that view. |
+| `brownsville-15.jpg` | Overhead of the deck with a wide band of sky and water. A phone crop of it showed almost no bridge. |
 | `brownsville-07.jpg` | Bridge is small in a wide valley. Less of the structure. |
 | `brownsville-08.jpg` | Same pour moment as 11 and 19. |
 | `brownsville-09.jpg` | Three-quarter view close to the hero and to 05. |
@@ -53,7 +53,7 @@ The hero and five gallery frames cover a side elevation, a wide view, the deck d
 | `brownsville-19.jpg` | Same pour moment as 08 and 11. |
 | `brownsville-20.jpg` | Tighter paver frame. Faces are not identifiable, and 11 already shows the machine. |
 | `brownsville-21.jpg` | Approach with trucks. Plates are not readable, and the view repeats the deck shots. |
-| `brownsville-22.jpg` | Another side elevation. The hero already holds that view. |
+| `brownsville-22.jpg` | Another side elevation. The homepage uses `brownsville-06.jpg`. |
 | `brownsville/untitled/brownsville-untitled-02.jpg` | Backlit and hazy. Left out on purpose. |
 | `brownsville/untitled/brownsville-untitled-03.jpg` | High context frame. The structure is clearer in the frames that are used. |
 | `brownsville/untitled/brownsville-untitled-04.jpg` | Wide context of the same earlier visit. `untitled-01` is the frame that shows the work. |

@@ -23,7 +23,8 @@
 :root {
   --ink-muted: #4e545c;
   --hairline: #d5d2cb;
-  --header-h: 148px;
+  --header-h: 108px;
+  --banner-h: 56px;
 }
 
 @media (min-width: 1024px) {
