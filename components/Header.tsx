@@ -1,35 +1,52 @@
 "use client";
 
 import Image from "next/image";
+import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
 import { business } from "@/lib/business";
+import Divider from "./Divider";
 
 const nav = [
-  { label: "Capabilities", href: "#capabilities" },
-  { label: "Record", href: "#record" },
-  { label: "About", href: "#about" },
-  { label: "Careers", href: "#careers" },
-  { label: "Contact", href: "#contact" },
+  { label: "Projects", href: "/projects" },
+  { label: "Capabilities", href: "/capabilities" },
+  { label: "Record", href: "/record" },
+  { label: "About", href: "/about" },
+  { label: "Careers", href: "/careers" },
+  { label: "Contact", href: "/contact" },
 ];
 
-/**
- * The bar is pinned, so two things have to stay true.
- *
- * Its height is published as --header-h and kept current with a ResizeObserver,
- * because that is what every section's scroll-margin is measured against: land a
- * section any higher and the bar covers its own heading. On a handset the bar
- * carries the mark on one line and the sections on a second line that scrolls
- * sideways, which keeps it about a tenth of the viewport rather than a third.
- *
- * The section under the reading line is marked with aria-current so the bar says
- * where you are, not just where you can go.
- */
+function currentHref(pathname: string) {
+  if (pathname === "/projects" || pathname.startsWith("/projects/")) return "/projects";
+  return nav.find((item) => item.href === pathname)?.href ?? "";
+}
+
+function ActiveMark({ on }: { on: boolean }) {
+  return (
+    <span
+      aria-hidden="true"
+      className={`mt-1 flex w-full flex-col gap-[3px] ${on ? "" : "invisible"}`}
+    >
+      <span className="block h-[2px] w-full bg-white" />
+      <span className="block h-px w-full bg-white" />
+      <span className="block h-px w-full bg-white" />
+    </span>
+  );
+}
+
 export default function Header() {
-  const ref = useRef<HTMLElement>(null);
-  const [active, setActive] = useState<string>("");
+  const pathname = usePathname();
+  const headerRef = useRef<HTMLElement>(null);
+  const buttonRef = useRef<HTMLButtonElement>(null);
+  const [open, setOpen] = useState(false);
+  const active = currentHref(pathname);
 
   useEffect(() => {
-    const el = ref.current;
+    setOpen(false);
+  }, [pathname]);
+
+  useEffect(() => {
+    const el = headerRef.current;
     if (!el) return;
     const publish = () =>
       document.documentElement.style.setProperty(
@@ -44,99 +61,165 @@ export default function Header() {
       ro.disconnect();
       window.removeEventListener("orientationchange", publish);
     };
-  }, []);
+  }, [open]);
 
   useEffect(() => {
-    const sections = nav
-      .map((item) => document.getElementById(item.href.slice(1)))
-      .filter((el): el is HTMLElement => el !== null);
-    if (sections.length === 0) return;
+    if (!open) return;
+    const header = headerRef.current;
+    const previousOverflow = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
 
-    // Watch a band just under the bar rather than the whole viewport, so the
-    // active item changes when a section reaches the reading line.
-    const io = new IntersectionObserver(
-      (entries) => {
-        const hit = entries
-          .filter((e) => e.isIntersecting)
-          .sort((a, b) => a.boundingClientRect.top - b.boundingClientRect.top)[0];
-        if (hit) setActive(`#${hit.target.id}`);
-      },
-      { rootMargin: "-45% 0px -50% 0px", threshold: 0 },
-    );
-    sections.forEach((s) => io.observe(s));
-    return () => io.disconnect();
-  }, []);
+    const inerted: HTMLElement[] = [];
+    document.querySelectorAll("main, footer, [data-banner], [data-sticky]").forEach((node) => {
+      const el = node as HTMLElement;
+      if (!el.hasAttribute("inert")) {
+        el.setAttribute("inert", "");
+        inerted.push(el);
+      }
+    });
 
-  /**
-   * Smooth scrolling lives here rather than on `html`, because a global
-   * scroll-behavior animates every programmatic window.scrollTo as well, which
-   * silently breaks scripted scrolling and any lazy image below the fold.
-   */
-  const jump = (href: string) => (e: React.MouseEvent<HTMLAnchorElement>) => {
-    const target = document.getElementById(href.slice(1));
-    if (!target) return;
-    e.preventDefault();
-    const still = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-    target.scrollIntoView({ behavior: still ? "auto" : "smooth", block: "start" });
-    history.pushState(null, "", href);
-    setActive(href);
-  };
+    const focusable = () => {
+      if (!header) return [];
+      return Array.from(header.querySelectorAll<HTMLElement>("a[href], button:not([disabled])")).filter(
+        (el) => el.getClientRects().length > 0,
+      );
+    };
 
-  const link = (item: (typeof nav)[number], extra = "") => {
-    const on = active === item.href;
-    return (
-      <a
-        key={item.href}
-        href={item.href}
-        onClick={jump(item.href)}
-        aria-current={on ? "true" : undefined}
-        className={`inline-flex min-h-11 shrink-0 items-center border-b-2 ${
-          on ? "border-steel text-white" : "border-transparent hover:text-white"
-        } ${extra}`}
-      >
-        {item.label}
-      </a>
-    );
-  };
+    const menuLink = header?.querySelector<HTMLElement>("#site-menu a[href]");
+    menuLink?.focus();
+
+    const onKey = (event: KeyboardEvent) => {
+      if (event.key === "Escape") {
+        event.preventDefault();
+        setOpen(false);
+        buttonRef.current?.focus();
+        return;
+      }
+      if (event.key !== "Tab") return;
+      const items = focusable();
+      if (items.length === 0) return;
+      const first = items[0];
+      const last = items[items.length - 1];
+      const current = document.activeElement;
+      if (event.shiftKey && current === first) {
+        event.preventDefault();
+        last.focus();
+      } else if (!event.shiftKey && current === last) {
+        event.preventDefault();
+        first.focus();
+      }
+    };
+
+    document.addEventListener("keydown", onKey);
+    return () => {
+      document.body.style.overflow = previousOverflow;
+      inerted.forEach((el) => el.removeAttribute("inert"));
+      document.removeEventListener("keydown", onKey);
+    };
+  }, [open]);
 
   return (
     <header
-      ref={ref}
-      className="sticky top-0 z-50 border-b border-white/12 bg-girder text-white"
+      ref={headerRef}
+      className="on-dark sticky top-0 z-50 max-h-[calc(100svh-3.5rem)] overflow-y-auto bg-navy text-white lg:max-h-none lg:overflow-visible"
     >
-      <div className="mx-auto max-w-6xl px-5">
-        <div className="flex items-center justify-between gap-6 py-2.5 lg:py-4">
-          <a href="#top" onClick={jump("#top")} className="flex min-h-11 items-center">
-            <Image
-              src="/images/loftus-logo.png"
-              alt={business.legalName}
-              width={367}
-              height={88}
-              priority
-              className="h-8 w-auto sm:h-9 lg:h-10"
-            />
-          </a>
+      <a href="#content" className="skip-link">
+        Skip to content
+      </a>
+      <div className="mx-auto flex max-w-6xl items-center gap-4 px-5 py-3">
+        <Link
+          href="/"
+          className="flex min-h-11 min-w-0 flex-1 items-center lg:w-[220px] lg:flex-none"
+        >
+          <Image
+            src="/images/logos/current-logo-white.png"
+            alt={business.legalName}
+            width={1200}
+            height={285}
+            loading="eager"
+            unoptimized
+            sizes="(min-width: 1024px) 220px, 190px"
+            className="h-auto w-full max-w-[190px] lg:max-w-none"
+          />
+        </Link>
 
-          <nav className="hidden items-center gap-x-5 text-[13px] uppercase tracking-[0.06em] text-steel lg:flex">
-            {nav.map((item) => link(item))}
-            <a
-              href={business.phoneHref}
-              data-primary="true"
-              className="inline-flex min-h-11 items-center font-semibold tracking-normal text-white"
-            >
-              {business.phone}
-            </a>
-          </nav>
+        <div aria-hidden="true" className="hidden min-w-8 flex-1 flex-col justify-center gap-[5px] lg:flex">
+          <span className="block h-[3px] w-full bg-white" />
+          <span className="block h-[2px] w-full bg-white" />
+          <span className="block h-px w-full bg-white" />
         </div>
 
-        {/* Handset row: one line, scrolled sideways rather than wrapped. */}
-        <nav
-          aria-label="Sections"
-          className="-mx-5 flex gap-x-5 overflow-x-auto px-5 pb-0.5 text-[12.5px] uppercase tracking-[0.06em] text-steel [scrollbar-width:none] lg:hidden [&::-webkit-scrollbar]:hidden"
+        <button
+          ref={buttonRef}
+          type="button"
+          className="inline-flex min-h-11 w-16 shrink-0 items-center justify-end font-semibold lg:hidden"
+          aria-expanded={open}
+          aria-controls="site-menu"
+          onClick={() => setOpen((value) => !value)}
         >
-          {nav.map((item) => link(item))}
+          {open ? "Close" : "Menu"}
+        </button>
+
+        <nav aria-label="Primary" className="ml-auto hidden items-end gap-x-3 text-[14px] lg:flex xl:gap-x-4 xl:text-[15px]">
+          {nav.map((item) => {
+            const on = active === item.href;
+            return (
+              <Link
+                key={item.href}
+                href={item.href}
+                aria-current={on ? "page" : undefined}
+                className={`inline-flex min-h-11 flex-col justify-center whitespace-nowrap ${
+                  on ? "text-white" : "text-mist hover:text-white"
+                }`}
+              >
+                {item.label}
+                <ActiveMark on={on} />
+              </Link>
+            );
+          })}
+          <a
+            href={business.phoneHref}
+            data-primary="true"
+            className="inline-flex min-h-11 flex-col justify-center whitespace-nowrap font-semibold text-white"
+          >
+            {business.phone}
+            <ActiveMark on={false} />
+          </a>
         </nav>
       </div>
+
+      <nav
+        id="site-menu"
+        aria-label="Primary"
+        hidden={!open}
+        className="flex flex-col px-5 pb-4 lg:hidden"
+      >
+        {nav.map((item) => {
+          const on = active === item.href;
+          return (
+            <Link
+              key={item.href}
+              href={item.href}
+              aria-current={on ? "page" : undefined}
+              className={`inline-flex min-h-11 w-full flex-col justify-center ${
+                on ? "text-white" : "text-mist"
+              }`}
+            >
+              {item.label}
+              <ActiveMark on={on} />
+            </Link>
+          );
+        })}
+        <a
+          href={business.phoneHref}
+          data-primary="true"
+          className="inline-flex min-h-11 w-full items-center font-semibold text-white"
+        >
+          {business.phone}
+        </a>
+      </nav>
+
+      <Divider tone="white" className="lg:hidden" />
     </header>
   );
 }

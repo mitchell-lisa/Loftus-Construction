@@ -1,7 +1,26 @@
 # Loftus Construction, Inc. research profile
 
-Status: demo / spec rebuild. Researched 2026-08-31. Every line carries its source.
-Nothing in this file may appear on the site unless it has a source next to it.
+Status: demo preview for a paying client. Researched 2026-08-31. Asset update 2026-10-08.
+Every line carries its source. Nothing in this file may appear on the site unless it has a source next to it.
+
+## Update 2026-10-08, files from Ryan Loftus
+
+Ryan Loftus sent logos and jobsite photographs on 8 October 2026 (upload account rloft24@gmail.com, folder owned by mitchell@mjlcollective.com). He is the client contact on this engagement. No title, biography, or staff role for Ryan was included for publication, so his name is not added to the team. The 2019 team page remains the only staff source.
+
+Used on the site, and only as described in `ASSETS.md`:
+
+- Current logo, raster PNG, bright blue. Header.
+- Dimensional-letters vector, fill `#222e61`, brick arch over the wordmark. Footer. Not recolored.
+- Brownsville photographs: a concrete bridge deck pour, plus one frame of broken concrete and an excavator beside the river.
+- University Avenue photographs: steel bridge underside, stone pier, stone and glass building, grated deck.
+
+Not published, because they were not supplied or are not safe to state:
+
+- Project owner, scope, contract value, street address, city beyond the folder name, or dates for Brownsville and University Avenue. Photo captions describe only what is visible. Capture times in the file inventory are not treated as project dates.
+- GPS. Originals that had coordinates were stripped before this repo received them. No coordinates are stored here.
+- The handwritten field sketch `university-avenue-01`.
+- The 25th anniversary mark (1994 to 2019). It is not a current anniversary.
+- License, insurance, bonding, hours, reviews, and a current staff roster. Still unknown. Still null.
 
 ## Identity
 
@@ -59,7 +78,7 @@ SR 52 masonry bridge rehabilitation $3,439,000 (June 2019) · Main Street bridge
 
 **Award, verifiable:** April 2019, ASHE Delaware Valley Section Project of the Year, $10M and under, for the SR 13 masonry arch rehabilitation (part of the Group T contract), described by the company as the oldest bridge in the United States, dating to the late 1600s. Source: news.php. This is the company's own claim and worth repeating on the site; the "oldest bridge in the United States" phrasing should be attributed to them, not asserted as fact by us.
 
-**Current work, third-party verified:** Tinicum Township, Bucks County PA awarded Loftus Construction the Headquarters Road Bridge rehabilitation on 5 August 2025 for approximately $2.3 million, after competitive bidding among seven firms. Board chair Eleanor Breslin said the contractor is "fully capable of handling this project, every aspect of it." Source: [Bucks County Herald](https://www.buckscountyherald.com/news/despite-legal-threats-tinicum-awards-headquarters-road-bridge-contract/article_bedf5407-6540-454f-b3a8-9b10d83e1e81.html). Payment applications and change orders on that contract run through **August 2026**, and 30 Pennsylvania public contracts are tracked in total. Source: [Civic IQ](https://civiciq.com/public-contract/vendor/loftus-construction-inc/PA). The company is unambiguously active.
+**Headquarters Road, third-party record:** Tinicum Township, Bucks County PA awarded Loftus Construction the Headquarters Road Bridge rehabilitation on 5 August 2025 for approximately $2.3 million, after competitive bidding among seven firms. Board chair Eleanor Breslin said the contractor is "fully capable of handling this project, every aspect of it." Source: [Bucks County Herald](https://www.buckscountyherald.com/news/despite-legal-threats-tinicum-awards-headquarters-road-bridge-contract/article_bedf5407-6540-454f-b3a8-9b10d83e1e81.html). Payment applications and change orders on that contract run through **August 2026**, and 30 Pennsylvania public contracts are tracked in total. Source: [Civic IQ](https://civiciq.com/public-contract/vendor/loftus-construction-inc/PA). The company is active. This job is not on the 2019 site. The preview does not call the job current. Whether the contract is still underway needs confirming with Ryan.
 
 ## Services, in the company's own words
 
@@ -121,6 +140,7 @@ Loftus already has the strongest raw material of any of these: named clients, a 
 11. **Projects between 2020 and 2026** apart from Headquarters Road. There are 30 tracked PA contracts; only the Tinicum one is itemised publicly.
 12. **Whether the company knows it has been hacked.** Assume not.
 13. **Any social media presence.** A LinkedIn company page exists at linkedin.com/company/loftus-construction-inc but LinkedIn blocks automated reading, so its content, follower count and last post date are unverified. No Facebook, Instagram or X account was found.
+14. **Whether Headquarters Road is still under contract.** The award is 5 August 2025 and the payment record runs through August 2026. That is not a 2019 site caption. Ryan needs to confirm the status before the site says the job is current.
 
 ## Weakest assets, stated honestly
 

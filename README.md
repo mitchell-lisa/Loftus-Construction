@@ -1,8 +1,13 @@
 # Loftus Construction, Inc. website
 
-A speculative rebuild of loftusconstruction.com, built by MJL Collective from
-public sources only. Status is `demo`: the site is noindexed, carries a preview
-banner naming the builder, and contains no forms.
+A preview site for Loftus Construction, built by MJL Collective. Public facts
+still come from the sources in `PROFILE.md`. Logos and the Brownsville and
+University Avenue photographs were supplied by Ryan Loftus on 8 Oct 2026.
+Which files are on the page, and which were left out, is `ASSETS.md`.
+
+Status stays `demo`: the site is noindexed, carries a preview banner naming
+the builder, and contains no forms. Do not promote a preview deployment to
+production.
 
 ## Stack
 
@@ -42,22 +47,27 @@ else needs to change.
 
 ## Design notes
 
-The separator running through the site is taken from the wordmark: three
-horizontal rules, stepped so each is shorter than the one above, measured off
-the logo file at roughly 100, 83 and 69 percent. It lives in `components/Rule.tsx`
-and is the only ornament used.
+The three speed lines beside LOFTUS are the site's motif. They run out of the
+logo across the header, cross the photographs, and mark the current page.
+They live in `components/Divider.tsx`. Colors are in `COLOR.md`. On a phone,
+Menu opens the page list.
+Headlines are Newsreader. Body and navigation are Public Sans. Navy `#222e61`
+is the only dark field: header, footer, phone bar, and page plates. Brand blue
+`#0014e0` is the thin accent on white. Content sections are white.
 
-Palette, sampled rather than guessed:
+Palette:
 
 | Token | Hex | Source |
 |---|---|---|
-| girder | `#191d21` | oxidized steel in their own project photography |
-| slate | `#364f6d` | already present in their existing stylesheet |
-| steel | `#aab1b9` | already present in their existing stylesheet |
-| concrete | `#d3d3d3` | new deck concrete, Strasburg Railroad photograph |
-| chalk | `#f4f3f0` | fresh pour, bridge deck photograph |
+| brand | `#0014e0` | current logo PNG, between interior blues `#0000c8` and `#0016e4` |
+| navy | `#222e61` | dimensional sign, used for every dark surface |
+| mist | `#c5cad3` | secondary text on navy |
+| ink | `#1c1e22` | body text on white |
+| rule | `#d5d8de` | hairlines |
 
-Photography is the company's own, taken from their current site. It is genuine
-but low resolution, capped at 1140 pixels wide, and the layout is built to sit
-within that limit. Replacing these files with owner-supplied originals improves
-every section without any code change.
+The header uses `logos/current-logo-white.png`, the current wordmark recolored
+white for the navy bar. The footer uses `logos/dimensional-letters-white.svg`.
+The blue and navy source files stay in the repo and are not placed on the bar.
+The 25th anniversary mark is not on the site. Photography is the jobsite set
+listed in `ASSETS.md`. Older low-resolution files from loftusconstruction.com
+are not used.

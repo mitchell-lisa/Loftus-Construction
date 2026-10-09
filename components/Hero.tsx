@@ -1,49 +1,53 @@
 import Image from "next/image";
-import Rule from "./Rule";
 import { business } from "@/lib/business";
+import Divider from "./Divider";
 
-/**
- * The headline sits on the photograph itself. The source is only 1140 by 355,
- * so the image is cropped rather than shown whole here, and the type sits in a
- * solid plate anchored to the lower left so contrast never depends on what
- * happens to be behind it. Owner-supplied originals would let this run taller.
- */
 export default function Hero() {
+  const { hero } = business;
+
   return (
-    <section id="top" className="relative bg-girder text-white">
-      <div className="relative h-[clamp(340px,52vw,460px)] w-full">
+    <section
+      id="top"
+      className="on-dark grid h-[calc(100svh-var(--header-h)-var(--banner-h))] min-h-[520px] grid-rows-[minmax(160px,1fr)_auto] bg-navy text-white"
+    >
+      <div className="relative min-h-0 overflow-hidden bg-navy">
         <Image
-          src="/images/strasburg-railroad-bridge.webp"
-          alt="Completed main track bridge replacement for the Strasburg Railroad at Gap, Pennsylvania, with a steam locomotive crossing"
+          src={hero.src}
+          alt={hero.alt}
           fill
           priority
-          sizes="100vw"
-          className="object-cover object-[48%_center] sm:object-[52%_center] lg:object-center"
+          sizes="(max-width: 1023px) 280vw, 100vw"
+          className="origin-[center_58%] scale-[2.8] object-cover lg:origin-center lg:scale-100 lg:object-[center_46%]"
         />
-        <div
-          aria-hidden="true"
-          className="absolute inset-0 bg-gradient-to-t from-girder via-girder/45 to-transparent"
-        />
+        <Divider tone="white" className="absolute inset-x-0 bottom-0" />
+      </div>
 
-        <div className="absolute inset-x-0 bottom-0">
-          <div className="mx-auto max-w-6xl px-5 pb-8 lg:pb-10">
-            <Rule tone="dark" side="both" width={84} className="mb-5" />
-            <h1 className="max-w-[19ch] text-[clamp(1.75rem,5.6vw,3rem)] leading-[1.06] drop-shadow-[0_2px_10px_rgba(15,18,21,0.85)]">
-              Design-build, preconstruction, construction
-            </h1>
-            {/* The delivery methods lead, but the cover still has to say what
-                gets built, which is what the structure line carries. */}
-            <p className="mt-3 max-w-[52ch] text-[clamp(0.95rem,2.4vw,1.05rem)] leading-snug [text-wrap:balance] text-concrete drop-shadow-[0_2px_8px_rgba(15,18,21,0.9)]">
-              Bridges, culverts, retaining walls, foundations, structural
-              rehabilitation and dams
+      <div className="bg-navy px-5 pb-20 pt-10 lg:px-8 lg:py-14">
+        <div className="mx-auto flex max-w-6xl flex-col gap-4 lg:flex-row lg:items-end lg:justify-between lg:gap-10">
+          <h1 className="max-w-[14ch] text-[clamp(2.6rem,5.5vw,4.6rem)] leading-[0.92]">
+            Heavy civil construction{" "}
+            <span className="whitespace-nowrap">since {business.foundedYear}</span>
+          </h1>
+          <div className="max-w-sm shrink-0 lg:pb-1">
+            <p className="text-[1.15rem] leading-snug text-white">
+              Bridges, culverts, retaining walls, foundations, structural rehabilitation
+              and dams. {business.city}, {business.state}.
             </p>
-            <a
-              href={business.phoneHref}
-              data-primary="true"
-              className="mt-5 inline-flex min-h-11 items-center border-b-2 border-steel pb-1 text-[19px] font-semibold text-white hover:border-white"
-            >
-              {business.phone}
-            </a>
+            <div className="mt-4 flex flex-wrap items-center gap-x-6 gap-y-3">
+              <a
+                href={business.phoneHref}
+                data-primary="true"
+                className="inline-flex min-h-11 items-center border-b-2 border-white text-[1.45rem] font-semibold leading-none text-white"
+              >
+                {business.phone}
+              </a>
+              <a
+                href="/contact"
+                className="inline-flex min-h-11 items-center bg-white px-4 text-[16px] font-semibold text-navy"
+              >
+                Request a bid
+              </a>
+            </div>
           </div>
         </div>
       </div>

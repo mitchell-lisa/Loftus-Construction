@@ -14,6 +14,30 @@ export type Project = {
   current?: boolean;
 };
 
+export type JobPhoto = {
+  src: string;
+  alt: string;
+  width: number;
+  height: number;
+};
+
+/**
+ * A job we can show in photographs.
+ * owner, location, scope, value, and dates are null until Ryan supplies them.
+ * Do not render those nulls, and do not write filler in their place.
+ */
+export type PhotoProject = {
+  slug: string;
+  name: string;
+  summary: string;
+  photos: JobPhoto[];
+  owner: null;
+  location: null;
+  scope: null;
+  value: null;
+  dates: null;
+};
+
 export type Person = {
   name: string;
   title: string;
@@ -55,19 +79,37 @@ export type Business = {
   social: null;
   mission: string;
   history: string[];
+  /**
+   * 2019 roster from the old team.php. Not the current team.
+   * `currentTeam` stays null until Ryan confirms who is there now.
+   * Do not render `team` on the site.
+   */
   team: Person[];
+  currentTeam: null;
+  testimonials: null;
+  license: null;
+  insurance: null;
   prequalifications: string[];
   associations: string[];
   clients: string[];
   capabilities: CapabilityGroup[];
   services: { name: string; blurb: string; items: string[] }[];
   projects: Project[];
+  /** Homepage photograph. One frame, named in the caption. */
+  hero: JobPhoto;
+  /**
+   * Jobs Ryan photographed. Summaries describe the frames only.
+   * Anything he did not send (owner, address, value, dates, scope) is absent.
+   */
+  photoProjects: PhotoProject[];
   award: { year: number; body: string; title: string; detail: string } | null;
   careers: { program: string; blurb: string; philosophy: string } | null;
   builder: { name: string; url: string | null };
 };
 
 export const business: Business = {
+  // Stays demo so this preview stays noindexed, with the builder banner.
+  // Loftus is a client. This deployment is not the public site.
   status: "demo",
 
   legalName: "Loftus Construction, Inc.",
@@ -95,6 +137,10 @@ export const business: Business = {
   rating: null,
   reviewCount: null,
   social: null,
+  currentTeam: null,
+  testimonials: null,
+  license: null,
+  insurance: null,
 
   mission:
     "The purpose of Loftus Construction, Inc. is to complete difficult heavy construction projects, in a safe and timely fashion, and to provide a superior product to the client.",
@@ -161,7 +207,7 @@ export const business: Business = {
     {
       name: "Design-build",
       blurb:
-        "A turnkey solution that puts one party in charge of every part of a project, which lowers risk and cost and can shorten delivery.",
+        "Pricing, conceptual options, value engineering, new structures and rehabilitation of existing structures, plus permits and agency coordination.",
       items: [
         "Budget pricing and conceptual structure options",
         "Value engineering of completed designs",
@@ -174,7 +220,7 @@ export const business: Business = {
     {
       name: "Preconstruction",
       blurb:
-        "Project analysis that identifies problem areas before they become delays, customized to what the project actually needs.",
+        "Feasibility, design, estimates, scheduling, procurement, logistics and constructability review before work starts.",
       items: [
         "Site feasibility and conceptual design",
         "Detailed designs and constructability reviews",
@@ -196,8 +242,8 @@ export const business: Business = {
         "Pre-engineered pedestrian bridges",
         "Timber bridges",
       ],
-      image: "/images/bridges.webp",
-      alt: "Completed pedestrian bridge with stone-faced abutment and steel railing",
+      image: null,
+      alt: null,
     },
     {
       name: "Culverts",
@@ -208,8 +254,8 @@ export const business: Business = {
         "Metal arch culverts",
         "Pipe culverts",
       ],
-      image: "/images/culverts.webp",
-      alt: "Stone-faced arch culvert carrying a road over a creek",
+      image: null,
+      alt: null,
     },
     {
       name: "Retaining walls",
@@ -221,8 +267,8 @@ export const business: Business = {
         "Steel sheetpile walls",
         "Gabion walls",
       ],
-      image: "/images/retaining-walls.webp",
-      alt: "Cast-in-place concrete retaining wall alongside a stream",
+      image: null,
+      alt: null,
     },
     {
       name: "Foundations",
@@ -233,8 +279,8 @@ export const business: Business = {
         "Reinforced concrete foundations",
         "Support of excavation",
       ],
-      image: "/images/foundations.webp",
-      alt: "Reinforced concrete foundation under construction inside a sheetpile excavation",
+      image: null,
+      alt: null,
     },
     {
       name: "Structural rehabilitation",
@@ -247,14 +293,14 @@ export const business: Business = {
         "Streambank stabilization, gabions and Reno mattresses",
         "Rip rap lining and protection",
       ],
-      image: "/images/structural-rehabilitation.webp",
-      alt: "Masonry arch bridge under rehabilitation, lit by work lights at night",
+      image: null,
+      alt: null,
     },
     {
       name: "Dams",
       items: ["Emergency stabilization", "Rehabilitation", "Complete reconstruction"],
-      image: "/images/dams.webp",
-      alt: "Restored dam and spillway with stabilized bank",
+      image: null,
+      alt: null,
     },
   ],
 
@@ -264,7 +310,6 @@ export const business: Business = {
       owner: "Tinicum Township, Bucks County",
       location: "Tinicum Township, PA",
       value: 2300000,
-      current: true,
     },
     {
       name: "PA Turnpike bridge replacement DB-155",
@@ -346,6 +391,102 @@ export const business: Business = {
     },
   ],
 
+  hero: {
+    src: "/images/jobs/brownsville-16.jpg",
+    alt: "Overhead view of a concrete bridge deck, with crew and a truck on the span over a river, Brownsville",
+    width: 2400,
+    height: 1800,
+  },
+
+  photoProjects: [
+    {
+      slug: "brownsville",
+      name: "Brownsville",
+      owner: null,
+      location: null,
+      scope: null,
+      value: null,
+      dates: null,
+      summary:
+        "Concrete bridge deck pour on a span over a river. The photographs show the piers, the deck, crew and equipment on the bridge, and broken concrete beside the river.",
+      photos: [
+        {
+          src: "/images/jobs/brownsville-05.jpg",
+          alt: "Wide view of a concrete bridge deck pour, with a lift on the near approach and the river and hills beyond, Brownsville",
+          width: 2400,
+          height: 1800,
+        },
+        {
+          src: "/images/jobs/brownsville-03.jpg",
+          alt: "Looking down a fresh concrete bridge deck during a pour, with a pump, crew and rebar along the edge, Brownsville",
+          width: 2400,
+          height: 1800,
+        },
+        {
+          src: "/images/jobs/brownsville-11.jpg",
+          alt: "Mixer truck and paver on a fresh concrete bridge deck, with crew in high-visibility clothing, Brownsville",
+          width: 2400,
+          height: 1800,
+        },
+        {
+          src: "/images/jobs/brownsville-16.jpg",
+          alt: "Overhead view of a concrete bridge deck, with crew and a truck on the span over a river, Brownsville",
+          width: 2400,
+          height: 1800,
+        },
+        {
+          src: "/images/jobs/brownsville-untitled-01.jpg",
+          alt: "Excavator and loader on broken concrete beside a river, with part of a bridge deck at the left, Brownsville",
+          width: 2400,
+          height: 1800,
+        },
+      ],
+    },
+    {
+      slug: "university-avenue",
+      name: "University Avenue",
+      owner: null,
+      location: null,
+      scope: null,
+      value: null,
+      dates: null,
+      summary:
+        "Steel bridge with a grated deck. The photographs show riveted girders and a stone pier from below, a stone and glass building beside the deck, and the grating over the water.",
+      photos: [
+        {
+          src: "/images/jobs/university-avenue-untitled-01.jpg",
+          alt: "Underside of a steel bridge with riveted girders, open grating above and a stone pier, University Avenue",
+          width: 2400,
+          height: 1800,
+        },
+        {
+          src: "/images/jobs/university-avenue-untitled-02.jpg",
+          alt: "Wider view under a steel bridge, with girders, a stone pier and the river, University Avenue",
+          width: 2400,
+          height: 1800,
+        },
+        {
+          src: "/images/jobs/university-avenue-untitled-03.jpg",
+          alt: "Stone and glass building beside a grated bridge deck, University Avenue",
+          width: 2400,
+          height: 1800,
+        },
+        {
+          src: "/images/jobs/university-avenue-untitled-04.jpg",
+          alt: "Riveted steel girders and a stone pier under a bridge, with the river below, University Avenue",
+          width: 2400,
+          height: 1800,
+        },
+        {
+          src: "/images/jobs/university-avenue-07.jpg",
+          alt: "Steel grating around an opening in the deck, with a bolted splice and dark water below, University Avenue",
+          width: 2400,
+          height: 1800,
+        },
+      ],
+    },
+  ],
+
   award: {
     year: 2019,
     body: "American Society of Highway Engineers, Delaware Valley Section",
@@ -369,6 +510,10 @@ export const business: Business = {
 
 export function formatUSD(value: number): string {
   return "$" + value.toLocaleString("en-US");
+}
+
+export function projectBySlug(slug: string): PhotoProject | null {
+  return business.photoProjects.find((project) => project.slug === slug) ?? null;
 }
 
 export const addressLine = `${business.street}, ${business.city}, ${business.state} ${business.zip}`;

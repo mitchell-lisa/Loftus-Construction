@@ -1,36 +1,33 @@
 @import "tailwindcss";
 
 /*
-  Palette sampled from Loftus Construction's own material.
-  girder and steel come from their photography, slate and steel-grey are the
-  two colors already present in their existing stylesheet.
+  Loftus mark, sampled not invented.
+  brand  #0014e0  interior blue of the current wordmark
+  navy   #222e61  the dimensional-letters sign
+  Headlines are Newsreader. Body and navigation are Public Sans.
 */
 @theme {
-  --color-girder: #191d21;
-  --color-girder-soft: #232830;
-  --color-slate: #364f6d;
-  --color-slate-deep: #2a3e56;
-  --color-steel: #aab1b9;
-  --color-concrete: #d3d3d3;
-  --color-chalk: #f4f3f0;
-  --color-ink: #24282d;
-  --color-ink-soft: #5b6169;
+  --color-navy: #222e61;
+  --color-brand: #0014e0;
+  --color-mist: #c5cad3;
+  --color-ink: #1c1e22;
+  --color-paper: #ffffff;
+  --color-rule: #d5d8de;
 
-  --font-display: var(--font-source-serif), Georgia, "Times New Roman", serif;
-  --font-body: var(--font-archivo), "Helvetica Neue", Arial, sans-serif;
+  --font-display: var(--font-newsreader), Georgia, "Times New Roman", serif;
+  --font-body: var(--font-public-sans), "Helvetica Neue", Arial, sans-serif;
 }
 
 :root {
-  --ink-muted: #5b6169;
-  --hairline: #d8d6d0;
-  /* Height of the pinned bar. Header.tsx keeps this current from the live
-     element; this value is only what the first paint scrolls against. */
-  --header-h: 96px;
+  --ink-muted: #4e545c;
+  --hairline: #d5d8de;
+  --header-h: 124px;
+  --banner-h: 56px;
 }
 
 @media (min-width: 1024px) {
   :root {
-    --header-h: 76px;
+    --header-h: 108px;
   }
 }
 
@@ -38,17 +35,16 @@ html {
   -webkit-text-size-adjust: 100%;
 }
 
-/* Every anchor target clears the pinned bar, plus a little air. */
 [id] {
   scroll-margin-top: calc(var(--header-h) + 12px);
 }
 
 body {
-  background: var(--color-chalk);
+  background: var(--color-paper);
   color: var(--color-ink);
   font-family: var(--font-body);
-  font-size: 16px;
-  line-height: 1.6;
+  font-size: 17px;
+  line-height: 1.55;
   -webkit-font-smoothing: antialiased;
   overflow-x: hidden;
 }
@@ -59,13 +55,58 @@ h3 {
   font-family: var(--font-display);
   font-weight: 600;
   text-wrap: balance;
-  letter-spacing: -0.005em;
+  letter-spacing: -0.02em;
+}
+
+h1 {
+  font-weight: 700;
 }
 
 a:focus-visible,
-button:focus-visible {
-  outline: 2px solid var(--color-slate);
+button:focus-visible,
+input:focus-visible,
+textarea:focus-visible {
+  outline: 2px solid var(--color-brand);
   outline-offset: 3px;
+}
+
+.on-dark :is(a, button, input, textarea, summary):focus-visible {
+  outline-color: #ffffff;
+}
+
+.on-dark .skip-link:focus-visible {
+  outline-color: #222e61;
+}
+
+.skip-link {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  clip-path: inset(50%);
+  white-space: nowrap;
+  border: 0;
+}
+
+.skip-link:focus {
+  position: static;
+  display: flex;
+  align-items: center;
+  width: fit-content;
+  height: auto;
+  min-height: 44px;
+  margin: 0.75rem 1.25rem 0;
+  padding: 0.5rem 0.75rem;
+  overflow: visible;
+  clip: auto;
+  clip-path: none;
+  white-space: normal;
+  background: #ffffff;
+  color: #222e61;
+  font-weight: 600;
 }
 
 .tnum {
