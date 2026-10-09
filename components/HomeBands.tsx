@@ -8,7 +8,6 @@ export default function HomeBands() {
     ...business.capabilities.map((group) => group.name),
     ...business.services.map((service) => service.name),
   ];
-  const current = business.projects.find((project) => project.current);
   const award = business.award;
 
   return (
@@ -62,15 +61,6 @@ export default function HomeBands() {
             </Link>
           </div>
           <div className="mt-10 grid gap-12 border-t border-navy pt-8 lg:grid-cols-2">
-            {current ? (
-              <div>
-                <p className="font-display text-[clamp(1.7rem,2.6vw,2.35rem)] leading-tight text-navy">
-                  {current.name}
-                </p>
-                {current.owner ? <p className="mt-3 text-[17px] text-ink">{current.owner}</p> : null}
-                <p className="mt-1 text-[15px] text-[color:var(--ink-muted)]">Under contract now</p>
-              </div>
-            ) : null}
             {award ? (
               <div>
                 <p className="font-display text-[clamp(1.7rem,2.6vw,2.35rem)] leading-tight text-navy">

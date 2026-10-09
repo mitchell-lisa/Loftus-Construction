@@ -78,7 +78,7 @@ SR 52 masonry bridge rehabilitation $3,439,000 (June 2019) · Main Street bridge
 
 **Award, verifiable:** April 2019, ASHE Delaware Valley Section Project of the Year, $10M and under, for the SR 13 masonry arch rehabilitation (part of the Group T contract), described by the company as the oldest bridge in the United States, dating to the late 1600s. Source: news.php. This is the company's own claim and worth repeating on the site; the "oldest bridge in the United States" phrasing should be attributed to them, not asserted as fact by us.
 
-**Current work, third-party verified:** Tinicum Township, Bucks County PA awarded Loftus Construction the Headquarters Road Bridge rehabilitation on 5 August 2025 for approximately $2.3 million, after competitive bidding among seven firms. Board chair Eleanor Breslin said the contractor is "fully capable of handling this project, every aspect of it." Source: [Bucks County Herald](https://www.buckscountyherald.com/news/despite-legal-threats-tinicum-awards-headquarters-road-bridge-contract/article_bedf5407-6540-454f-b3a8-9b10d83e1e81.html). Payment applications and change orders on that contract run through **August 2026**, and 30 Pennsylvania public contracts are tracked in total. Source: [Civic IQ](https://civiciq.com/public-contract/vendor/loftus-construction-inc/PA). The company is unambiguously active.
+**Headquarters Road, third-party record:** Tinicum Township, Bucks County PA awarded Loftus Construction the Headquarters Road Bridge rehabilitation on 5 August 2025 for approximately $2.3 million, after competitive bidding among seven firms. Board chair Eleanor Breslin said the contractor is "fully capable of handling this project, every aspect of it." Source: [Bucks County Herald](https://www.buckscountyherald.com/news/despite-legal-threats-tinicum-awards-headquarters-road-bridge-contract/article_bedf5407-6540-454f-b3a8-9b10d83e1e81.html). Payment applications and change orders on that contract run through **August 2026**, and 30 Pennsylvania public contracts are tracked in total. Source: [Civic IQ](https://civiciq.com/public-contract/vendor/loftus-construction-inc/PA). The company is active. This job is not on the 2019 site. The preview does not call the job current. Whether the contract is still underway needs confirming with Ryan.
 
 ## Services, in the company's own words
 
@@ -140,6 +140,7 @@ Loftus already has the strongest raw material of any of these: named clients, a 
 11. **Projects between 2020 and 2026** apart from Headquarters Road. There are 30 tracked PA contracts; only the Tinicum one is itemised publicly.
 12. **Whether the company knows it has been hacked.** Assume not.
 13. **Any social media presence.** A LinkedIn company page exists at linkedin.com/company/loftus-construction-inc but LinkedIn blocks automated reading, so its content, follower count and last post date are unverified. No Facebook, Instagram or X account was found.
+14. **Whether Headquarters Road is still under contract.** The award is 5 August 2025 and the payment record runs through August 2026. That is not a 2019 site caption. Ryan needs to confirm the status before the site says the job is current.
 
 ## Weakest assets, stated honestly
 

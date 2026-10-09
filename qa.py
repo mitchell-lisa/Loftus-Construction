@@ -162,6 +162,33 @@ with sync_playwright() as p:
     check("no third-party requests on the route sweep", not third, third[:6])
 
     page.goto(BASE + "/", wait_until="networkidle", timeout=60000)
+    hidden_skip = page.evaluate(
+        """() => {
+          const link = document.querySelector('.skip-link');
+          const banner = document.querySelector('[data-banner]');
+          const lr = link.getBoundingClientRect();
+          const br = banner.getBoundingClientRect();
+          const overlaps = lr.width > 2 && lr.height > 2 && !(lr.right < br.left || lr.left > br.right || lr.bottom < br.top || lr.top > br.bottom);
+          return {overlaps, w: Math.round(lr.width), h: Math.round(lr.height)};
+        }"""
+    )
+    check("skip link stays hidden until focus", not hidden_skip["overlaps"], hidden_skip)
+    page.focus(".skip-link")
+    shown_skip = page.evaluate(
+        """() => {
+          const link = document.querySelector('.skip-link');
+          const banner = document.querySelector('[data-banner]');
+          const lr = link.getBoundingClientRect();
+          const br = banner.getBoundingClientRect();
+          return {top: Math.round(lr.top), height: Math.round(lr.height), bannerBottom: Math.round(br.bottom)};
+        }"""
+    )
+    check(
+        "focused skip link clears the banner",
+        shown_skip["height"] >= 44 and shown_skip["top"] >= shown_skip["bannerBottom"] - 1,
+        shown_skip,
+    )
+    page.evaluate("document.activeElement && document.activeElement.blur()")
     hrefs = page.eval_on_selector_all(
         "header a[href]", "els=>els.map(e=>e.getAttribute('href'))"
     )
@@ -208,7 +235,7 @@ with sync_playwright() as p:
     page.goto(BASE + "/", wait_until="networkidle", timeout=60000)
     small = page.evaluate(
         """() => Array.from(document.querySelectorAll('header a, nav a, [data-primary]'))
-             .filter(e => e.offsetParent !== null)
+             .filter(e => e.offsetParent !== null && !e.classList.contains('skip-link'))
              .map(e => ({t:(e.innerText||'').trim().slice(0,28), h:Math.round(e.getBoundingClientRect().height)}))
              .filter(x => x.h < 44)"""
     )

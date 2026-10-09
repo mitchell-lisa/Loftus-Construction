@@ -310,7 +310,6 @@ export const business: Business = {
       owner: "Tinicum Township, Bucks County",
       location: "Tinicum Township, PA",
       value: 2300000,
-      current: true,
     },
     {
       name: "PA Turnpike bridge replacement DB-155",

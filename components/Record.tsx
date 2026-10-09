@@ -2,8 +2,6 @@ import { Section } from "./Section";
 import { business, formatUSD } from "@/lib/business";
 
 export default function Record() {
-  const current = business.projects.find((project) => project.current);
-
   return (
     <Section compact className="bg-white">
       <h2 className="max-w-[16ch] text-[clamp(2rem,4vw,3rem)] leading-[0.95] text-navy">
@@ -12,16 +10,6 @@ export default function Record() {
       <p className="mt-4 max-w-[42ch] text-[17px] text-[color:var(--ink-muted)]">
         Owner and contract value as published by the firm.
       </p>
-
-      {current ? (
-        <div className="mt-10 border-t border-navy pt-6">
-          <p className="text-balance font-display text-[clamp(1.8rem,3vw,2.5rem)] leading-tight text-navy">
-            {current.name}
-          </p>
-          {current.owner ? <p className="mt-2 text-[17px] text-ink">{current.owner}</p> : null}
-          <p className="mt-1 text-[15px] text-[color:var(--ink-muted)]">Under contract now</p>
-        </div>
-      ) : null}
 
       <ul className="mt-8 border-t border-navy lg:hidden">
         {business.projects.map((project) => (
