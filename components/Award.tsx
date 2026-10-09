@@ -1,4 +1,4 @@
-import { Flank } from "./Rule";
+import Divider from "./Divider";
 import { business } from "@/lib/business";
 
 export default function Award() {
@@ -6,15 +6,14 @@ export default function Award() {
   const { year, body, title, detail } = business.award;
 
   return (
-    <section className="bg-chalk">
-      <div className="mx-auto max-w-6xl px-5 py-12 lg:py-14">
-        <Flank tone="light" thickness={3} gap={5} className="mb-1">
-          <p className="text-[17px] font-semibold leading-snug text-ink">
-            {title}, {year}
-          </p>
-        </Flank>
-        <p className="mt-3 text-[15px] text-[color:var(--ink-muted)]">{body}</p>
-        <p className="mt-4 max-w-[62ch] text-[15.5px] leading-relaxed text-ink">{detail}</p>
+    <section className="bg-navy text-white">
+      <Divider tone="white" />
+      <div className="mx-auto max-w-6xl px-5 py-14 lg:py-16">
+        <p className="max-w-[22ch] font-display text-[clamp(1.7rem,3vw,2.4rem)] font-semibold leading-[1.1]">
+          {title}, {year}
+        </p>
+        <p className="mt-4 text-[16px] text-white/80">{body}</p>
+        <p className="mt-4 max-w-[62ch] text-[17px] leading-relaxed">{detail}</p>
       </div>
     </section>
   );

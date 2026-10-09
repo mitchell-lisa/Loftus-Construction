@@ -79,8 +79,19 @@ with sync_playwright() as p:
     tel = pg.eval_on_selector_all('a[href^="tel:"]', "els=>els.map(e=>e.getAttribute('href'))")
     check("tel links all dial +18567866607", bool(tel) and all(t == "tel:+18567866607" for t in tel), tel)
 
-    forms = pg.eval_on_selector_all("form,input,textarea,select", "els=>els.length")
-    check("no forms or inputs while demo", forms == 0, forms)
+    # The request-for-quote block is a labeled demo. It has no action and does not send.
+    forms = pg.eval_on_selector_all(
+        "form",
+        "els=>els.map(e=>({action:e.getAttribute('action'), text:(e.innerText||'').slice(0,300)}))",
+    )
+    check(
+        "demo RFQ is present and does not submit",
+        len(forms) == 1
+        and not forms[0]["action"]
+        and "demo form" in forms[0]["text"].lower()
+        and "does not send" in forms[0]["text"].lower(),
+        forms,
+    )
 
     banner = pg.inner_text("body")
     check("preview banner names the builder", "MJL Collective" in banner)

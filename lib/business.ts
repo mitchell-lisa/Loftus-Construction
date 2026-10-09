@@ -22,13 +22,20 @@ export type JobPhoto = {
 };
 
 /**
- * A job we can show in photographs. Name and summary only.
- * Owner, location, contract value and dates stay off the type until Ryan supplies them.
+ * A job we can show in photographs.
+ * owner, location, scope, value, and dates are null until Ryan supplies them.
+ * Do not render those nulls, and do not write filler in their place.
  */
 export type PhotoProject = {
+  slug: string;
   name: string;
   summary: string;
   photos: JobPhoto[];
+  owner: null;
+  location: null;
+  scope: null;
+  value: null;
+  dates: null;
 };
 
 export type Person = {
@@ -72,7 +79,16 @@ export type Business = {
   social: null;
   mission: string;
   history: string[];
+  /**
+   * 2019 roster from the old team.php. Not the current team.
+   * `currentTeam` stays null until Ryan confirms who is there now.
+   * Do not render `team` on the site.
+   */
   team: Person[];
+  currentTeam: null;
+  testimonials: null;
+  license: null;
+  insurance: null;
   prequalifications: string[];
   associations: string[];
   clients: string[];
@@ -121,6 +137,10 @@ export const business: Business = {
   rating: null,
   reviewCount: null,
   social: null,
+  currentTeam: null,
+  testimonials: null,
+  license: null,
+  insurance: null,
 
   mission:
     "The purpose of Loftus Construction, Inc. is to complete difficult heavy construction projects, in a safe and timely fashion, and to provide a superior product to the client.",
@@ -381,7 +401,13 @@ export const business: Business = {
 
   photoProjects: [
     {
+      slug: "brownsville",
       name: "Brownsville",
+      owner: null,
+      location: null,
+      scope: null,
+      value: null,
+      dates: null,
       summary:
         "Concrete bridge deck pour on a span over a river. The photographs show the piers, the deck, crew and equipment on the bridge, and broken concrete beside the river.",
       photos: [
@@ -418,7 +444,13 @@ export const business: Business = {
       ],
     },
     {
+      slug: "university-avenue",
       name: "University Avenue",
+      owner: null,
+      location: null,
+      scope: null,
+      value: null,
+      dates: null,
       summary:
         "Steel bridge with a grated deck. The photographs show riveted girders and a stone pier from below, a stone and glass building beside the deck, and the grating over the water.",
       photos: [
@@ -479,6 +511,10 @@ export const business: Business = {
 
 export function formatUSD(value: number): string {
   return "$" + value.toLocaleString("en-US");
+}
+
+export function projectBySlug(slug: string): PhotoProject | null {
+  return business.photoProjects.find((project) => project.slug === slug) ?? null;
 }
 
 export const addressLine = `${business.street}, ${business.city}, ${business.state} ${business.zip}`;

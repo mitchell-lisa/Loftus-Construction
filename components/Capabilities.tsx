@@ -1,4 +1,3 @@
-import Image from "next/image";
 import { Section, SectionHeading } from "./Section";
 import { business } from "@/lib/business";
 
@@ -6,41 +5,41 @@ export default function Capabilities() {
   return (
     <Section id="capabilities" className="bg-chalk">
       <SectionHeading>What we build</SectionHeading>
+      <p className="mt-4 max-w-[46ch] text-[18px] text-ink">
+        Bridges, culverts, retaining walls, foundations, structural rehabilitation
+        and dams.
+      </p>
 
-      <div className="grid gap-x-10 gap-y-10 sm:grid-cols-2 lg:grid-cols-3">
+      <div className="mt-10">
         {business.capabilities.map((group) => (
-          <div key={group.name}>
-            {group.image ? (
-              <div className="relative mb-4 aspect-[350/260] w-full overflow-hidden bg-concrete">
-                <Image
-                  src={group.image}
-                  alt={group.alt ?? ""}
-                  fill
-                  sizes="(min-width: 1024px) 340px, (min-width: 640px) 45vw, 90vw"
-                  className="object-cover"
-                />
-              </div>
-            ) : null}
-            <h3 className="text-[19px] text-ink">{group.name}</h3>
-            <ul className="mt-2 space-y-1 text-[15px] text-[color:var(--ink-muted)]">
+          <div
+            key={group.name}
+            className="grid gap-3 border-t border-[color:var(--hairline)] py-6 lg:grid-cols-[16rem_1fr] lg:gap-10"
+          >
+            <h3 className="text-[1.45rem] text-navy">{group.name}</h3>
+            <ul className="grid gap-x-10 gap-y-1 sm:grid-cols-2">
               {group.items.map((item) => (
-                <li key={item}>{item}</li>
+                <li key={item} className="text-[16.5px] text-[color:var(--ink-muted)]">
+                  {item}
+                </li>
               ))}
             </ul>
           </div>
         ))}
       </div>
 
-      <div className="mt-14 grid gap-10 border-t border-[color:var(--hairline)] pt-10 sm:grid-cols-2">
+      <div className="mt-4 grid gap-12 border-t border-[color:var(--hairline)] pt-10 lg:grid-cols-2">
         {business.services.map((service) => (
           <div key={service.name}>
-            <h3 className="text-[19px] text-ink">{service.name}</h3>
-            <p className="mt-2 max-w-[46ch] text-[15px] text-[color:var(--ink-muted)]">
+            <h3 className="text-[1.45rem] text-navy">{service.name}</h3>
+            <p className="mt-3 max-w-[46ch] text-[16.5px] text-[color:var(--ink-muted)]">
               {service.blurb}
             </p>
-            <ul className="mt-3 space-y-1 text-[15px] text-[color:var(--ink-muted)]">
+            <ul className="mt-4 space-y-1">
               {service.items.map((item) => (
-                <li key={item}>{item}</li>
+                <li key={item} className="text-[16.5px] text-[color:var(--ink-muted)]">
+                  {item}
+                </li>
               ))}
             </ul>
           </div>

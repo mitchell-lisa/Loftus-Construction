@@ -47,10 +47,10 @@ else needs to change.
 
 ## Design notes
 
-The separator running through the site is taken from the wordmark: three
-horizontal rules, stepped so each is shorter than the one above, measured off
-the logo file at roughly 100, 83 and 69 percent. It lives in `components/Rule.tsx`
-and is the only ornament used.
+The header edge and the breaks between bands are three equal speed lines, the
+stripes beside LOFTUS on the current wordmark. They live in `components/Divider.tsx`.
+Headlines are Newsreader. Body and navigation are Public Sans. Navy `#222e61`
+is the dimensional sign. Brand blue `#0014e0` is the current wordmark.
 
 Palette, sampled rather than guessed:
 

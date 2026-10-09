@@ -3,20 +3,26 @@ import localFont from "next/font/local";
 import "./globals.css";
 import { business, addressLine } from "@/lib/business";
 import { localBusinessSchema } from "@/lib/schema";
+import DemoBanner from "@/components/DemoBanner";
+import Header from "@/components/Header";
+import Footer from "@/components/Footer";
+import StickyCall from "@/components/StickyCall";
 
-const sourceSerif = localFont({
+const newsreader = localFont({
   src: [
-    { path: "../public/fonts/SourceSerif4-400.woff2", weight: "400", style: "normal" },
-    { path: "../public/fonts/SourceSerif4-600.woff2", weight: "600", style: "normal" },
+    { path: "../public/fonts/Newsreader-latin-600.woff2", weight: "600", style: "normal" },
+    { path: "../public/fonts/Newsreader-latin-700.woff2", weight: "700", style: "normal" },
   ],
-  variable: "--font-source-serif",
+  variable: "--font-newsreader",
   display: "swap",
 });
 
-const archivo = localFont({
-  src: "../public/fonts/Archivo-latin.woff2",
-  variable: "--font-archivo",
-  weight: "400 700",
+const publicSans = localFont({
+  src: [
+    { path: "../public/fonts/PublicSans-latin-400.woff2", weight: "400", style: "normal" },
+    { path: "../public/fonts/PublicSans-latin-600.woff2", weight: "600", style: "normal" },
+  ],
+  variable: "--font-public-sans",
   display: "swap",
 });
 
@@ -29,17 +35,17 @@ const description =
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
-  title,
+  title: {
+    default: title,
+    template: `%s | ${business.legalName}`,
+  },
   description,
-  alternates: { canonical: "/" },
-  // Demo status keeps every route out of the index.
   robots:
     business.status === "demo"
       ? { index: false, follow: false, nocache: true }
       : { index: true, follow: true },
   openGraph: {
     type: "website",
-    url: SITE_URL,
     siteName: business.legalName,
     title,
     description,
@@ -61,9 +67,13 @@ export default function RootLayout({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
   return (
-    <html lang="en" className={`${sourceSerif.variable} ${archivo.variable}`}>
+    <html lang="en" className={`${newsreader.variable} ${publicSans.variable}`}>
       <body>
+        <DemoBanner />
+        <Header />
         {children}
+        <Footer />
+        <StickyCall />
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{
