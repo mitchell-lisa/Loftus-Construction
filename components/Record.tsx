@@ -3,7 +3,7 @@ import { business, formatUSD } from "@/lib/business";
 
 export default function Record() {
   return (
-    <Section compact className="bg-white">
+    <Section className="bg-white">
       <h2 className="max-w-[16ch] text-[clamp(2rem,4vw,3rem)] leading-[0.95] text-navy">
         Selected contracts
       </h2>
@@ -11,7 +11,7 @@ export default function Record() {
         Owner and contract value as published by the firm.
       </p>
 
-      <ul className="mt-8 border-t border-navy lg:hidden">
+      <ul className="mt-8 border-t border-rule lg:hidden">
         {business.projects.map((project) => (
           <li key={project.name} className="border-b border-rule py-4">
             <p className="text-balance font-display text-[1.2rem] leading-snug text-navy">{project.name}</p>
@@ -34,7 +34,7 @@ export default function Record() {
             Selected projects with the owner and contract value published by Loftus Construction.
           </caption>
           <thead>
-            <tr className="border-b-2 border-navy text-left text-[13px] text-navy">
+            <tr className="border-b border-rule text-left text-[13px] text-navy">
               <th scope="col" className="py-2 pr-4 font-semibold">
                 Project
               </th>
@@ -48,7 +48,7 @@ export default function Record() {
           </thead>
           <tbody>
             {business.projects.map((project) => (
-              <tr key={project.name} className="border-b border-rule align-top hover:bg-chalk">
+              <tr key={project.name} className="border-b border-rule align-top">
                 <td className="py-3 pr-4">
                   <span className="font-display text-[1.05rem] text-navy">{project.name}</span>
                   {project.location ? (

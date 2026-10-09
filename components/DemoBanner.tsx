@@ -37,7 +37,7 @@ export default function DemoBanner() {
         <button
           type="button"
           onClick={() => setHidden(true)}
-          className="min-h-9 shrink-0 border border-white/40 px-3 text-[12px]"
+          className="min-h-9 shrink-0 border border-white px-3 text-[12px]"
         >
           Hide
         </button>

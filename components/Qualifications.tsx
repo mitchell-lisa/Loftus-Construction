@@ -9,7 +9,7 @@ const groups = [
 
 export default function Qualifications() {
   return (
-    <Section className="bg-chalk">
+    <Section className="bg-white">
       <div className="border-t border-rule">
         {groups.map((group) => (
           <div

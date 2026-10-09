@@ -9,12 +9,7 @@
 @theme {
   --color-navy: #222e61;
   --color-brand: #0014e0;
-  --color-chrome: #12162a;
-  --color-chrome-muted: #c5cad3;
-  --color-girder: #191d21;
-  --color-steel: #8b9098;
-  --color-concrete: #d3d3d3;
-  --color-chalk: #f2f4f6;
+  --color-mist: #c5cad3;
   --color-ink: #1c1e22;
   --color-paper: #ffffff;
   --color-rule: #d5d8de;
@@ -80,7 +75,7 @@ textarea:focus-visible {
 }
 
 .on-dark .skip-link:focus-visible {
-  outline-color: #12162a;
+  outline-color: #222e61;
 }
 
 .skip-link {
@@ -110,7 +105,7 @@ textarea:focus-visible {
   clip-path: none;
   white-space: normal;
   background: #ffffff;
-  color: #12162a;
+  color: #222e61;
   font-weight: 600;
 }
 

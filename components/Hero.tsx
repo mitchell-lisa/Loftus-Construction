@@ -19,17 +19,17 @@ export default function Hero() {
           sizes="(max-width: 1023px) 280vw, 100vw"
           className="origin-[center_58%] scale-[2.8] object-cover lg:origin-center lg:scale-100 lg:object-[center_46%]"
         />
-        <Divider className="absolute inset-x-0 bottom-0" />
+        <Divider tone="white" className="absolute inset-x-0 bottom-0" />
       </div>
 
-      <div className="bg-navy px-5 pb-20 pt-4 lg:px-8 lg:pb-8 lg:pt-6">
+      <div className="bg-navy px-5 pb-20 pt-10 lg:px-8 lg:py-14">
         <div className="mx-auto flex max-w-6xl flex-col gap-4 lg:flex-row lg:items-end lg:justify-between lg:gap-10">
-          <h1 className="max-w-[14ch] text-[clamp(2.4rem,5.2vw,4.75rem)] leading-[0.9]">
+          <h1 className="max-w-[14ch] text-[clamp(2.6rem,5.5vw,4.6rem)] leading-[0.92]">
             Heavy civil construction{" "}
             <span className="whitespace-nowrap">since {business.foundedYear}</span>
           </h1>
           <div className="max-w-sm shrink-0 lg:pb-1">
-            <p className="text-[17px] leading-snug text-[#d5d8e2] lg:text-[19px]">
+            <p className="text-[1.15rem] leading-snug text-white">
               Bridges, culverts, retaining walls, foundations, structural rehabilitation
               and dams. {business.city}, {business.state}.
             </p>
@@ -43,7 +43,7 @@ export default function Hero() {
               </a>
               <a
                 href="/contact"
-                className="inline-flex min-h-11 items-center bg-brand px-4 text-[16px] font-semibold text-white hover:bg-[#0012c4]"
+                className="inline-flex min-h-11 items-center bg-white px-4 text-[16px] font-semibold text-navy"
               >
                 Request a bid
               </a>

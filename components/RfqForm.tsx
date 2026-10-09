@@ -48,7 +48,7 @@ export default function RfqForm() {
       </div>
       <button
         type="submit"
-        className="mt-5 inline-flex min-h-11 items-center bg-navy px-5 text-[16px] font-semibold text-white hover:bg-[#1a274f]"
+        className="mt-5 inline-flex min-h-11 items-center bg-brand px-5 text-[16px] font-semibold text-white"
       >
         Submit request
       </button>

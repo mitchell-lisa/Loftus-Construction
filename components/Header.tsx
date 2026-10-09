@@ -121,7 +121,7 @@ export default function Header() {
   return (
     <header
       ref={headerRef}
-      className="on-dark sticky top-0 z-50 max-h-[calc(100svh-3.5rem)] overflow-y-auto bg-chrome text-white lg:max-h-none lg:overflow-visible"
+      className="on-dark sticky top-0 z-50 max-h-[calc(100svh-3.5rem)] overflow-y-auto bg-navy text-white lg:max-h-none lg:overflow-visible"
     >
       <a href="#content" className="skip-link">
         Skip to content
@@ -169,7 +169,7 @@ export default function Header() {
                 href={item.href}
                 aria-current={on ? "page" : undefined}
                 className={`inline-flex min-h-11 flex-col justify-center whitespace-nowrap ${
-                  on ? "text-white" : "text-chrome-muted hover:text-white"
+                  on ? "text-white" : "text-mist hover:text-white"
                 }`}
               >
                 {item.label}
@@ -202,7 +202,7 @@ export default function Header() {
               href={item.href}
               aria-current={on ? "page" : undefined}
               className={`inline-flex min-h-11 w-full flex-col justify-center ${
-                on ? "text-white" : "text-chrome-muted"
+                on ? "text-white" : "text-mist"
               }`}
             >
               {item.label}

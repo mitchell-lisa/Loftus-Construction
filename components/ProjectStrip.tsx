@@ -37,7 +37,7 @@ export default function ProjectStrip({
       {order.map((index) => cards[index]).map(({ project, photo, position }) => (
         <article key={project.slug} className="group bg-white">
           <Link href={`/projects/${project.slug}`} className="block">
-            <div className={`relative overflow-hidden bg-concrete ${frame}`}>
+            <div className={`relative overflow-hidden bg-white ${frame}`}>
               <Image
                 src={photo.src}
                 alt={photo.alt}

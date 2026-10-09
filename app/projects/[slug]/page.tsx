@@ -114,11 +114,11 @@ export default async function ProjectPage({ params }: Props) {
             sizes="100vw"
             className="object-cover object-[center_46%]"
           />
-          <Divider className="absolute inset-x-0 bottom-0" />
+          <Divider tone="white" className="absolute inset-x-0 bottom-0" />
         </div>
-        <div className="bg-navy px-5 pb-20 pt-4 lg:px-8 lg:pb-8 lg:pt-6">
+        <div className="bg-navy px-5 pb-20 pt-10 lg:px-8 lg:py-14">
           <div className="mx-auto flex max-w-6xl flex-col gap-4 lg:flex-row lg:items-end lg:justify-between">
-            <h1 className="max-w-[12ch] text-[clamp(2.6rem,6vw,4.8rem)] leading-[0.9]">
+            <h1 className="max-w-[14ch] text-[clamp(2.6rem,5.5vw,4.6rem)] leading-[0.92]">
               {project.name}
             </h1>
             <div className="max-w-md lg:pb-1">
@@ -147,7 +147,7 @@ export default async function ProjectPage({ params }: Props) {
           const photo = project.photos[frame.index];
           if (!photo) return null;
           return (
-            <div key={photo.src} className={`relative bg-concrete ${frame.className}`}>
+            <div key={photo.src} className={`relative bg-white ${frame.className}`}>
               <Image
                 src={photo.src}
                 alt={photo.alt}

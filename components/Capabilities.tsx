@@ -3,7 +3,7 @@ import { business } from "@/lib/business";
 
 export default function Capabilities() {
   return (
-    <Section className="bg-chalk">
+    <Section className="bg-white">
       <div className="border-t border-rule">
         {business.capabilities.map((group) => (
           <div

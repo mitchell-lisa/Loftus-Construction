@@ -4,7 +4,7 @@ import { business } from "@/lib/business";
 
 export default function Contact() {
   return (
-    <Section className="bg-chalk">
+    <Section className="bg-white">
       <div className="grid gap-14 lg:grid-cols-2">
         <div>
           <p className="text-[17px] font-semibold text-navy">{business.legalName}</p>
@@ -38,7 +38,7 @@ export default function Contact() {
               href={business.directionsUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex min-h-11 items-center border-b border-navy text-navy"
+              className="inline-flex min-h-11 items-center border-b-2 border-brand text-brand"
             >
               Get directions
             </a>

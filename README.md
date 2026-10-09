@@ -52,22 +52,22 @@ logo across the header, cross the photographs, and mark the current page.
 They live in `components/Divider.tsx`. Colors are in `COLOR.md`. On a phone,
 Menu opens the page list.
 Headlines are Newsreader. Body and navigation are Public Sans. Navy `#222e61`
-is the dimensional sign. Brand blue `#0014e0` is the current wordmark. Chrome
-`#12162a` is the header, footer, and phone bar.
+is the only dark field: header, footer, phone bar, and page plates. Brand blue
+`#0014e0` is the thin accent on white. Content sections are white.
 
-Palette, sampled rather than guessed:
+Palette:
 
 | Token | Hex | Source |
 |---|---|---|
 | brand | `#0014e0` | current logo PNG, between interior blues `#0000c8` and `#0016e4` |
-| girder | `#191d21` | near-black for the preview bar |
-| steel | `#aab1b9` | neutral grey from the old stylesheet |
-| concrete | `#d3d3d3` | photo placeholder behind images while they load |
-| chalk | `#f2f4f6` | cool gray section bands |
+| navy | `#222e61` | dimensional sign, used for every dark surface |
+| mist | `#c5cad3` | secondary text on navy |
+| ink | `#1c1e22` | body text on white |
+| rule | `#d5d8de` | hairlines |
 
 The header uses `logos/current-logo-white.png`, the current wordmark recolored
-white for the dark bar. The footer uses `logos/dimensional-letters-white.svg`.
-The blue and navy source files stay in the repo and are not placed on the chrome.
+white for the navy bar. The footer uses `logos/dimensional-letters-white.svg`.
+The blue and navy source files stay in the repo and are not placed on the bar.
 The 25th anniversary mark is not on the site. Photography is the jobsite set
 listed in `ASSETS.md`. Older low-resolution files from loftusconstruction.com
 are not used.

@@ -13,7 +13,7 @@ const links = [
 
 export default function Footer() {
   return (
-    <footer className="on-dark bg-chrome text-white">
+    <footer className="on-dark bg-navy text-white">
       <Divider tone="white" />
       <div className="mx-auto max-w-6xl px-5 pb-28 pt-10 lg:pb-14">
         <img
@@ -30,20 +30,20 @@ export default function Footer() {
             <Link
               key={item.href}
               href={item.href}
-              className="inline-flex min-h-11 items-center text-[15px] text-chrome-muted hover:text-white"
+              className="inline-flex min-h-11 items-center text-[15px] text-mist hover:text-white"
             >
               {item.label}
             </Link>
           ))}
         </nav>
-        <p className="mt-6 text-[16px] text-chrome-muted">
+        <p className="mt-6 text-[16px] text-mist">
           {business.street}, {business.city}, {business.state} {business.zip}
         </p>
         <p className="mt-1 text-[16px]">
           <a href={business.phoneHref} className="inline-flex min-h-11 items-center text-white">
             {business.phone}
           </a>
-          {business.fax ? <span className="text-chrome-muted">, fax {business.fax}</span> : null}
+          {business.fax ? <span className="text-mist">, fax {business.fax}</span> : null}
         </p>
         <p className="text-[16px]">
           <a
@@ -54,7 +54,7 @@ export default function Footer() {
           </a>
         </p>
         {business.status === "demo" ? (
-          <p className="mt-8 max-w-[62ch] border-t border-white/25 pt-5 text-[14px] leading-relaxed text-chrome-muted">
+          <p className="mt-8 max-w-[62ch] border-t border-rule pt-5 text-[14px] leading-relaxed text-mist">
             This page is a preview built by {business.builder.name}. It is not the official
             website of {business.legalName}, and the request form does not send.
           </p>

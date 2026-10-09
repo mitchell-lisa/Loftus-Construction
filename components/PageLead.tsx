@@ -16,7 +16,7 @@ export default function PageLead({
   if (photo) {
     return (
       <section className="on-dark bg-navy text-white">
-        <div className="relative h-[46vh] min-h-[240px] max-h-[520px] overflow-hidden bg-concrete">
+        <div className="relative h-[46vh] min-h-[240px] max-h-[520px] overflow-hidden bg-white">
           <Image
             src={photo.src}
             alt={photo.alt}
@@ -25,14 +25,14 @@ export default function PageLead({
             sizes="100vw"
             className={`object-cover ${position}`}
           />
-          <Divider className="absolute inset-x-0 bottom-0" />
+          <Divider tone="white" className="absolute inset-x-0 bottom-0" />
         </div>
-        <div className="px-5 py-7 lg:px-8 lg:py-10">
+        <div className="px-5 py-10 lg:px-8 lg:py-14">
           <div className="mx-auto max-w-6xl">
             <h1 className="max-w-[14ch] text-[clamp(2.6rem,5.5vw,4.6rem)] leading-[0.92]">
               {title}
             </h1>
-            <p className="mt-4 max-w-[46ch] text-[1.15rem] leading-snug text-[#d5d8e2]">{line}</p>
+            <p className="mt-4 max-w-[46ch] text-[1.15rem] leading-snug text-white">{line}</p>
           </div>
         </div>
       </section>
@@ -42,9 +42,11 @@ export default function PageLead({
   return (
     <section className="on-dark bg-navy text-white">
       <Divider tone="white" />
-      <div className="mx-auto max-w-6xl px-5 py-10 lg:py-14">
-        <h1 className="max-w-[14ch] text-[clamp(2.6rem,5.5vw,4.6rem)] leading-[0.92]">{title}</h1>
-        <p className="mt-4 max-w-[46ch] text-[1.15rem] leading-snug text-[#d5d8e2]">{line}</p>
+      <div className="px-5 py-10 lg:px-8 lg:py-14">
+        <div className="mx-auto max-w-6xl">
+          <h1 className="max-w-[14ch] text-[clamp(2.6rem,5.5vw,4.6rem)] leading-[0.92]">{title}</h1>
+          <p className="mt-4 max-w-[46ch] text-[1.15rem] leading-snug text-white">{line}</p>
+        </div>
       </div>
     </section>
   );

@@ -307,6 +307,46 @@ with sync_playwright() as p:
             status = str(e)
         check(f"link {path} returns 200", status == 200, status)
     context.close()
+
+    ALLOWED = {
+        "#ffffff",
+        "#222e61",
+        "#0014e0",
+        "#d5d8de",
+        "#1c1e22",
+        "#4e545c",
+        "#c5cad3",
+    }
+    for width in (1440, 390):
+        context = browser.new_context(viewport={"width": width, "height": 900})
+        page = context.new_page()
+        for path in ROUTES:
+            page.goto(BASE + path, wait_until="networkidle", timeout=60000)
+            found = page.evaluate(
+                """() => {
+                  const out = [];
+                  const seen = new Set();
+                  for (const el of document.querySelectorAll('*')) {
+                    const bg = getComputedStyle(el).backgroundColor;
+                    if (!bg || bg === 'transparent' || bg === 'rgba(0, 0, 0, 0)') continue;
+                    if (seen.has(bg)) continue;
+                    seen.add(bg);
+                    out.push({bg, tag: el.tagName, cls: (el.className || '').toString().slice(0, 80)});
+                  }
+                  return out;
+                }"""
+            )
+            stray = []
+            for item in found:
+                raw = item["bg"]
+                hexed = raw
+                if raw.startswith("rgb"):
+                    nums = [int(n) for n in raw.replace("rgba", "rgb").replace("rgb(", "").replace(")", "").split(",")[:3]]
+                    hexed = "#{:02x}{:02x}{:02x}".format(*nums)
+                if hexed not in ALLOWED:
+                    stray.append(f"{hexed} {item['tag']}.{item['cls']}")
+            check(f"{width}px {path} backgrounds stay in the palette", not stray, stray)
+        context.close()
     browser.close()
 
 for path, expect in [("/robots.txt", "Disallow: /"), ("/sitemap.xml", "<urlset")]:

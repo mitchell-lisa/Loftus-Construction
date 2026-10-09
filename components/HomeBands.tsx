@@ -13,7 +13,7 @@ export default function HomeBands() {
   return (
     <>
       <section className="bg-white">
-        <div className="mx-auto flex max-w-6xl flex-wrap items-end justify-between gap-x-6 gap-y-2 px-5 pb-2 pt-14 lg:pt-20">
+        <div className="mx-auto flex max-w-6xl flex-wrap items-end justify-between gap-x-6 gap-y-2 px-5 pb-8 pt-16 lg:pt-24">
           <h2 className="text-[clamp(2.1rem,4vw,3.2rem)] leading-[0.95] text-navy">Projects</h2>
           <Link
             href="/projects"
@@ -25,7 +25,7 @@ export default function HomeBands() {
         <ProjectStrip order={[1, 0]} />
       </section>
 
-      <section className="bg-chalk">
+      <section className="bg-white">
         <Divider />
         <div className="mx-auto max-w-6xl px-5 py-16 lg:py-24">
           <div className="flex flex-wrap items-end justify-between gap-x-6 gap-y-2">
@@ -50,6 +50,7 @@ export default function HomeBands() {
       </section>
 
       <section className="bg-white">
+        <Divider />
         <div className="mx-auto max-w-6xl px-5 py-16 lg:py-24">
           <div className="flex flex-wrap items-end justify-between gap-x-6 gap-y-2">
             <h2 className="text-[clamp(2.1rem,4vw,3.2rem)] leading-[0.95] text-navy">Record</h2>
@@ -60,7 +61,7 @@ export default function HomeBands() {
               Full record
             </Link>
           </div>
-          <div className="mt-10 grid gap-12 border-t border-navy pt-8 lg:grid-cols-2">
+          <div className="mt-10 grid gap-12 border-t border-rule pt-8 lg:grid-cols-2">
             {award ? (
               <div>
                 <p className="font-display text-[clamp(1.7rem,2.6vw,2.35rem)] leading-tight text-navy">
@@ -75,7 +76,7 @@ export default function HomeBands() {
 
       <section className="on-dark bg-navy text-white">
         <Divider tone="white" />
-        <div className="mx-auto max-w-6xl px-5 pb-24 pt-14 lg:py-20">
+        <div className="mx-auto max-w-6xl px-5 pt-16 pb-24 lg:py-24">
           <h2 className="text-[clamp(2.1rem,4vw,3.2rem)] leading-[0.95]">Contact</h2>
           <p className="mt-6">
             <a
@@ -94,13 +95,13 @@ export default function HomeBands() {
               {business.email}
             </a>
           </p>
-          <p className="mt-4 text-[17px] text-[#d5d8e2]">
+          <p className="mt-4 text-[17px] text-mist">
             {business.street}, {business.city}, {business.state} {business.zip}
           </p>
           <p className="mt-8">
             <Link
               href="/contact"
-              className="inline-flex min-h-11 items-center bg-brand px-4 text-[16px] font-semibold text-white hover:bg-[#0012c4]"
+              className="inline-flex min-h-11 items-center bg-white px-4 text-[16px] font-semibold text-navy"
             >
               Request a bid
             </Link>
