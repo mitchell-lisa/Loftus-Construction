@@ -1,8 +1,13 @@
 # Loftus Construction, Inc. website
 
-A speculative rebuild of loftusconstruction.com, built by MJL Collective from
-public sources only. Status is `demo`: the site is noindexed, carries a preview
-banner naming the builder, and contains no forms.
+A preview site for Loftus Construction, built by MJL Collective. Public facts
+still come from the sources in `PROFILE.md`. Logos and the Brownsville and
+University Avenue photographs were supplied by Ryan Loftus on 8 Oct 2026.
+Which files are on the page, and which were left out, is `ASSETS.md`.
+
+Status stays `demo`: the site is noindexed, carries a preview banner naming
+the builder, and contains no forms. Do not promote a preview deployment to
+production.
 
 ## Stack
 
@@ -42,22 +47,23 @@ else needs to change.
 
 ## Design notes
 
-The separator running through the site is taken from the wordmark: three
-horizontal rules, stepped so each is shorter than the one above, measured off
-the logo file at roughly 100, 83 and 69 percent. It lives in `components/Rule.tsx`
-and is the only ornament used.
+The design is built out of the Loftus wordmark.
 
-Palette, sampled rather than guessed:
-
-| Token | Hex | Source |
-|---|---|---|
-| girder | `#191d21` | oxidized steel in their own project photography |
-| slate | `#364f6d` | already present in their existing stylesheet |
-| steel | `#aab1b9` | already present in their existing stylesheet |
-| concrete | `#d3d3d3` | new deck concrete, Strasburg Railroad photograph |
-| chalk | `#f4f3f0` | fresh pour, bridge deck photograph |
-
-Photography is the company's own, taken from their current site. It is genuine
-but low resolution, capped at 1140 pixels wide, and the layout is built to sit
-within that limit. Replacing these files with owner-supplied originals improves
-every section without any code change.
+- **Speed lines.** The three stepped rules beside LOFTUS (heavy, medium, light) are the
+  structure of the site: the header rule, the line under the home headline that runs
+  into the photograph, section breaks, the active page mark, and on the record page the
+  contract amounts themselves, where the length of the rule is the size of the job.
+  `components/SpeedLines.tsx`, `components/ValueBar.tsx`.
+- **Type.** Tinos, the free metric match for the Times serif in the wordmark, for
+  headlines; small caps set like CONSTRUCTION, INC. for sheet labels; Public Sans for
+  reading.
+- **Drawing cues.** Blueprint grid on navy panels, dimension lines for photo captions
+  (`components/Dim.tsx`), and a title block job sheet on each project page.
+- **Palette.** One navy `#222e61` (the dimensional letters sign) for every dark panel,
+  white for content, the wordmark blue `#0014e0` only for links and thin rules.
+- **Photographs.** Every photo is defined once in `lib/photos.ts` and used once on the
+  site. Job photos are 2400 px web copies of Ryan's Drive originals (the home photo is
+  3200 px from the original drone frame). The five contract photos on the record page
+  and four capability thumbnails are the small originals from loftusconstruction.com
+  and are only ever shown at or below their native size.
+- **Phone menu.** A full screen dialog rendered into `<body>`, outside the header.

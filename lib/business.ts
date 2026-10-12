@@ -2,6 +2,8 @@
 // Anything we could not verify from a public source is null, and null renders nothing.
 // Every value here traces to a line in PROFILE.md with its source next to it.
 
+import { photos, type Photo, type PhotoKey } from "./photos";
+
 export type Status = "demo" | "sold" | "client";
 
 export type Project = {
@@ -12,6 +14,31 @@ export type Project = {
   value: number | null;
   /** True only for work confirmed in progress by a third party source. */
   current?: boolean;
+  /** Photograph from the company's current site, where one exists. */
+  photo?: PhotoKey;
+};
+
+export type JobPhoto = Photo;
+
+/**
+ * A job Ryan photographed. Names come from his Drive folder titles.
+ * Owner, contract value, scope, and dates beyond the photo dates are not
+ * supplied yet, so they are absent rather than guessed.
+ */
+export type PhotoProject = {
+  slug: string;
+  name: string;
+  /** Short form for cards and links. */
+  short: string;
+  /** Only when certain from public knowledge of the structure. */
+  place: string | null;
+  structure: string;
+  summary: string;
+  /** Rows for the spec sheet. Only facts we hold. */
+  sheet: { label: string; value: string }[];
+  /** Photo keys, in the order the page tells the story. */
+  lead: PhotoKey;
+  story: { heading: string; text: string; photos: PhotoKey[] }[];
 };
 
 export type Person = {
@@ -55,19 +82,37 @@ export type Business = {
   social: null;
   mission: string;
   history: string[];
+  /**
+   * 2019 roster from the old team.php. Not the current team.
+   * `currentTeam` stays null until Ryan confirms who is there now.
+   * Do not render `team` on the site.
+   */
   team: Person[];
+  currentTeam: null;
+  testimonials: null;
+  license: null;
+  insurance: null;
   prequalifications: string[];
   associations: string[];
   clients: string[];
   capabilities: CapabilityGroup[];
   services: { name: string; blurb: string; items: string[] }[];
   projects: Project[];
+  /** Homepage photograph. */
+  hero: JobPhoto;
+  /**
+   * Jobs Ryan photographed. Summaries describe the frames only.
+   * Anything he did not send (owner, address, value, dates, scope) is absent.
+   */
+  photoProjects: PhotoProject[];
   award: { year: number; body: string; title: string; detail: string } | null;
   careers: { program: string; blurb: string; philosophy: string } | null;
   builder: { name: string; url: string | null };
 };
 
 export const business: Business = {
+  // Stays demo so this preview stays noindexed, with the builder banner.
+  // Loftus is a client. This deployment is not the public site.
   status: "demo",
 
   legalName: "Loftus Construction, Inc.",
@@ -95,6 +140,10 @@ export const business: Business = {
   rating: null,
   reviewCount: null,
   social: null,
+  currentTeam: null,
+  testimonials: null,
+  license: null,
+  insurance: null,
 
   mission:
     "The purpose of Loftus Construction, Inc. is to complete difficult heavy construction projects, in a safe and timely fashion, and to provide a superior product to the client.",
@@ -161,7 +210,7 @@ export const business: Business = {
     {
       name: "Design-build",
       blurb:
-        "A turnkey solution that puts one party in charge of every part of a project, which lowers risk and cost and can shorten delivery.",
+        "Pricing, conceptual options, value engineering, new structures and rehabilitation of existing structures, plus permits and agency coordination.",
       items: [
         "Budget pricing and conceptual structure options",
         "Value engineering of completed designs",
@@ -174,7 +223,7 @@ export const business: Business = {
     {
       name: "Preconstruction",
       blurb:
-        "Project analysis that identifies problem areas before they become delays, customized to what the project actually needs.",
+        "Feasibility, design, estimates, scheduling, procurement, logistics and constructability review before work starts.",
       items: [
         "Site feasibility and conceptual design",
         "Detailed designs and constructability reviews",
@@ -196,8 +245,8 @@ export const business: Business = {
         "Pre-engineered pedestrian bridges",
         "Timber bridges",
       ],
-      image: "/images/bridges.webp",
-      alt: "Completed pedestrian bridge with stone-faced abutment and steel railing",
+      image: null,
+      alt: null,
     },
     {
       name: "Culverts",
@@ -208,8 +257,8 @@ export const business: Business = {
         "Metal arch culverts",
         "Pipe culverts",
       ],
-      image: "/images/culverts.webp",
-      alt: "Stone-faced arch culvert carrying a road over a creek",
+      image: null,
+      alt: null,
     },
     {
       name: "Retaining walls",
@@ -221,8 +270,8 @@ export const business: Business = {
         "Steel sheetpile walls",
         "Gabion walls",
       ],
-      image: "/images/retaining-walls.webp",
-      alt: "Cast-in-place concrete retaining wall alongside a stream",
+      image: null,
+      alt: null,
     },
     {
       name: "Foundations",
@@ -233,8 +282,8 @@ export const business: Business = {
         "Reinforced concrete foundations",
         "Support of excavation",
       ],
-      image: "/images/foundations.webp",
-      alt: "Reinforced concrete foundation under construction inside a sheetpile excavation",
+      image: null,
+      alt: null,
     },
     {
       name: "Structural rehabilitation",
@@ -247,14 +296,14 @@ export const business: Business = {
         "Streambank stabilization, gabions and Reno mattresses",
         "Rip rap lining and protection",
       ],
-      image: "/images/structural-rehabilitation.webp",
-      alt: "Masonry arch bridge under rehabilitation, lit by work lights at night",
+      image: null,
+      alt: null,
     },
     {
       name: "Dams",
       items: ["Emergency stabilization", "Rehabilitation", "Complete reconstruction"],
-      image: "/images/dams.webp",
-      alt: "Restored dam and spillway with stabilized bank",
+      image: null,
+      alt: null,
     },
   ],
 
@@ -264,25 +313,27 @@ export const business: Business = {
       owner: "Tinicum Township, Bucks County",
       location: "Tinicum Township, PA",
       value: 2300000,
-      current: true,
     },
     {
       name: "PA Turnpike bridge replacement DB-155",
       owner: "Pennsylvania Turnpike Commission",
       location: "Willow Grove, PA",
       value: 12880527,
+      photo: "rDb155",
     },
     {
       name: "PA Turnpike bridge replacement NB-142",
       owner: "Pennsylvania Turnpike Commission",
       location: "Lansdale, PA",
       value: 12327393,
+      photo: "rNb142",
     },
     {
       name: "Henry Avenue bridge over Wissahickon Creek",
       owner: "PennDOT District 6",
       location: "Philadelphia, PA",
       value: 12306782,
+      photo: "rHenry",
     },
     {
       name: "41st Street bridge over Amtrak and SEPTA",
@@ -337,12 +388,106 @@ export const business: Business = {
       owner: "PennDOT District 5",
       location: "Easton, PA",
       value: 1369884,
+      photo: "rSr611",
     },
     {
       name: "Strasburg Railroad main track bridge replacement",
       owner: "Strasburg Railroad",
       location: "Gap, PA",
       value: 468000,
+      photo: "rStrasburg",
+    },
+  ],
+
+  hero: photos.heroDeck,
+
+  photoProjects: [
+    {
+      slug: "brownsville-road",
+      name: "Brownsville Road over Neshaminy Creek",
+      short: "Brownsville Road",
+      place: null,
+      structure: "Concrete deck bridge on piers",
+      summary:
+        "A new concrete bridge carrying Brownsville Road over Neshaminy Creek. The photographs run from the old bridge in October 2024, through demolition in spring 2025, to the deck pour in April 2026.",
+      sheet: [
+        { label: "Structure", value: "Concrete deck on piers" },
+        { label: "Waterway", value: "Neshaminy Creek" },
+        { label: "Photographed", value: "October 2024 to April 2026" },
+      ],
+      lead: "bLead",
+      story: [
+        {
+          heading: "The old bridge",
+          text: "Brownsville Road crossed the creek on an older concrete bridge, with debris built up against the pier.",
+          photos: ["bOldBank", "bApproach"],
+        },
+        {
+          heading: "Out with the old abutments",
+          text: "In spring 2025 the crew broke out the old abutment concrete beside the creek, with part of the old deck still standing.",
+          photos: ["bDemo", "bEarly"],
+        },
+        {
+          heading: "Deck pour",
+          text: "Concrete went onto the new deck on April 23, 2026, with the pump, the paver and the crew working across the span.",
+          photos: ["bPour", "bPaver", "bPier"],
+        },
+      ],
+    },
+    {
+      slug: "university-avenue",
+      name: "University Avenue Bridge over the Schuylkill River",
+      short: "University Avenue",
+      place: "Philadelphia, PA",
+      structure: "Steel bridge with an open grated deck",
+      summary:
+        "Work on the University Avenue Bridge over the Schuylkill River in Philadelphia. The photographs show the riveted girders and stone piers from the water, the operator's house on the deck, and new steel grating going in.",
+      sheet: [
+        { label: "Structure", value: "Steel girders, open grated deck" },
+        { label: "Waterway", value: "Schuylkill River" },
+        { label: "Location", value: "Philadelphia, PA" },
+        { label: "Photographed", value: "July to October 2026" },
+      ],
+      lead: "uGirders",
+      story: [
+        {
+          heading: "From the water",
+          text: "Under the span the old riveted steel sits on stone piers with round openings, a few feet above the Schuylkill.",
+          photos: [],
+        },
+        {
+          heading: "On the deck",
+          text: "Up top, the grated roadway runs past the stone and glass operator's house. New grating panels are set, checked and fastened piece by piece.",
+          photos: ["uHouse", "uOpening", "uTag", "uLevel"],
+        },
+      ],
+    },
+    {
+      slug: "st-peters-road",
+      name: "St. Peters Road retaining wall",
+      short: "St. Peters Road",
+      place: null,
+      structure: "Retaining wall along a wooded road",
+      summary:
+        "A rebuilt retaining wall holding up St. Peters Road where it runs above a steep wooded slope. In May 2025 the old wall and the lane above it were cracking and dropping. A year later the wall, rail and paving were finished.",
+      sheet: [
+        { label: "Structure", value: "Retaining wall with guide rail" },
+        { label: "Before", value: "May 2025" },
+        { label: "Completed", value: "May 2026" },
+      ],
+      lead: "sLead",
+      story: [
+        {
+          heading: "Before",
+          text: "The lane along the old wall was cracked along its length, and in places the edge had dropped toward the slope.",
+          photos: ["sBefore", "sCracks", "sCurve", "sStart"],
+        },
+        {
+          heading: "Finished",
+          text: "The new wall carries the road edge the full length of the curve, with new rail and fresh paving on top.",
+          photos: ["sClimb"],
+        },
+      ],
     },
   ],
 
@@ -369,6 +514,10 @@ export const business: Business = {
 
 export function formatUSD(value: number): string {
   return "$" + value.toLocaleString("en-US");
+}
+
+export function projectBySlug(slug: string): PhotoProject | null {
+  return business.photoProjects.find((project) => project.slug === slug) ?? null;
 }
 
 export const addressLine = `${business.street}, ${business.city}, ${business.state} ${business.zip}`;

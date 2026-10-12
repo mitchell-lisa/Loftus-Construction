@@ -1,38 +1,74 @@
-import { Flank } from "./Rule";
+import Link from "next/link";
 import { business } from "@/lib/business";
+import { nav } from "./nav";
+import SpeedLines from "./SpeedLines";
 
 export default function Footer() {
   return (
-    <footer className="bg-girder text-steel">
-      <div className="mx-auto max-w-6xl px-5 pb-28 pt-12 lg:pb-12">
-        <Flank tone="dark" className="mb-1">
-          <p className="text-[16px] font-semibold text-white">{business.legalName}</p>
-        </Flank>
-        <p className="mt-1 text-[15px]">{business.descriptor}</p>
-        <p className="mt-4 text-[15px]">
-          {business.street}, {business.city}, {business.state} {business.zip}
-        </p>
-        <p className="mt-1 text-[15px]">
-          <a href={business.phoneHref} className="inline-block py-1 text-white hover:underline">
-            {business.phone}
-          </a>
-          {business.fax ? <span className="text-steel">, fax {business.fax}</span> : null}
-        </p>
-        <p className="mt-1 text-[15px]">
-          <a href={`mailto:${business.email}`} className="inline-block py-1 text-white hover:underline">
-            {business.email}
-          </a>
-        </p>
-
-        {business.status === "demo" ? (
-          <p className="mt-8 max-w-[62ch] border-t border-white/12 pt-5 text-[13.5px] leading-relaxed text-steel">
-            This page is a speculative preview built by {business.builder.name}. It is
-            not the official website of {business.legalName} and was not commissioned by
-            the company, and carries no forms. The company logo appears here to
-            identify the business and will be removed on request.
+    <footer className="on-dark grid-paper bg-navy text-white">
+      <SpeedLines reveal className="text-white" />
+      <div className="wrap grid gap-12 pb-16 pt-14 lg:grid-cols-[1.1fr_1fr] lg:gap-20 lg:pb-20 lg:pt-20">
+        <div>
+          <img
+            src="/images/logos/dimensional-letters-white.svg"
+            alt="Loftus Construction, Inc., engineers and contractors, with the brick arch from the company sign"
+            width={687}
+            height={248}
+            loading="lazy"
+            decoding="async"
+            className="block h-auto w-full max-w-[400px]"
+          />
+          <p className="mt-8 max-w-[34ch] font-display text-[1.35rem] leading-snug text-white">
+            Engineers and contractors, building bridges, walls and dams since {business.foundedYear}.
           </p>
-        ) : null}
+        </div>
+        <div className="grid gap-10 sm:grid-cols-2">
+          <nav aria-label="Footer">
+            <ul>
+              <li>
+                <Link href="/" className="inline-flex min-h-11 items-center text-[16px] text-mist hover:text-white">
+                  Home
+                </Link>
+              </li>
+              {nav.map((item) => (
+                <li key={item.href}>
+                  <Link
+                    href={item.href}
+                    className="inline-flex min-h-11 items-center text-[16px] text-mist hover:text-white"
+                  >
+                    {item.label}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </nav>
+          <div className="text-[16px]">
+            <a href={business.phoneHref} className="inline-flex min-h-11 items-center font-semibold text-white">
+              {business.phone}
+            </a>
+            {business.fax ? <p className="text-mist">Fax {business.fax}</p> : null}
+            <a
+              href={`mailto:${business.email}`}
+              className="mt-1 inline-flex min-h-11 items-center break-all text-white underline decoration-white/40 underline-offset-4"
+            >
+              {business.email}
+            </a>
+            <p className="mt-2 text-mist">
+              {business.street}
+              <br />
+              {business.city}, {business.state} {business.zip}
+            </p>
+          </div>
+        </div>
       </div>
+      {business.status === "demo" ? (
+        <div className="border-t border-white/15">
+          <p className="wrap py-6 text-[14px] leading-relaxed text-mist">
+            Preview built by {business.builder.name}. Not the official website of {business.legalName} The
+            request form does not send.
+          </p>
+        </div>
+      ) : null}
     </footer>
   );
 }

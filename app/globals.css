@@ -1,75 +1,264 @@
 @import "tailwindcss";
 
 /*
-  Palette sampled from Loftus Construction's own material.
-  girder and steel come from their photography, slate and steel-grey are the
-  two colors already present in their existing stylesheet.
+  Loftus palette. One navy, one blue, white. Nothing else.
+  navy   #222e61  the dimensional letters sign
+  brand  #0014e0  the blue of the current wordmark, used thin and sparingly
+  Display type is Tinos, the free metric match for the Times serif in the wordmark.
+  Body is Public Sans, close to the sans under the wordmark.
 */
 @theme {
-  --color-girder: #191d21;
-  --color-girder-soft: #232830;
-  --color-slate: #364f6d;
-  --color-slate-deep: #2a3e56;
-  --color-steel: #aab1b9;
-  --color-concrete: #d3d3d3;
-  --color-chalk: #f4f3f0;
-  --color-ink: #24282d;
-  --color-ink-soft: #5b6169;
+  --color-navy: #222e61;
+  --color-brand: #0014e0;
+  --color-ink: #1c1e22;
+  --color-paper: #ffffff;
+  --color-rule: #d5d8de;
+  --color-mist: #c9cedb;
+  --color-muted: #50566a;
 
-  --font-display: var(--font-source-serif), Georgia, "Times New Roman", serif;
-  --font-body: var(--font-archivo), "Helvetica Neue", Arial, sans-serif;
+  --font-display: var(--font-tinos), "Times New Roman", Times, serif;
+  --font-body: var(--font-public-sans), "Helvetica Neue", Arial, sans-serif;
 }
 
 :root {
-  --ink-muted: #5b6169;
-  --hairline: #d8d6d0;
-  /* Height of the pinned bar. Header.tsx keeps this current from the live
-     element; this value is only what the first paint scrolls against. */
-  --header-h: 96px;
+  --header-h: 68px;
+  --banner-h: 0px;
+  --gutter: 1.25rem;
+}
+
+@media (min-width: 768px) {
+  :root {
+    --gutter: 2.5rem;
+  }
 }
 
 @media (min-width: 1024px) {
   :root {
-    --header-h: 76px;
+    --header-h: 84px;
   }
 }
 
 html {
   -webkit-text-size-adjust: 100%;
+  scroll-behavior: smooth;
+  overflow-x: clip;
 }
 
-/* Every anchor target clears the pinned bar, plus a little air. */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+}
+
 [id] {
-  scroll-margin-top: calc(var(--header-h) + 12px);
+  scroll-margin-top: calc(var(--header-h) + 16px);
 }
 
 body {
-  background: var(--color-chalk);
+  background: var(--color-paper);
   color: var(--color-ink);
   font-family: var(--font-body);
-  font-size: 16px;
+  font-size: 17px;
   line-height: 1.6;
   -webkit-font-smoothing: antialiased;
-  overflow-x: hidden;
+  overflow-x: clip;
+}
+
+/* Room for the phone call bar */
+@media (max-width: 1023px) {
+  body {
+    padding-bottom: 56px;
+  }
 }
 
 h1,
 h2,
 h3 {
   font-family: var(--font-display);
-  font-weight: 600;
+  font-weight: 400;
   text-wrap: balance;
-  letter-spacing: -0.005em;
+  letter-spacing: -0.015em;
 }
 
-a:focus-visible,
-button:focus-visible {
-  outline: 2px solid var(--color-slate);
-  outline-offset: 3px;
+p {
+  text-wrap: pretty;
+}
+
+@layer components {
+.wrap {
+  width: 100%;
+  max-width: 82rem;
+  margin-inline: auto;
+  padding-inline: var(--gutter);
+}
+
+/* Caps set like CONSTRUCTION, INC. under the wordmark */
+.caps {
+  font-family: var(--font-display);
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  font-size: 0.82em;
 }
 
 .tnum {
   font-variant-numeric: tabular-nums;
+}
+
+}
+
+a:focus-visible,
+button:focus-visible,
+input:focus-visible,
+textarea:focus-visible {
+  outline: 2px solid var(--color-brand);
+  outline-offset: 3px;
+}
+
+.on-dark :is(a, button, input, textarea):focus-visible {
+  outline-color: #ffffff;
+}
+
+.skip-link {
+  position: absolute;
+  left: 0.75rem;
+  top: -100px;
+  z-index: 200;
+  background: #ffffff;
+  color: var(--color-navy);
+  padding: 0.6rem 0.9rem;
+  font-weight: 600;
+}
+
+.skip-link:focus {
+  top: 0.75rem;
+}
+
+@layer components {
+/* Blueprint grid. Lines in the same navy or white, never a new colour. */
+.grid-paper {
+  background-image:
+    linear-gradient(to right, rgb(255 255 255 / 0.07) 1px, transparent 1px),
+    linear-gradient(to bottom, rgb(255 255 255 / 0.07) 1px, transparent 1px);
+  background-size: 48px 48px;
+  background-position: -1px -1px;
+}
+
+.grid-paper-light {
+  background-image:
+    linear-gradient(to right, rgb(34 46 97 / 0.06) 1px, transparent 1px),
+    linear-gradient(to bottom, rgb(34 46 97 / 0.06) 1px, transparent 1px);
+  background-size: 48px 48px;
+  background-position: -1px -1px;
+}
+
+/* Speed lines. Three rules, heavy to light, drawn from one side. */
+.speed {
+  display: flex;
+  flex-direction: column;
+  gap: var(--speed-gap, 6px);
+}
+
+.speed > span {
+  display: block;
+  background: currentColor;
+  transform-origin: var(--speed-origin, left) center;
+}
+
+.speed > span:nth-child(1) {
+  height: var(--speed-1, 4px);
+}
+
+.speed > span:nth-child(2) {
+  height: var(--speed-2, 2px);
+}
+
+.speed > span:nth-child(3) {
+  height: var(--speed-3, 1px);
+}
+
+}
+
+/* Draw-in on first view. Without JS nothing is hidden. */
+.js [data-reveal] .speed > span,
+.js .speed[data-reveal] > span {
+  transform: scaleX(0);
+  transition: transform 1100ms cubic-bezier(0.2, 0.7, 0.1, 1);
+}
+
+.js [data-reveal].is-in .speed > span,
+.js .speed[data-reveal].is-in > span {
+  transform: scaleX(1);
+}
+
+.js [data-reveal] .speed > span:nth-child(2),
+.js .speed[data-reveal] > span:nth-child(2) {
+  transition-delay: 120ms;
+}
+
+.js [data-reveal] .speed > span:nth-child(3),
+.js .speed[data-reveal] > span:nth-child(3) {
+  transition-delay: 240ms;
+}
+
+.js [data-rise] {
+  opacity: 0;
+  transform: translateY(18px);
+  transition:
+    opacity 700ms ease,
+    transform 900ms cubic-bezier(0.2, 0.7, 0.1, 1);
+}
+
+.js [data-rise].is-in {
+  opacity: 1;
+  transform: none;
+}
+
+@layer components {
+/* Dimension line: |<---- label ---->| */
+.dim {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  font-size: 13px;
+  line-height: 1.3;
+  letter-spacing: 0.02em;
+}
+
+.dim::before,
+.dim::after {
+  content: "";
+  flex: 1 1 0;
+  min-width: 1.5rem;
+  height: 9px;
+  border-block-start: 0;
+  background:
+    linear-gradient(currentColor, currentColor) center / 100% 1px no-repeat;
+  border-inline: 1px solid currentColor;
+}
+
+.dim-start::before {
+  flex: 0 0 1.5rem;
+}
+
+.dim > span {
+  flex: 0 1 auto;
+  min-width: 0;
+}
+
+}
+
+/* Hero image slow settle */
+@keyframes settle {
+  from {
+    transform: scale(1.06);
+  }
+  to {
+    transform: scale(1);
+  }
+}
+
+.settle {
+  animation: settle 2400ms cubic-bezier(0.2, 0.7, 0.1, 1) both;
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -78,5 +267,49 @@ button:focus-visible {
   *::after {
     animation-duration: 0.001ms !important;
     transition-duration: 0.001ms !important;
+  }
+
+  .js [data-rise] {
+    opacity: 1;
+    transform: none;
+  }
+
+  .js [data-reveal] .speed > span,
+  .js .speed[data-reveal] > span {
+    transform: none;
+  }
+}
+
+/* Body scroll lock while the phone menu is open */
+html.menu-open,
+html.menu-open body {
+  overflow: hidden;
+}
+
+@keyframes menu-in {
+  from {
+    opacity: 0;
+    transform: translateX(-14px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+#site-menu:not([hidden]) {
+  animation: fade-in 220ms ease both;
+}
+
+#site-menu:not([hidden]) .menu-item {
+  animation: menu-in 420ms cubic-bezier(0.2, 0.7, 0.1, 1) both;
+}
+
+@keyframes fade-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
   }
 }
