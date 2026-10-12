@@ -33,7 +33,7 @@ export default function Home() {
       <section className="section">
         <div className="wrap grid gap-12 lg:grid-cols-12">
           <p className="intro lg:col-span-8" data-reveal>
-            Loftus Construction was founded in Cinnaminson, New Jersey to complete difficult heavy construction projects in a safe and timely fashion. Three decades on, the work is still bridges, walls and dams for the agencies that own them.
+            Loftus Construction was founded in 1994 to complete difficult heavy construction projects in a safe and timely fashion. Three decades on, the work is still bridges, walls and dams for the agencies that own them.
           </p>
           <dl className="keyfacts lg:col-span-4" data-reveal>
             <div><dt>Founded</dt><dd className="tnum">{firm.founded}</dd></div>
@@ -47,7 +47,7 @@ export default function Home() {
         <div className="wrap">
           <div className="grid gap-6 lg:grid-cols-12 lg:items-end">
             <h2 className="h1 lg:col-span-7" data-reveal>Where the work is</h2>
-            <p className="lede lg:col-span-5" data-reveal>Most of the published record is in southeastern Pennsylvania, from Philadelphia out to Easton and Gap. The office is across the river in Cinnaminson.</p>
+            <p className="lede lg:col-span-5" data-reveal>Most of the published record is in southeastern Pennsylvania, from Philadelphia out to Easton and Gap. The office is in King of Prussia.</p>
           </div>
           <div className="atlas mt-14 lg:mt-20">
             {[["Philadelphia", phl], ["Pennsylvania", pa], ["New Jersey", nj]].map(([label, list]) => (
