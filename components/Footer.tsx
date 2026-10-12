@@ -9,11 +9,11 @@ export default function Footer() {
       <div className="wrap grid gap-12 py-16 md:grid-cols-12 lg:py-20">
         <div className="md:col-span-5">
           <Image
-            src="/images/logos/dimensional-letters-white.svg"
+            src="/images/logos/current-logo-white.png"
             alt={business.legalName}
-            width={687}
-            height={248}
-            className="h-auto w-[180px]"
+            width={1200}
+            height={285}
+            className="h-auto w-[200px]"
           />
         </div>
         <div className="text-[15px] leading-7 md:col-span-4">
