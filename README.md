@@ -47,27 +47,23 @@ else needs to change.
 
 ## Design notes
 
-The three speed lines beside LOFTUS are the site's motif. They run out of the
-logo across the header, cross the photographs, and mark the current page.
-They live in `components/Divider.tsx`. Colors are in `COLOR.md`. On a phone,
-Menu opens the page list.
-Headlines are Newsreader. Body and navigation are Public Sans. Navy `#222e61`
-is the only dark field: header, footer, phone bar, and page plates. Brand blue
-`#0014e0` is the thin accent on white. Content sections are white.
+The design is built out of the Loftus wordmark.
 
-Palette:
-
-| Token | Hex | Source |
-|---|---|---|
-| brand | `#0014e0` | current logo PNG, between interior blues `#0000c8` and `#0016e4` |
-| navy | `#222e61` | dimensional sign, used for every dark surface |
-| mist | `#c5cad3` | secondary text on navy |
-| ink | `#1c1e22` | body text on white |
-| rule | `#d5d8de` | hairlines |
-
-The header uses `logos/current-logo-white.png`, the current wordmark recolored
-white for the navy bar. The footer uses `logos/dimensional-letters-white.svg`.
-The blue and navy source files stay in the repo and are not placed on the bar.
-The 25th anniversary mark is not on the site. Photography is the jobsite set
-listed in `ASSETS.md`. Older low-resolution files from loftusconstruction.com
-are not used.
+- **Speed lines.** The three stepped rules beside LOFTUS (heavy, medium, light) are the
+  structure of the site: the header rule, the line under the home headline that runs
+  into the photograph, section breaks, the active page mark, and on the record page the
+  contract amounts themselves, where the length of the rule is the size of the job.
+  `components/SpeedLines.tsx`, `components/ValueBar.tsx`.
+- **Type.** Tinos, the free metric match for the Times serif in the wordmark, for
+  headlines; small caps set like CONSTRUCTION, INC. for sheet labels; Public Sans for
+  reading.
+- **Drawing cues.** Blueprint grid on navy panels, dimension lines for photo captions
+  (`components/Dim.tsx`), and a title block job sheet on each project page.
+- **Palette.** One navy `#222e61` (the dimensional letters sign) for every dark panel,
+  white for content, the wordmark blue `#0014e0` only for links and thin rules.
+- **Photographs.** Every photo is defined once in `lib/photos.ts` and used once on the
+  site. Job photos are 2400 px web copies of Ryan's Drive originals (the home photo is
+  3200 px from the original drone frame). The five contract photos on the record page
+  and four capability thumbnails are the small originals from loftusconstruction.com
+  and are only ever shown at or below their native size.
+- **Phone menu.** A full screen dialog rendered into `<body>`, outside the header.

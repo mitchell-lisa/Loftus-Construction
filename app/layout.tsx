@@ -7,13 +7,15 @@ import DemoBanner from "@/components/DemoBanner";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import StickyCall from "@/components/StickyCall";
+import Reveal from "@/components/Reveal";
 
-const newsreader = localFont({
+const tinos = localFont({
   src: [
-    { path: "../public/fonts/Newsreader-latin-600.woff2", weight: "600", style: "normal" },
-    { path: "../public/fonts/Newsreader-latin-700.woff2", weight: "700", style: "normal" },
+    { path: "../public/fonts/Tinos-latin-400.woff2", weight: "400", style: "normal" },
+    { path: "../public/fonts/Tinos-latin-400-italic.woff2", weight: "400", style: "italic" },
+    { path: "../public/fonts/Tinos-latin-700.woff2", weight: "700", style: "normal" },
   ],
-  variable: "--font-newsreader",
+  variable: "--font-tinos",
   display: "swap",
 });
 
@@ -29,7 +31,7 @@ const publicSans = localFont({
 export const SITE_URL =
   process.env.NEXT_PUBLIC_SITE_URL ?? "https://loftus-construction.vercel.app";
 
-const title = `${business.legalName} | Heavy civil bridge construction, ${business.city} NJ`;
+const title = `${business.legalName} | Bridges, walls and heavy civil work since 1994`;
 const description =
   "Heavy civil contractor in Cinnaminson, New Jersey. Bridges, culverts, retaining walls, foundations, structural rehabilitation and dams for PennDOT, the Pennsylvania Turnpike Commission, NJDOT, NJ Transit and the City of Philadelphia since 1994.";
 
@@ -67,7 +69,12 @@ export default function RootLayout({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
   return (
-    <html lang="en" className={`${newsreader.variable} ${publicSans.variable}`}>
+    <html lang="en" className={`${tinos.variable} ${publicSans.variable}`} suppressHydrationWarning>
+      <head>
+        <script
+          dangerouslySetInnerHTML={{ __html: "document.documentElement.classList.add('js')" }}
+        />
+      </head>
       <body>
         <DemoBanner />
         <Header />
@@ -76,6 +83,7 @@ export default function RootLayout({
         </main>
         <Footer />
         <StickyCall />
+        <Reveal />
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{

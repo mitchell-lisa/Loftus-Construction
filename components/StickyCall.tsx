@@ -6,7 +6,7 @@ export default function StickyCall() {
       <a
         href={business.phoneHref}
         data-primary="true"
-        className="flex min-h-14 items-center justify-center border-t border-rule px-5 text-[17px] font-semibold text-white"
+        className="flex min-h-14 items-center justify-center gap-3 border-t border-white/20 px-5 pb-[env(safe-area-inset-bottom)] text-[17px] font-semibold text-white"
       >
         Call {business.phone}
       </a>

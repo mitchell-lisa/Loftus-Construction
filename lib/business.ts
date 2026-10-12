@@ -2,6 +2,8 @@
 // Anything we could not verify from a public source is null, and null renders nothing.
 // Every value here traces to a line in PROFILE.md with its source next to it.
 
+import { photos, type Photo, type PhotoKey } from "./photos";
+
 export type Status = "demo" | "sold" | "client";
 
 export type Project = {
@@ -12,30 +14,31 @@ export type Project = {
   value: number | null;
   /** True only for work confirmed in progress by a third party source. */
   current?: boolean;
+  /** Photograph from the company's current site, where one exists. */
+  photo?: PhotoKey;
 };
 
-export type JobPhoto = {
-  src: string;
-  alt: string;
-  width: number;
-  height: number;
-};
+export type JobPhoto = Photo;
 
 /**
- * A job we can show in photographs.
- * owner, location, scope, value, and dates are null until Ryan supplies them.
- * Do not render those nulls, and do not write filler in their place.
+ * A job Ryan photographed. Names come from his Drive folder titles.
+ * Owner, contract value, scope, and dates beyond the photo dates are not
+ * supplied yet, so they are absent rather than guessed.
  */
 export type PhotoProject = {
   slug: string;
   name: string;
+  /** Short form for cards and links. */
+  short: string;
+  /** Only when certain from public knowledge of the structure. */
+  place: string | null;
+  structure: string;
   summary: string;
-  photos: JobPhoto[];
-  owner: null;
-  location: null;
-  scope: null;
-  value: null;
-  dates: null;
+  /** Rows for the spec sheet. Only facts we hold. */
+  sheet: { label: string; value: string }[];
+  /** Photo keys, in the order the page tells the story. */
+  lead: PhotoKey;
+  story: { heading: string; text: string; photos: PhotoKey[] }[];
 };
 
 export type Person = {
@@ -95,7 +98,7 @@ export type Business = {
   capabilities: CapabilityGroup[];
   services: { name: string; blurb: string; items: string[] }[];
   projects: Project[];
-  /** Homepage photograph. One frame, named in the caption. */
+  /** Homepage photograph. */
   hero: JobPhoto;
   /**
    * Jobs Ryan photographed. Summaries describe the frames only.
@@ -316,18 +319,21 @@ export const business: Business = {
       owner: "Pennsylvania Turnpike Commission",
       location: "Willow Grove, PA",
       value: 12880527,
+      photo: "rDb155",
     },
     {
       name: "PA Turnpike bridge replacement NB-142",
       owner: "Pennsylvania Turnpike Commission",
       location: "Lansdale, PA",
       value: 12327393,
+      photo: "rNb142",
     },
     {
       name: "Henry Avenue bridge over Wissahickon Creek",
       owner: "PennDOT District 6",
       location: "Philadelphia, PA",
       value: 12306782,
+      photo: "rHenry",
     },
     {
       name: "41st Street bridge over Amtrak and SEPTA",
@@ -382,106 +388,104 @@ export const business: Business = {
       owner: "PennDOT District 5",
       location: "Easton, PA",
       value: 1369884,
+      photo: "rSr611",
     },
     {
       name: "Strasburg Railroad main track bridge replacement",
       owner: "Strasburg Railroad",
       location: "Gap, PA",
       value: 468000,
+      photo: "rStrasburg",
     },
   ],
 
-  hero: {
-    src: "/images/jobs/brownsville-16.jpg",
-    alt: "Overhead view of a concrete bridge deck, with crew and a truck on the span over a river, Brownsville",
-    width: 2400,
-    height: 1800,
-  },
+  hero: photos.heroDeck,
 
   photoProjects: [
     {
-      slug: "brownsville",
-      name: "Brownsville",
-      owner: null,
-      location: null,
-      scope: null,
-      value: null,
-      dates: null,
+      slug: "brownsville-road",
+      name: "Brownsville Road over Neshaminy Creek",
+      short: "Brownsville Road",
+      place: null,
+      structure: "Concrete deck bridge on piers",
       summary:
-        "Concrete bridge deck pour on a span over a river. The photographs show the piers, the deck, crew and equipment on the bridge, and broken concrete beside the river.",
-      photos: [
+        "A new concrete bridge carrying Brownsville Road over Neshaminy Creek. The photographs run from the old bridge in October 2024, through demolition in spring 2025, to the deck pour in April 2026.",
+      sheet: [
+        { label: "Structure", value: "Concrete deck on piers" },
+        { label: "Waterway", value: "Neshaminy Creek" },
+        { label: "Photographed", value: "October 2024 to April 2026" },
+      ],
+      lead: "bLead",
+      story: [
         {
-          src: "/images/jobs/brownsville-05.jpg",
-          alt: "Wide view of a concrete bridge deck pour, with a lift on the near approach and the river and hills beyond, Brownsville",
-          width: 2400,
-          height: 1800,
+          heading: "The old bridge",
+          text: "Brownsville Road crossed the creek on an older concrete bridge, with debris built up against the pier.",
+          photos: ["bOldBank", "bApproach"],
         },
         {
-          src: "/images/jobs/brownsville-03.jpg",
-          alt: "Looking down a fresh concrete bridge deck during a pour, with a pump, crew and rebar along the edge, Brownsville",
-          width: 2400,
-          height: 1800,
+          heading: "Out with the old abutments",
+          text: "In spring 2025 the crew broke out the old abutment concrete beside the creek, with part of the old deck still standing.",
+          photos: ["bDemo", "bEarly"],
         },
         {
-          src: "/images/jobs/brownsville-11.jpg",
-          alt: "Mixer truck and paver on a fresh concrete bridge deck, with crew in high-visibility clothing, Brownsville",
-          width: 2400,
-          height: 1800,
-        },
-        {
-          src: "/images/jobs/brownsville-16.jpg",
-          alt: "Overhead view of a concrete bridge deck, with crew and a truck on the span over a river, Brownsville",
-          width: 2400,
-          height: 1800,
-        },
-        {
-          src: "/images/jobs/brownsville-untitled-01.jpg",
-          alt: "Excavator and loader on broken concrete beside a river, with part of a bridge deck at the left, Brownsville",
-          width: 2400,
-          height: 1800,
+          heading: "Deck pour",
+          text: "Concrete went onto the new deck on April 23, 2026, with the pump, the paver and the crew working across the span.",
+          photos: ["bPour", "bPaver", "bPier"],
         },
       ],
     },
     {
       slug: "university-avenue",
-      name: "University Avenue",
-      owner: null,
-      location: null,
-      scope: null,
-      value: null,
-      dates: null,
+      name: "University Avenue Bridge over the Schuylkill River",
+      short: "University Avenue",
+      place: "Philadelphia, PA",
+      structure: "Steel bridge with an open grated deck",
       summary:
-        "Steel bridge with a grated deck. The photographs show riveted girders and a stone pier from below, a stone and glass building beside the deck, and the grating over the water.",
-      photos: [
+        "Work on the University Avenue Bridge over the Schuylkill River in Philadelphia. The photographs show the riveted girders and stone piers from the water, the operator's house on the deck, and new steel grating going in.",
+      sheet: [
+        { label: "Structure", value: "Steel girders, open grated deck" },
+        { label: "Waterway", value: "Schuylkill River" },
+        { label: "Location", value: "Philadelphia, PA" },
+        { label: "Photographed", value: "July to October 2026" },
+      ],
+      lead: "uGirders",
+      story: [
         {
-          src: "/images/jobs/university-avenue-untitled-01.jpg",
-          alt: "Underside of a steel bridge with riveted girders, open grating above and a stone pier, University Avenue",
-          width: 2400,
-          height: 1800,
+          heading: "From the water",
+          text: "Under the span the old riveted steel sits on stone piers with round openings, a few feet above the Schuylkill.",
+          photos: [],
         },
         {
-          src: "/images/jobs/university-avenue-untitled-02.jpg",
-          alt: "Wider view under a steel bridge, with girders, a stone pier and the river, University Avenue",
-          width: 2400,
-          height: 1800,
+          heading: "On the deck",
+          text: "Up top, the grated roadway runs past the stone and glass operator's house. New grating panels are set, checked and fastened piece by piece.",
+          photos: ["uHouse", "uOpening", "uTag", "uLevel"],
+        },
+      ],
+    },
+    {
+      slug: "st-peters-road",
+      name: "St. Peters Road retaining wall",
+      short: "St. Peters Road",
+      place: null,
+      structure: "Retaining wall along a wooded road",
+      summary:
+        "A rebuilt retaining wall holding up St. Peters Road where it runs above a steep wooded slope. In May 2025 the old wall and the lane above it were cracking and dropping. A year later the wall, rail and paving were finished.",
+      sheet: [
+        { label: "Structure", value: "Retaining wall with guide rail" },
+        { label: "Before", value: "May 2025" },
+        { label: "Completed", value: "May 2026" },
+      ],
+      lead: "sLead",
+      story: [
+        {
+          heading: "Before",
+          text: "The lane along the old wall was cracked along its length, and in places the edge had dropped toward the slope.",
+          photos: ["sBefore", "sCracks", "sCurve", "sStart"],
         },
         {
-          src: "/images/jobs/university-avenue-untitled-03.jpg",
-          alt: "Stone and glass building beside a grated bridge deck, University Avenue",
-          width: 2400,
-          height: 1800,
-        },
-        {
-          src: "/images/jobs/university-avenue-untitled-04.jpg",
-          alt: "Riveted steel girders and a stone pier under a bridge, with the river below, University Avenue",
-          width: 2400,
-          height: 1800,
-        },
-        {
-          src: "/images/jobs/university-avenue-07.jpg",
-          alt: "Steel grating around an opening in the deck, with a bolted splice and dark water below, University Avenue",
-          width: 2400,
-          height: 1800,
+          heading: "Finished",
+          text: "The new wall carries the road edge the full length of the curve, with new rail and fresh paving on top.",
+          photos: ["sClimb"],
         },
       ],
     },

@@ -1,225 +1,112 @@
 "use client";
 
-import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import { business } from "@/lib/business";
-import Divider from "./Divider";
-
-const nav = [
-  { label: "Projects", href: "/projects" },
-  { label: "Capabilities", href: "/capabilities" },
-  { label: "Record", href: "/record" },
-  { label: "About", href: "/about" },
-  { label: "Careers", href: "/careers" },
-  { label: "Contact", href: "/contact" },
-];
-
-function currentHref(pathname: string) {
-  if (pathname === "/projects" || pathname.startsWith("/projects/")) return "/projects";
-  return nav.find((item) => item.href === pathname)?.href ?? "";
-}
-
-function ActiveMark({ on }: { on: boolean }) {
-  return (
-    <span
-      aria-hidden="true"
-      className={`mt-1 flex w-full flex-col gap-[3px] ${on ? "" : "invisible"}`}
-    >
-      <span className="block h-[2px] w-full bg-white" />
-      <span className="block h-px w-full bg-white" />
-      <span className="block h-px w-full bg-white" />
-    </span>
-  );
-}
+import Logo from "./Logo";
+import MenuDrawer from "./MenuDrawer";
+import { currentHref, nav } from "./nav";
 
 export default function Header() {
   const pathname = usePathname();
-  const headerRef = useRef<HTMLElement>(null);
-  const buttonRef = useRef<HTMLButtonElement>(null);
-  const [open, setOpen] = useState(false);
   const active = currentHref(pathname);
+  const [open, setOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
+  const buttonRef = useRef<HTMLButtonElement>(null);
+  const close = useCallback(() => {
+    setOpen(false);
+    requestAnimationFrame(() => buttonRef.current?.focus());
+  }, []);
 
   useEffect(() => {
     setOpen(false);
   }, [pathname]);
 
   useEffect(() => {
-    const el = headerRef.current;
-    if (!el) return;
-    const publish = () =>
-      document.documentElement.style.setProperty(
-        "--header-h",
-        `${Math.round(el.getBoundingClientRect().height)}px`,
-      );
-    publish();
-    const ro = new ResizeObserver(publish);
-    ro.observe(el);
-    window.addEventListener("orientationchange", publish);
-    return () => {
-      ro.disconnect();
-      window.removeEventListener("orientationchange", publish);
-    };
-  }, [open]);
-
-  useEffect(() => {
-    if (!open) return;
-    const header = headerRef.current;
-    const previousOverflow = document.body.style.overflow;
-    document.body.style.overflow = "hidden";
-
-    const inerted: HTMLElement[] = [];
-    document.querySelectorAll("main, footer, [data-banner], [data-sticky]").forEach((node) => {
-      const el = node as HTMLElement;
-      if (!el.hasAttribute("inert")) {
-        el.setAttribute("inert", "");
-        inerted.push(el);
-      }
-    });
-
-    const focusable = () => {
-      if (!header) return [];
-      return Array.from(header.querySelectorAll<HTMLElement>("a[href], button:not([disabled])")).filter(
-        (el) => el.getClientRects().length > 0,
-      );
-    };
-
-    const menuLink = header?.querySelector<HTMLElement>("#site-menu a[href]");
-    menuLink?.focus();
-
-    const onKey = (event: KeyboardEvent) => {
-      if (event.key === "Escape") {
-        event.preventDefault();
-        setOpen(false);
-        buttonRef.current?.focus();
-        return;
-      }
-      if (event.key !== "Tab") return;
-      const items = focusable();
-      if (items.length === 0) return;
-      const first = items[0];
-      const last = items[items.length - 1];
-      const current = document.activeElement;
-      if (event.shiftKey && current === first) {
-        event.preventDefault();
-        last.focus();
-      } else if (!event.shiftKey && current === last) {
-        event.preventDefault();
-        first.focus();
-      }
-    };
-
-    document.addEventListener("keydown", onKey);
-    return () => {
-      document.body.style.overflow = previousOverflow;
-      inerted.forEach((el) => el.removeAttribute("inert"));
-      document.removeEventListener("keydown", onKey);
-    };
-  }, [open]);
+    const onScroll = () => setScrolled(window.scrollY > 8);
+    onScroll();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
 
   return (
-    <header
-      ref={headerRef}
-      className="on-dark sticky top-0 z-50 max-h-[calc(100svh-3.5rem)] overflow-y-auto bg-navy text-white lg:max-h-none lg:overflow-visible"
-    >
-      <a href="#content" className="skip-link">
-        Skip to content
-      </a>
-      <div className="mx-auto flex max-w-6xl items-center gap-4 px-5 py-3">
-        <Link
-          href="/"
-          className="flex min-h-11 min-w-0 flex-1 items-center lg:w-[220px] lg:flex-none"
-        >
-          <Image
-            src="/images/logos/current-logo-white.png"
-            alt={business.legalName}
-            width={1200}
-            height={285}
-            loading="eager"
-            unoptimized
-            sizes="(min-width: 1024px) 220px, 190px"
-            className="h-auto w-full max-w-[190px] lg:max-w-none"
-          />
-        </Link>
-
-        <div aria-hidden="true" className="hidden min-w-8 flex-1 flex-col justify-center gap-[5px] lg:flex">
-          <span className="block h-[3px] w-full bg-white" />
-          <span className="block h-[2px] w-full bg-white" />
-          <span className="block h-px w-full bg-white" />
-        </div>
-
-        <button
-          ref={buttonRef}
-          type="button"
-          className="inline-flex min-h-11 w-16 shrink-0 items-center justify-end font-semibold lg:hidden"
-          aria-expanded={open}
-          aria-controls="site-menu"
-          onClick={() => setOpen((value) => !value)}
-        >
-          {open ? "Close" : "Menu"}
-        </button>
-
-        <nav aria-label="Primary" className="ml-auto hidden items-end gap-x-3 text-[14px] lg:flex xl:gap-x-4 xl:text-[15px]">
-          {nav.map((item) => {
-            const on = active === item.href;
-            return (
-              <Link
-                key={item.href}
-                href={item.href}
-                aria-current={on ? "page" : undefined}
-                className={`inline-flex min-h-11 flex-col justify-center whitespace-nowrap ${
-                  on ? "text-white" : "text-mist hover:text-white"
-                }`}
-              >
-                {item.label}
-                <ActiveMark on={on} />
-              </Link>
-            );
-          })}
-          <a
-            href={business.phoneHref}
-            data-primary="true"
-            className="inline-flex min-h-11 flex-col justify-center whitespace-nowrap font-semibold text-white"
-          >
-            {business.phone}
-            <ActiveMark on={false} />
-          </a>
-        </nav>
-      </div>
-
-      <nav
-        id="site-menu"
-        aria-label="Primary"
-        hidden={!open}
-        className="flex flex-col px-5 pb-4 lg:hidden"
+    <>
+      <header
+        data-header=""
+        className={`on-dark sticky top-0 z-50 bg-navy text-white transition-shadow duration-300 ${
+          scrolled ? "shadow-[0_1px_0_rgb(255_255_255/0.14)]" : ""
+        }`}
       >
-        {nav.map((item) => {
-          const on = active === item.href;
-          return (
-            <Link
-              key={item.href}
-              href={item.href}
-              aria-current={on ? "page" : undefined}
-              className={`inline-flex min-h-11 w-full flex-col justify-center ${
-                on ? "text-white" : "text-mist"
-              }`}
-            >
-              {item.label}
-              <ActiveMark on={on} />
-            </Link>
-          );
-        })}
-        <a
-          href={business.phoneHref}
-          data-primary="true"
-          className="inline-flex min-h-11 w-full items-center font-semibold text-white"
-        >
-          {business.phone}
+        <a href="#content" className="skip-link">
+          Skip to content
         </a>
-      </nav>
+        <div className="wrap flex h-[var(--header-h)] items-center gap-6">
+          <Link href="/" aria-label={`${business.legalName}, home`} className="flex shrink-0 items-center py-2">
+            <Logo className="w-[156px] sm:w-[176px] lg:w-[206px]" />
+          </Link>
 
-      <Divider tone="white" className="lg:hidden" />
-    </header>
+          <div aria-hidden="true" className="hidden min-w-6 flex-1 lg:block">
+            <div className="speed text-white" style={{ "--speed-1": "3px", "--speed-gap": "5px" } as React.CSSProperties}>
+              <span />
+              <span />
+              <span />
+            </div>
+          </div>
+
+          <nav aria-label="Primary" className="hidden items-center gap-x-5 lg:flex xl:gap-x-7">
+            {nav.map((item) => {
+              const on = active === item.href;
+              return (
+                <Link
+                  key={item.href}
+                  href={item.href}
+                  aria-current={on ? "page" : undefined}
+                  className={`relative inline-flex min-h-11 items-center whitespace-nowrap text-[15px] transition-colors ${
+                    on ? "text-white" : "text-mist hover:text-white"
+                  }`}
+                >
+                  {item.label}
+                  <span
+                    aria-hidden="true"
+                    className={`absolute inset-x-0 bottom-2 h-[2px] origin-left bg-white transition-transform duration-300 ${
+                      on ? "scale-x-100" : "scale-x-0"
+                    }`}
+                  />
+                </Link>
+              );
+            })}
+            <a
+              href={business.phoneHref}
+              data-primary="true"
+              className="inline-flex min-h-11 items-center whitespace-nowrap border border-white/70 px-4 text-[15px] font-semibold text-white transition-colors hover:bg-white hover:text-navy"
+            >
+              {business.phone}
+            </a>
+          </nav>
+
+          <button
+            ref={buttonRef}
+            type="button"
+            aria-expanded={open}
+            aria-controls="site-menu"
+            onClick={() => setOpen(true)}
+            className="ml-auto inline-flex min-h-11 items-center gap-3 pl-3 text-[15px] font-semibold lg:hidden"
+          >
+            Menu
+            <span aria-hidden="true" className="flex w-7 flex-col items-end gap-[5px]">
+              <span className="block h-[3px] w-7 bg-white" />
+              <span className="block h-[2px] w-[22px] bg-white" />
+              <span className="block h-px w-[17px] bg-white" />
+            </span>
+          </button>
+        </div>
+      </header>
+      <MenuDrawer
+        open={open}
+        active={active}
+        onClose={close}
+      />
+    </>
   );
 }
