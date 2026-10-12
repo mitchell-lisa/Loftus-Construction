@@ -15,7 +15,7 @@ export default function CapabilitiesPage() {
       </div>
       <section className="wrap grid gap-x-8 gap-y-14 py-20 sm:grid-cols-2 lg:grid-cols-3 lg:py-28">
         {business.capabilities.map((c) => (
-          <div key={c.name} data-reveal className="border-t border-navy pt-6">
+          <div key={c.name} data-reveal className="border-t border-rule pt-6">
             <h2 className="t-h3">{c.name}</h2>
             <ul className="mt-4 space-y-2 text-[15px] text-steel">
               {c.items.map((i) => <li key={i}>{i}</li>)}
@@ -23,14 +23,14 @@ export default function CapabilitiesPage() {
           </div>
         ))}
       </section>
-      <section className="bg-stone">
+      <section className="bg-panel">
         <div className="wrap grid gap-x-8 gap-y-14 py-20 lg:grid-cols-12 lg:py-28">
           <div className="lg:col-span-5">
             <Pic id="bLength" sizes="(min-width:1024px) 40vw, 100vw" className="aspect-[4/5] lg:aspect-[4/5]" />
           </div>
           <div className="grid gap-14 lg:col-span-6 lg:col-start-7 lg:self-center">
             {business.services.map((s) => (
-              <div key={s.name} data-reveal className="border-t border-navy pt-6">
+              <div key={s.name} data-reveal className="border-t border-rule pt-6">
                 <h2 data-reveal className="t-h2 text-[clamp(1.75rem,3vw,2.5rem)]">{s.name}</h2>
                 <ul className="mt-4 space-y-2 text-[15px] text-steel">
                   {s.items.map((i) => <li key={i}>{i}</li>)}

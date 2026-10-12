@@ -31,16 +31,16 @@ export default function AboutPage() {
         <Pic id="bContext" sizes="100vw" priority className="aspect-[4/3] md:aspect-[21/9]" />
       </div>
       <section className="wrap py-20 lg:py-32">
-        <dl className="border-t border-navy">
+        <dl className="border-t border-rule">
           {years.map(([y, t]) => (
             <div key={y} className="grid gap-1 border-b border-line py-8 md:grid-cols-12 md:gap-8">
-              <dt className="text-[clamp(2.5rem,5vw,4.5rem)] font-semibold leading-none tracking-[-0.04em] text-navy tabular-nums md:col-span-3">{y}</dt>
+              <dt className="text-[clamp(2.5rem,5vw,4.5rem)] font-semibold leading-none tracking-[-0.04em] text-chalk tabular-nums md:col-span-3">{y}</dt>
               <dd className="self-center text-[18px] md:col-span-8">{t}</dd>
             </div>
           ))}
         </dl>
       </section>
-      <section className="bg-stone">
+      <section className="bg-panel">
         <div className="wrap grid gap-16 py-20 lg:grid-cols-2 lg:gap-16 lg:py-28">
           <List title="Prequalified with" items={business.prequalifications} />
           <List title="Member of" items={business.associations} />

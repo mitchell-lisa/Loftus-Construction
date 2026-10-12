@@ -20,7 +20,7 @@ export default function Pic({
   const text = typeof caption === "string" ? caption : caption ? (photo as { caption?: string }).caption : null;
   return (
     <figure className="min-w-0">
-      <div className={`relative overflow-hidden bg-stone ${className}`}>
+      <div className={`relative overflow-hidden bg-panel ${className}`}>
         <Image src={photo.src} alt={photo.alt} fill sizes={sizes} priority={priority} quality={82} className={`zoom object-cover ${position}`} />
       </div>
       {text ? <figcaption className="mt-3 text-[14px] text-steel">{text}</figcaption> : null}

@@ -21,9 +21,9 @@ export default function CareersPage() {
             One year of training for recent graduates, preferably in civil engineering. Estimating, project engineering, equipment, contracts and safety.
           </p>
         </div>
-        <div className="border-t border-navy pt-6 text-[16px] lg:col-span-4 lg:col-start-9">
-          <p className="font-semibold text-navy">Resumes to {business.careersContact}</p>
-          <a href={`mailto:${business.careersEmail}`} className="link mt-2 inline-block break-all text-navy">{business.careersEmail}</a>
+        <div className="border-t border-rule pt-6 text-[16px] lg:col-span-4 lg:col-start-9">
+          <p className="font-semibold text-chalk">Resumes to {business.careersContact}</p>
+          <a href={`mailto:${business.careersEmail}`} className="link mt-2 inline-block break-all text-chalk">{business.careersEmail}</a>
           <p className="mt-6 text-[14px] text-steel">An equal opportunity employer.</p>
         </div>
       </section>

@@ -22,11 +22,11 @@ export default function Header() {
   const active = (href: string) => pathname === href || pathname.startsWith(href + "/");
 
   return (
-    <header className="sticky top-0 z-40 border-b border-line bg-white">
+    <header className="sticky top-0 z-40 border-b border-line bg-girder/95 backdrop-blur">
       <div className="wrap flex h-[var(--header-h)] items-center justify-between gap-6">
         <Link href="/" aria-label={`${business.shortName}, home`} className="flex shrink-0 items-center">
           <Image
-            src="/images/logos/current-logo.png"
+            src="/images/logos/current-logo-white.png"
             alt={business.legalName}
             width={1200}
             height={285}
@@ -42,14 +42,14 @@ export default function Header() {
                 <Link
                   href={item.href}
                   aria-current={active(item.href) ? "page" : undefined}
-                  className={`py-2 ${active(item.href) ? "text-navy underline decoration-1 underline-offset-[10px]" : "text-steel hover:text-navy"}`}
+                  className={`py-2 ${active(item.href) ? "text-chalk underline decoration-1 underline-offset-[10px]" : "text-steel hover:text-chalk"}`}
                 >
                   {item.label}
                 </Link>
               </li>
             ))}
             <li>
-              <a href={business.phoneHref} className="font-semibold text-navy">
+              <a href={business.phoneHref} className="font-semibold text-chalk">
                 {business.phone}
               </a>
             </li>
@@ -61,12 +61,12 @@ export default function Header() {
           onClick={() => setOpen(true)}
           aria-expanded={open}
           aria-controls="menu"
-          className="flex h-11 items-center gap-3 px-1 text-[15px] font-semibold text-navy lg:hidden"
+          className="flex h-11 items-center gap-3 px-1 text-[15px] font-semibold text-chalk lg:hidden"
         >
           Menu
           <span aria-hidden className="flex w-5 flex-col gap-[5px]">
-            <span className="h-[2px] bg-navy" />
-            <span className="h-[2px] bg-navy" />
+            <span className="h-[2px] bg-chalk" />
+            <span className="h-[2px] bg-chalk" />
           </span>
         </button>
       </div>
@@ -77,7 +77,7 @@ export default function Header() {
         aria-modal="true"
         aria-label="Menu"
         hidden={!open}
-        className="on-dark fixed inset-0 z-50 h-[100dvh] overflow-y-auto bg-navy text-white lg:hidden"
+        className="on-dark fixed inset-0 z-50 h-[100dvh] overflow-y-auto bg-girder text-white lg:hidden"
       >
         <div className="wrap flex h-[var(--header-h)] items-center justify-between">
           <Image
@@ -90,8 +90,8 @@ export default function Header() {
           <button type="button" onClick={() => setOpen(false)} className="flex h-11 items-center gap-3 px-1 text-[15px] font-semibold">
             Close
             <span aria-hidden className="relative block h-5 w-5">
-              <span className="absolute left-0 top-1/2 h-[2px] w-5 rotate-45 bg-white" />
-              <span className="absolute left-0 top-1/2 h-[2px] w-5 -rotate-45 bg-white" />
+              <span className="absolute left-0 top-1/2 h-[2px] w-5 rotate-45 bg-chalk" />
+              <span className="absolute left-0 top-1/2 h-[2px] w-5 -rotate-45 bg-chalk" />
             </span>
           </button>
         </div>
@@ -114,7 +114,7 @@ export default function Header() {
           </ul>
           <div className="mt-10 space-y-2 text-[17px]">
             <a href={business.phoneHref} className="block font-semibold">{business.phone}</a>
-            <a href={`mailto:${business.email}`} className="block break-all text-mist">{business.email}</a>
+            <a href={`mailto:${business.email}`} className="block break-all text-steel">{business.email}</a>
           </div>
         </nav>
       </div>

@@ -49,7 +49,7 @@ export default async function ProjectPage({ params }: { params: Promise<{ slug: 
   return (
     <>
       <div className="wrap pb-10 pt-12 lg:pb-16 lg:pt-24">
-        <Link href="/projects" className="group text-[15px] text-steel hover:text-navy"><span aria-hidden className="mr-2">&larr;</span>Projects</Link>
+        <Link href="/projects" className="group text-[15px] text-steel hover:text-chalk"><span aria-hidden className="mr-2">&larr;</span>Projects</Link>
         <div className="mt-6 grid gap-6 lg:grid-cols-12 lg:items-end lg:gap-8">
           <h1 className="t-h1 lg:col-span-9">{p.name}</h1>
           <p className="text-[15px] text-steel lg:col-span-3 lg:pb-2 lg:text-right">{p.structure}</p>
@@ -60,12 +60,12 @@ export default async function ProjectPage({ params }: { params: Promise<{ slug: 
       </div>
 
       <section className="wrap grid gap-12 py-16 lg:grid-cols-12 lg:gap-8 lg:py-28">
-        <p data-reveal className="text-[clamp(1.3rem,2.1vw,1.75rem)] leading-[1.4] tracking-[-0.012em] text-navy lg:col-span-7">{p.summary}</p>
-        <dl data-reveal className="self-start border-t border-navy lg:sticky lg:top-[calc(var(--header-h)+32px)] lg:col-span-4 lg:col-start-9">
+        <p data-reveal className="text-[clamp(1.3rem,2.1vw,1.75rem)] leading-[1.4] tracking-[-0.012em] text-chalk lg:col-span-7">{p.summary}</p>
+        <dl data-reveal className="self-start border-t border-rule lg:sticky lg:top-[calc(var(--header-h)+32px)] lg:col-span-4 lg:col-start-9">
           {p.sheet.map((row) => (
             <div key={row.label} className="flex justify-between gap-6 border-b border-line py-4 text-[15px]">
               <dt className="text-steel">{row.label}</dt>
-              <dd className="text-right font-semibold text-navy">{row.value}</dd>
+              <dd className="text-right font-semibold text-chalk">{row.value}</dd>
             </div>
           ))}
         </dl>
@@ -86,9 +86,9 @@ export default async function ProjectPage({ params }: { params: Promise<{ slug: 
       <Link href={`/projects/${next.slug}`} className="group block border-t border-line">
         <div className="wrap flex items-center justify-between gap-6 py-14 lg:py-24">
           <span>
-            <span className="block t-h2 font-semibold text-navy">{next.short}</span>
+            <span className="block t-h2 font-semibold text-chalk">{next.short}</span>
           </span>
-          <span aria-hidden className="arrow text-[clamp(1.75rem,3vw,2.75rem)] text-navy">&rarr;</span>
+          <span aria-hidden className="arrow text-[clamp(1.75rem,3vw,2.75rem)] text-chalk">&rarr;</span>
         </div>
       </Link>
     </>

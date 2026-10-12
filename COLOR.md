@@ -1,17 +1,25 @@
-# Color and type
+# Color (dark direction)
 
-Taken from the Loftus marks. One palette on every page.
+Taken from the chrome of the original Loftus demo: the girder black bar, the steel gray secondary text, the chalk off-white. No blue, no accent color. The photographs carry the color.
 
-| Role | Hex | Source / use |
+| Role | Hex | Where |
 |---|---|---|
-| Navy | `#222e61` | The dimensional letters sign. Headings, footer, buttons, menu. |
-| Navy deep | `#1a234b` | Button hover. |
-| Ink | `#15181f` | Body text. |
-| Steel | `#5a606b` | Secondary text. |
-| Stone | `#f3f3f1` | Quiet bands. |
-| Line | `#d9dadd` | Hairlines. |
-| Mist | `#b9bfcf` | Secondary text on navy. |
+| Girder | `#191d21` | Page ground, header, phone menu |
+| Panel | `#20252b` | Quiet bands, footer, form fields |
+| Line | `#2e343c` | Hairlines |
+| Rule | `#4a525c` | Rules under headings |
+| Chalk | `#f4f3f0` | Headings, primary text, the bid button |
+| Body | `#cfd3d8` | Running text |
+| Steel | `#aab1b9` | Secondary text |
 
-The wordmark keeps its own blue in the header. No other blue, no accents.
+Type: Source Serif 4 600 for headings, Archivo for everything else, as on the original demo. Both SIL Open Font License.
 
-Type: Public Sans 400 and 600 for everything. The serif lives in the logo only.
+## Contrast
+
+| Pair | Ratio |
+|---|---|
+| Chalk on girder | 15.3 to 1 |
+| Body on girder | 11.3 to 1 |
+| Steel on girder | 7.8 to 1 |
+| Steel on panel | 7.1 to 1 |
+| Girder on chalk, the bid button | 15.3 to 1 |

@@ -7,12 +7,19 @@ import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import Reveal from "@/components/Reveal";
 
-const publicSans = localFont({
+const sourceSerif = localFont({
   src: [
-    { path: "../public/fonts/PublicSans-latin-400.woff2", weight: "400", style: "normal" },
-    { path: "../public/fonts/PublicSans-latin-600.woff2", weight: "600", style: "normal" },
+    { path: "../public/fonts/SourceSerif4-400.woff2", weight: "400", style: "normal" },
+    { path: "../public/fonts/SourceSerif4-600.woff2", weight: "600", style: "normal" },
   ],
-  variable: "--font-public-sans",
+  variable: "--font-source-serif",
+  display: "swap",
+});
+
+const archivo = localFont({
+  src: "../public/fonts/Archivo-latin.woff2",
+  variable: "--font-archivo",
+  weight: "400 700",
   display: "swap",
 });
 
@@ -23,7 +30,7 @@ const title = `${business.legalName} | Bridges and heavy civil construction`;
 const description =
   "Heavy civil contractor in Cinnaminson, New Jersey, since 1994. Bridges, culverts, retaining walls, foundations, rehabilitation and dams.";
 
-export const viewport: Viewport = { themeColor: "#222e61" };
+export const viewport: Viewport = { themeColor: "#191d21" };
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
@@ -47,7 +54,7 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
   return (
-    <html lang="en" className={publicSans.variable} suppressHydrationWarning>
+    <html lang="en" className={`${sourceSerif.variable} ${archivo.variable}`} suppressHydrationWarning>
       <body>
         <script dangerouslySetInnerHTML={{ __html: "document.documentElement.classList.add('js')" }} />
         <a href="#content" className="skip">Skip to content</a>
