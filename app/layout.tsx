@@ -17,7 +17,7 @@ export const viewport: Viewport = { themeColor: "#222e61" };
 export const metadata: Metadata = {
   metadataBase: new URL(`https://${theme.host}`),
   title: { default: `${firm.legalName} | Bridges and heavy civil construction since 1994`, template: `%s | ${firm.legalName}` },
-  description: "Heavy civil engineers and contractors in Cinnaminson, New Jersey, since 1994. Bridges, rehabilitation, retaining walls, foundations, culverts and dams.",
+  description: "Heavy civil engineers and contractors in King of Prussia, Pennsylvania, since 1994. Bridges, rehabilitation, retaining walls, foundations, culverts and dams.",
   robots: { index: false, follow: false, nocache: true },
 };
 

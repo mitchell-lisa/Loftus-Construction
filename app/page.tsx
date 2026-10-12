@@ -19,7 +19,7 @@ export default function Home() {
             <h1 className="split-title">Engineers and contractors for difficult structures.</h1>
             <p className="lede mt-6 max-w-[34ch]">Bridges, masonry arches, retaining walls, foundations and dams for public owners in Pennsylvania, New Jersey and Delaware.</p>
             <dl className="spec mt-10">
-              <div><dt>Founded</dt><dd>{firm.founded}, Cinnaminson, NJ</dd></div>
+              <div><dt>Founded</dt><dd>{firm.founded}, King of Prussia, PA</dd></div>
               <div><dt>Prequalified</dt><dd>{prequalifications.length} agencies</dd></div>
               <div><dt>Record</dt><dd>{record.length} published projects</dd></div>
               <div><dt>Largest</dt><dd>{usd(largest.value!)}</dd></div>

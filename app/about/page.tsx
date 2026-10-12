@@ -4,12 +4,12 @@ import { firm, history, people, prequalifications, associations, clients, award,
 import { role } from "@/lib/alloc";
 import { meta } from "@/lib/meta";
 
-export const metadata = meta("About", "Founded in 1994 by Kevin J. Loftus. Heavy civil engineers and contractors in Cinnaminson, New Jersey.", "/about");
+export const metadata = meta("About", "Founded in 1994 by Kevin J. Loftus. Heavy civil engineers and contractors in King of Prussia, Pennsylvania.", "/about");
 
 export default function About() {
   return (
     <>
-      <PageHead title={`Since ${firm.founded}`} lede="Founded to take on difficult, heavily engineered projects that call for innovative and aggressive approaches. Still in Cinnaminson, New Jersey." photo={role.aboutHero} />
+      <PageHead title={`Since ${firm.founded}`} lede="Founded to take on difficult, heavily engineered projects that call for innovative and aggressive approaches. Based in King of Prussia, Pennsylvania." photo={role.aboutHero} />
 
       <section className="section">
         <div className="wrap grid gap-10 lg:grid-cols-12">
