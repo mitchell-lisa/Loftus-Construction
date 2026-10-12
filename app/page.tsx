@@ -97,9 +97,7 @@ export default function Home() {
           <div className="lg:col-span-7" data-reveal>
             <h2 className="h1">{careers.philosophy}</h2>
             <p className="lede mt-6 max-w-[44ch]">The {careers.program}: one year for recent graduates across estimating, project engineering, equipment, contracts and safety.</p>
-          </div>
-          <div className="lg:col-span-4 lg:col-start-9" data-reveal>
-            <Link href="/careers" className="btn">Careers</Link>
+            <Link href="/careers" className="btn mt-8">Careers</Link>
           </div>
         </div>
       </section>

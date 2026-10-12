@@ -31,7 +31,7 @@ export default function Projects() {
       </div>
       <section className="section section-alt" id="record">
         <div className="wrap">
-          <h2 className="h1" data-reveal>The record</h2>
+          <h2 className="h1 mb-10" data-reveal>The record</h2>
           <RecordIndex variant="cards" />
         </div>
       </section>

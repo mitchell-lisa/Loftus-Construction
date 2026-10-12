@@ -34,8 +34,13 @@ export default function Footer() {
           <Link href="/about#prequalifications" className="foot-link mt-2 inline-block text-[14px]">Full list</Link>
         </div>
       </div>
-      <div className="wrap foot-base flex flex-col gap-2 py-6 text-[13px] sm:flex-row sm:justify-between">
+      <div className="wrap foot-base flex flex-col gap-2 py-6 text-[13px] lg:flex-row lg:items-center lg:justify-between">
         <p>{firm.legalName}, {firm.descriptor}</p>
+        <ul className="foot-legal">
+          <li><Link href="/privacy" className="foot-link">Privacy Policy</Link></li>
+          <li><Link href="/terms" className="foot-link">Terms of Use</Link></li>
+          <li><Link href="/accessibility" className="foot-link">Accessibility</Link></li>
+        </ul>
         <p>Design preview by MJL Collective. Not the live site.</p>
       </div>
     </footer>
