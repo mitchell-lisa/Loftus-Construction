@@ -5,7 +5,7 @@ import { business } from "@/lib/business";
 
 export default function Footer() {
   return (
-    <footer className="on-dark bg-navy text-white">
+    <footer className="on-dark grid-blue text-white">
       <div className="wrap grid gap-12 py-16 md:grid-cols-12 lg:py-20">
         <div className="md:col-span-5">
           <Image
@@ -19,7 +19,7 @@ export default function Footer() {
         <div className="text-[15px] leading-7 md:col-span-4">
           <p>{business.street}</p>
           <p>{business.city}, {business.state} {business.zip}</p>
-          <p className="mt-4"><a href={business.phoneHref} className="font-semibold">{business.phone}</a></p>
+          <p className="mt-4"><a href={business.phoneHref} className="mono">{business.phone}</a></p>
           <p><a href={`mailto:${business.email}`} className="break-all text-mist hover:text-white">{business.email}</a></p>
         </div>
         <nav aria-label="Footer" className="md:col-span-3">

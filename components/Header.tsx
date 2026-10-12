@@ -22,7 +22,7 @@ export default function Header() {
   const active = (href: string) => pathname === href || pathname.startsWith(href + "/");
 
   return (
-    <header className="sticky top-0 z-40 border-b border-line bg-white">
+    <header className="sticky top-0 z-40 border-b border-navy bg-white">
       <div className="wrap flex h-[var(--header-h)] items-center justify-between gap-6">
         <Link href="/" aria-label={`${business.shortName}, home`} className="flex shrink-0 items-center">
           <Image
@@ -49,7 +49,7 @@ export default function Header() {
               </li>
             ))}
             <li>
-              <a href={business.phoneHref} className="font-semibold text-navy">
+              <a href={business.phoneHref} className="mono text-[14px] text-navy">
                 {business.phone}
               </a>
             </li>
@@ -77,7 +77,7 @@ export default function Header() {
         aria-modal="true"
         aria-label="Menu"
         hidden={!open}
-        className="on-dark fixed inset-0 z-50 h-[100dvh] overflow-y-auto bg-navy text-white lg:hidden"
+        className="on-dark grid-blue fixed inset-0 z-50 h-[100dvh] overflow-y-auto text-white lg:hidden"
       >
         <div className="wrap flex h-[var(--header-h)] items-center justify-between">
           <Image
@@ -98,14 +98,14 @@ export default function Header() {
         <nav aria-label="Mobile" className="wrap pb-12 pt-8">
           <ul className="border-t border-white/20">
             <li className="border-b border-white/20">
-              <Link href="/" className="flex min-h-16 items-center text-[28px] font-semibold tracking-tight">Home</Link>
+              <Link href="/" className="flex min-h-16 items-center text-[28px] font-medium tracking-tight">Home</Link>
             </li>
             {nav.map((item) => (
               <li key={item.href} className="border-b border-white/20">
                 <Link
                   href={item.href}
                   aria-current={active(item.href) ? "page" : undefined}
-                  className="flex min-h-16 items-center text-[28px] font-semibold tracking-tight"
+                  className="flex min-h-16 items-center text-[28px] font-medium tracking-tight"
                 >
                   {item.label}
                 </Link>
@@ -113,7 +113,7 @@ export default function Header() {
             ))}
           </ul>
           <div className="mt-10 space-y-2 text-[17px]">
-            <a href={business.phoneHref} className="block font-semibold">{business.phone}</a>
+            <a href={business.phoneHref} className="mono block">{business.phone}</a>
             <a href={`mailto:${business.email}`} className="block break-all text-mist">{business.email}</a>
           </div>
         </nav>

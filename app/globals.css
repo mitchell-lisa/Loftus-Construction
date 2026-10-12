@@ -17,7 +17,10 @@
   --color-stone: #f3f3f1;
   --color-line: #d9dadd;
   --color-mist: #b9bfcf;
-  --font-sans: var(--font-public-sans), "Helvetica Neue", Arial, sans-serif;
+  --font-sans: var(--font-plex), "Helvetica Neue", Arial, sans-serif;
+  --font-mono: var(--font-mono-face), ui-monospace, Menlo, monospace;
+  --color-paper: #f5f7fb;
+  --color-rule: #c9d0e0;
 }
 
 :root {
@@ -42,7 +45,7 @@ body {
   overflow-x: clip;
 }
 h1, h2, h3 {
-  font-weight: 600;
+  font-weight: 500;
   letter-spacing: -0.02em;
   line-height: 1.05;
   color: var(--color-navy);
@@ -100,3 +103,41 @@ h1, h2, h3 {
   .js [data-reveal] { opacity: 1; transform: none; transition: none; }
   .zoom, .hero-img, .arrow { transition: none; animation: none; transform: none !important; }
 }
+
+/* Direction C, Engineered. Drawing sheet language: fine grid, hairline frames, mono for data. */
+.mono { font-family: var(--font-mono); font-feature-settings: "zero" 1; letter-spacing: 0; }
+.t-numeral { font-family: var(--font-mono); font-weight: 400; letter-spacing: -0.04em; }
+.grid-paper {
+  background-color: #fff;
+  background-image:
+    linear-gradient(rgba(34,46,97,.09) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(34,46,97,.09) 1px, transparent 1px),
+    linear-gradient(rgba(34,46,97,.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(34,46,97,.04) 1px, transparent 1px);
+  background-size: 96px 96px, 96px 96px, 16px 16px, 16px 16px;
+  background-position: -1px -1px;
+}
+.grid-blue {
+  background-color: var(--color-navy);
+  background-image:
+    linear-gradient(rgba(255,255,255,.13) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,.13) 1px, transparent 1px),
+    linear-gradient(rgba(255,255,255,.05) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,.05) 1px, transparent 1px);
+  background-size: 80px 80px, 80px 80px, 16px 16px, 16px 16px;
+  background-position: -1px -1px;
+}
+/* Corner registration ticks around a framed drawing */
+.ticks { position: relative; }
+.ticks::before, .ticks::after {
+  content: ""; position: absolute; width: 14px; height: 14px; pointer-events: none; z-index: 2;
+  border-color: var(--color-navy); border-style: solid;
+}
+.ticks::before { top: -7px; left: -7px; border-width: 1px 0 0 1px; }
+.ticks::after { bottom: -7px; right: -7px; border-width: 0 1px 1px 0; }
+/* Dimension line: |<---- text ---->| */
+.dim { display: flex; align-items: center; gap: 10px; color: var(--color-steel); font-family: var(--font-mono); font-size: 12px; }
+.dim::before, .dim::after { content: ""; flex: 1; height: 7px; border: solid var(--color-rule); border-width: 0 1px; background: linear-gradient(var(--color-rule), var(--color-rule)) center / 100% 1px no-repeat; }
+.titleblock { border: 1px solid var(--color-navy); }
+.titleblock > * + * { border-top: 1px solid var(--color-rule); }
+.label { font-family: var(--font-mono); font-weight: 400; letter-spacing: 0.02em; }

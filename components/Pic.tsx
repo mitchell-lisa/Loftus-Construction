@@ -23,7 +23,7 @@ export default function Pic({
       <div className={`relative overflow-hidden bg-stone ${className}`}>
         <Image src={photo.src} alt={photo.alt} fill sizes={sizes} priority={priority} quality={82} className={`zoom object-cover ${position}`} />
       </div>
-      {text ? <figcaption className="mt-3 text-[14px] text-steel">{text}</figcaption> : null}
+      {text ? <figcaption className="mono mt-3 text-[12px] text-steel">{text}</figcaption> : null}
     </figure>
   );
 }
