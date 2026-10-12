@@ -5,6 +5,7 @@ import { business, addressLine } from "@/lib/business";
 import { localBusinessSchema } from "@/lib/schema";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
+import Reveal from "@/components/Reveal";
 
 const publicSans = localFont({
   src: [
@@ -46,14 +47,16 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
   return (
-    <html lang="en" className={publicSans.variable}>
+    <html lang="en" className={publicSans.variable} suppressHydrationWarning>
       <body>
+        <script dangerouslySetInnerHTML={{ __html: "document.documentElement.classList.add('js')" }} />
         <a href="#content" className="skip">Skip to content</a>
         <Header />
         <main id="content" tabIndex={-1} className="outline-none">
           {children}
         </main>
         <Footer />
+        <Reveal />
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(localBusinessSchema(SITE_URL)) }}

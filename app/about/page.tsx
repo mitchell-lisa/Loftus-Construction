@@ -15,7 +15,7 @@ const years = [
 function List({ title, items }: { title: string; items: string[] }) {
   return (
     <div>
-      <h2 className="text-[clamp(1.6rem,2.6vw,2.25rem)]">{title}</h2>
+      <h2 data-reveal className="t-h2 text-[clamp(1.75rem,3vw,2.5rem)]">{title}</h2>
       <ul className="mt-6 border-t border-line">
         {items.map((i) => <li key={i} className="border-b border-line py-3 text-[16px]">{i}</li>)}
       </ul>
@@ -30,11 +30,11 @@ export default function AboutPage() {
       <div className="wrap">
         <Pic id="bContext" sizes="100vw" priority className="aspect-[4/3] md:aspect-[21/9]" />
       </div>
-      <section className="wrap py-20 lg:py-28">
+      <section className="wrap py-20 lg:py-32">
         <dl className="border-t border-navy">
           {years.map(([y, t]) => (
-            <div key={y} className="grid gap-1 border-b border-line py-6 md:grid-cols-12 md:gap-8">
-              <dt className="text-[clamp(1.6rem,2.6vw,2.25rem)] font-semibold tracking-tight text-navy md:col-span-3">{y}</dt>
+            <div key={y} className="grid gap-1 border-b border-line py-8 md:grid-cols-12 md:gap-8">
+              <dt className="text-[clamp(2.5rem,5vw,4.5rem)] font-semibold leading-none tracking-[-0.04em] text-navy tabular-nums md:col-span-3">{y}</dt>
               <dd className="self-center text-[18px] md:col-span-8">{t}</dd>
             </div>
           ))}
