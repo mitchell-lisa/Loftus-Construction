@@ -48,24 +48,24 @@ export default async function ProjectPage({ params }: { params: Promise<{ slug: 
   const next = business.photoProjects[(i + 1) % business.photoProjects.length];
   return (
     <>
-      <div className="wrap pb-10 pt-12 lg:pb-16 lg:pt-24">
-        <Link href="/projects" className="group text-[15px] text-steel hover:text-navy"><span aria-hidden className="mr-2">&larr;</span>Projects</Link>
+      <div className="on-dark bg-navy text-white"><div className="wrap pb-10 pt-12 lg:pb-16 lg:pt-24">
+        <Link href="/projects" className="group cond text-[18px] !font-semibold text-mist hover:text-white"><span aria-hidden className="mr-2">&larr;</span>Projects</Link>
         <div className="mt-6 grid gap-6 lg:grid-cols-12 lg:items-end lg:gap-8">
-          <h1 className="t-h1 lg:col-span-9">{p.name}</h1>
-          <p className="text-[15px] text-steel lg:col-span-3 lg:pb-2 lg:text-right">{p.structure}</p>
+          <h1 className="t-h1 text-white lg:col-span-9">{p.name}</h1>
+          <p className="text-[15px] text-mist lg:col-span-3 lg:pb-2 lg:text-right">{p.structure}</p>
         </div>
-      </div>
-      <div className="mx-auto max-w-[1600px] md:px-10 xl:px-14">
+      </div></div>
+      <div>
         <Pic id={p.lead} sizes="100vw" priority className="aspect-[4/3] md:aspect-[21/9]" />
       </div>
 
       <section className="wrap grid gap-12 py-16 lg:grid-cols-12 lg:gap-8 lg:py-28">
         <p data-reveal className="text-[clamp(1.3rem,2.1vw,1.75rem)] leading-[1.4] tracking-[-0.012em] text-navy lg:col-span-7">{p.summary}</p>
-        <dl data-reveal className="self-start border-t border-navy lg:sticky lg:top-[calc(var(--header-h)+32px)] lg:col-span-4 lg:col-start-9">
+        <dl data-reveal className="self-start bg-steel-900 px-6 py-2 text-white lg:sticky lg:top-[calc(var(--header-h)+32px)] lg:col-span-4 lg:col-start-9">
           {p.sheet.map((row) => (
-            <div key={row.label} className="flex justify-between gap-6 border-b border-line py-4 text-[15px]">
-              <dt className="text-steel">{row.label}</dt>
-              <dd className="text-right font-semibold text-navy">{row.value}</dd>
+            <div key={row.label} className="flex justify-between gap-6 border-b border-white/15 py-4 text-[15px] last:border-0">
+              <dt className="text-steel-200">{row.label}</dt>
+              <dd className="text-right font-semibold text-white">{row.value}</dd>
             </div>
           ))}
         </dl>
@@ -73,7 +73,7 @@ export default async function ProjectPage({ params }: { params: Promise<{ slug: 
 
       {p.story.filter((s) => s.photos.length).map((s) => (
         <section key={s.heading} className="wrap py-16 lg:py-24">
-          <div data-reveal className="grid gap-4 border-t border-line pt-8 lg:grid-cols-12 lg:gap-8 lg:pt-10">
+          <div data-reveal className="grid gap-4 border-t-4 border-navy pt-8 lg:grid-cols-12 lg:gap-8 lg:pt-10">
             <h2 className="t-h3 text-[clamp(1.6rem,2.6vw,2.25rem)] lg:col-span-4">{s.heading}</h2>
             <p className="max-w-[52ch] text-steel lg:col-span-6 lg:col-start-6">{s.text}</p>
           </div>
@@ -83,12 +83,12 @@ export default async function ProjectPage({ params }: { params: Promise<{ slug: 
         </section>
       ))}
 
-      <Link href={`/projects/${next.slug}`} className="group block border-t border-line">
+      <Link href={`/projects/${next.slug}`} className="group on-dark block bg-navy text-white hover:bg-navy-deep">
         <div className="wrap flex items-center justify-between gap-6 py-14 lg:py-24">
           <span>
-            <span className="block t-h2 font-semibold text-navy">{next.short}</span>
+            <span className="block t-h1 cond text-white">{next.short}</span>
           </span>
-          <span aria-hidden className="arrow text-[clamp(1.75rem,3vw,2.75rem)] text-navy">&rarr;</span>
+          <span aria-hidden className="arrow text-[clamp(1.75rem,3vw,2.75rem)]">&rarr;</span>
         </div>
       </Link>
     </>

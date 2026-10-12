@@ -1,5 +1,5 @@
 import type { Metadata, Viewport } from "next";
-import localFont from "next/font/local";
+import { Barlow, Barlow_Condensed } from "next/font/google";
 import "./globals.css";
 import { business, addressLine } from "@/lib/business";
 import { localBusinessSchema } from "@/lib/schema";
@@ -7,14 +7,8 @@ import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import Reveal from "@/components/Reveal";
 
-const publicSans = localFont({
-  src: [
-    { path: "../public/fonts/PublicSans-latin-400.woff2", weight: "400", style: "normal" },
-    { path: "../public/fonts/PublicSans-latin-600.woff2", weight: "600", style: "normal" },
-  ],
-  variable: "--font-public-sans",
-  display: "swap",
-});
+const sans = Barlow({ subsets: ["latin"], weight: ["400", "500", "600"], variable: "--font-barlow", display: "swap" });
+const cond = Barlow_Condensed({ subsets: ["latin"], weight: ["600", "800"], variable: "--font-cond-face", display: "swap" });
 
 export const SITE_URL =
   process.env.NEXT_PUBLIC_SITE_URL ?? "https://loftus-construction.vercel.app";
@@ -47,7 +41,7 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
   return (
-    <html lang="en" className={publicSans.variable} suppressHydrationWarning>
+    <html lang="en" className={`${sans.variable} ${cond.variable}`} suppressHydrationWarning>
       <body>
         <script dangerouslySetInnerHTML={{ __html: "document.documentElement.classList.add('js')" }} />
         <a href="#content" className="skip">Skip to content</a>

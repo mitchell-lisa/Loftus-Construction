@@ -5,7 +5,7 @@ import { business } from "@/lib/business";
 
 export default function Footer() {
   return (
-    <footer className="on-dark bg-navy text-white">
+    <footer className="on-dark bg-steel-900 text-white border-t-8 border-navy">
       <div className="wrap grid gap-12 py-16 md:grid-cols-12 lg:py-20">
         <div className="md:col-span-5">
           <Image

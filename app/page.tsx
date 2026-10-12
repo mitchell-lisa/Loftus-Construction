@@ -4,7 +4,7 @@ import Pic from "@/components/Pic";
 import { business } from "@/lib/business";
 import type { PhotoKey } from "@/lib/photos";
 
-const cards: { slug: string; photo: PhotoKey; position?: string }[] = [
+const cards: { slug: string; photo: PhotoKey }[] = [
   { slug: "brownsville-road", photo: "bSpan" },
   { slug: "university-avenue", photo: "uUnder" },
   { slug: "st-peters-road", photo: "sAerial" },
@@ -12,114 +12,99 @@ const cards: { slug: string; photo: PhotoKey; position?: string }[] = [
 
 export default function Home() {
   const hero = business.hero;
-  const [first, ...rest] = cards.map((c) => ({ ...c, project: business.photoProjects.find((p) => p.slug === c.slug)! }));
+  const work = cards.map((c) => ({ ...c, project: business.photoProjects.find((p) => p.slug === c.slug)! }));
   const years = new Date().getFullYear() - (business.foundedYear ?? 1994);
   return (
     <>
-      <section className="relative h-[calc(100svh-var(--header-h))] min-h-[560px] max-h-[980px] overflow-hidden bg-navy">
-        <Image src={hero.src} alt={hero.alt} fill priority sizes="100vw" quality={85} className="hero-img object-cover object-[center_58%]" />
-        <div className="absolute inset-0 bg-gradient-to-t from-[#0b0f20]/90 via-[#0b0f20]/35 to-[#0b0f20]/10" />
-        <div className="absolute inset-x-0 bottom-0 h-2/3 bg-gradient-to-tr from-[#0b0f20]/55 to-transparent" />
-        <div className="wrap relative flex h-full flex-col justify-end pb-10 lg:pb-16">
-          <h1 data-reveal className="t-display max-w-[12ch] text-white">Bridges and heavy civil work.</h1>
-          <div data-reveal style={{ ["--d" as string]: "150ms" }} className="mt-8 flex flex-col gap-2 border-t border-white/25 pt-5 text-[15px] text-white/80 sm:flex-row sm:items-center sm:justify-between lg:mt-12">
-            <p>Cinnaminson, New Jersey</p>
-            <p>Pennsylvania, New Jersey, Delaware</p>
+      <section className="on-dark bg-navy text-white">
+        <div className="grid lg:grid-cols-12">
+          <div className="flex flex-col justify-end px-5 pb-10 pt-12 md:px-10 lg:col-span-6 lg:pb-16 lg:pl-14 lg:pr-10 xl:pl-[max(56px,calc((100vw-1360px)/2+56px))]">
+            <h1 data-reveal className="t-display text-white">Bridges. Heavy civil.</h1>
+            <div data-reveal className="mt-10 flex flex-wrap items-center gap-4">
+              <Link href="/contact" className="group cond inline-flex min-h-14 items-center gap-3 bg-white px-7 text-[20px] text-navy hover:bg-steel-200">Request a bid <span aria-hidden className="arrow">&rarr;</span></Link>
+              <a href={business.phoneHref} className="cond inline-flex min-h-14 items-center border-2 border-white px-7 text-[20px]">{business.phone}</a>
+            </div>
+          </div>
+          <div className="relative aspect-[4/3] lg:col-span-6 lg:aspect-auto lg:min-h-[calc(100svh-var(--header-h))]">
+            <Image src={hero.src} alt={hero.alt} fill priority sizes="(min-width:1024px) 50vw, 100vw" quality={85} className="hero-img object-cover object-[center_58%]" />
           </div>
         </div>
       </section>
 
-      <section className="border-b border-line">
-        <div className="wrap grid lg:grid-cols-12">
-          <div data-reveal className="flex items-end gap-5 py-10 lg:col-span-5 lg:py-16">
-            <span className="t-numeral">{business.foundedYear}</span>
-            <span className="pb-2 text-[15px] leading-snug text-steel">{years} years<br />in heavy civil</span>
-          </div>
-          <dl className="grid border-t border-line sm:grid-cols-2 lg:col-span-7 lg:border-l lg:border-t-0">
-            {[
-              ["Prequalified", "PennDOT, NJDOT, PA Turnpike"],
-              ["Award", "ASHE Project of the Year, 2019"],
-            ].map(([k, v], i) => (
-              <div key={k} data-reveal style={{ ["--d" as string]: `${i * 120}ms` }} className={`flex flex-col justify-end py-8 lg:px-10 lg:py-16 ${i ? "border-t border-line sm:border-l sm:border-t-0 sm:pl-8" : "sm:pr-8"}`}>
-                <dt className="text-[14px] text-steel">{k}</dt>
-                <dd className="mt-2 text-[clamp(1.25rem,1.8vw,1.5rem)] font-semibold leading-tight tracking-[-0.015em] text-navy">{v}</dd>
-              </div>
-            ))}
-          </dl>
+      <section className="bg-steel-900 text-white">
+        <div className="wrap grid sm:grid-cols-3">
+          {[
+            [String(business.foundedYear), "Founded"],
+            [String(years), "Years in heavy civil"],
+            ["PA NJ DE", "Working area"],
+          ].map(([v, k], i) => (
+            <div key={k} data-reveal className={`py-8 sm:px-6 lg:py-12 ${i ? "border-t border-white/15 sm:border-l sm:border-t-0" : "sm:pl-0"}`}>
+              <p className="cond text-[clamp(3rem,6vw,5.5rem)] leading-none">{v}</p>
+              <p className="mt-2 text-[15px] text-steel-200">{k}</p>
+            </div>
+          ))}
         </div>
       </section>
 
       <section className="wrap section">
-        <div data-reveal className="flex items-end justify-between gap-6 border-b border-navy pb-6">
+        <div data-reveal className="flex items-end justify-between gap-6 border-b-4 border-navy pb-5">
           <h2 className="t-h2">Current work</h2>
-          <Link href="/projects" className="group shrink-0 text-[15px] font-semibold text-navy">All projects <span aria-hidden className="arrow">&rarr;</span></Link>
+          <Link href="/projects" className="group cond shrink-0 text-[18px] text-navy">All projects <span aria-hidden className="arrow">&rarr;</span></Link>
         </div>
-        <Link href={`/projects/${first.slug}`} data-reveal className="group mt-10 block lg:mt-14">
-          <Pic id={first.photo} sizes="(min-width:1360px) 1250px, 100vw" className="aspect-[4/3] md:aspect-[16/8]" />
-          <div className="mt-5 flex items-baseline justify-between gap-6">
-            <div>
-              <h3 className="t-h3">{first.project.name}</h3>
-              <p className="mt-1 text-[15px] text-steel">{first.project.structure}</p>
-            </div>
-            <span aria-hidden className="arrow text-[24px] text-navy">&rarr;</span>
-          </div>
-        </Link>
-        <div className="mt-14 grid gap-14 md:grid-cols-2 md:gap-8 lg:mt-20">
-          {rest.map((c, i) => (
-            <Link key={c.slug} href={`/projects/${c.slug}`} data-reveal style={{ ["--d" as string]: `${i * 120}ms` }} className="group block">
-              <Pic id={c.photo} sizes="(min-width:768px) 48vw, 100vw" className="aspect-[4/3] md:aspect-[5/4]" />
-              <div className="mt-5 flex items-baseline justify-between gap-6">
+        <div className="mt-10 grid gap-6 lg:mt-14 lg:grid-cols-12">
+          {work.map((c, i) => (
+            <Link key={c.slug} href={`/projects/${c.slug}`} data-reveal style={{ ["--d" as string]: `${i * 100}ms` }} className={`group block ${i === 0 ? "lg:col-span-12" : "lg:col-span-6"}`}>
+              <Pic id={c.photo} sizes={i === 0 ? "(min-width:1360px) 1250px, 100vw" : "(min-width:1024px) 48vw, 100vw"} className={i === 0 ? "aspect-[4/3] md:aspect-[16/7]" : "aspect-[4/3]"} />
+              <div className="flex items-center justify-between gap-6 bg-navy px-5 py-4 text-white group-hover:bg-navy-deep lg:px-7 lg:py-5">
                 <div>
-                  <h3 className="t-h3">{c.project.short}</h3>
-                  <p className="mt-1 text-[15px] text-steel">{c.project.structure}</p>
+                  <h3 className="t-h3 text-white">{c.project.short}</h3>
+                  <p className="mt-1 text-[14px] text-mist">{c.project.structure}</p>
                 </div>
-                <span aria-hidden className="arrow text-[24px] text-navy">&rarr;</span>
+                <span aria-hidden className="arrow text-[26px]">&rarr;</span>
               </div>
             </Link>
           ))}
         </div>
       </section>
 
-      <section className="bg-stone">
+      <section className="bg-steel-100">
         <div className="wrap section grid gap-12 lg:grid-cols-12 lg:gap-8">
-          <div data-reveal className="lg:col-span-6">
-            <Pic id="bLow" sizes="(min-width:1024px) 48vw, 100vw" className="aspect-[4/5] sm:aspect-[4/3] lg:aspect-[4/5]" />
-          </div>
-          <div className="lg:col-span-5 lg:col-start-8 lg:self-end">
-            <h2 data-reveal className="t-h2">What we build</h2>
-            <ul className="mt-10 border-t border-navy">
+          <div className="lg:col-span-7">
+            <h2 data-reveal className="t-h1">What we build</h2>
+            <ul className="mt-10 grid sm:grid-cols-2">
               {business.capabilities.map((c, i) => (
-                <li key={c.name} data-reveal style={{ ["--d" as string]: `${i * 60}ms` }} className="border-b border-line">
-                  <Link href="/capabilities" className="group flex items-center justify-between py-5 text-[clamp(1.25rem,1.8vw,1.5rem)] font-semibold tracking-[-0.015em] text-navy">
+                <li key={c.name} data-reveal style={{ ["--d" as string]: `${i * 60}ms` }} className="border-t-2 border-steel-900">
+                  <Link href="/capabilities" className="group cond flex items-center justify-between py-4 pr-6 text-[clamp(1.4rem,2vw,1.75rem)] text-steel-900 hover:text-navy">
                     {c.name}
-                    <span aria-hidden className="arrow text-[20px] text-steel group-hover:text-navy">&rarr;</span>
+                    <span aria-hidden className="arrow text-[20px]">&rarr;</span>
                   </Link>
                 </li>
               ))}
             </ul>
           </div>
+          <div data-reveal className="lg:col-span-5">
+            <Pic id="bLow" sizes="(min-width:1024px) 40vw, 100vw" className="aspect-[4/3] lg:aspect-[4/5]" />
+          </div>
         </div>
       </section>
 
       <section className="wrap section">
-        <div className="grid gap-10 lg:grid-cols-12 lg:gap-8">
-          <h2 data-reveal className="t-h2 lg:col-span-4">Built for</h2>
-          <ul className="grid grid-cols-1 border-t border-line sm:grid-cols-2 lg:col-span-8">
-            {business.clients.map((c, i) => (
-              <li key={c} data-reveal style={{ ["--d" as string]: `${(i % 2) * 80}ms` }} className="flex min-h-[76px] items-center border-b border-line py-5 text-[18px] font-semibold leading-snug tracking-[-0.01em] text-navy sm:min-h-[104px] sm:odd:pr-8 sm:even:border-l sm:even:pl-8">
-                {c}
-              </li>
-            ))}
-          </ul>
+        <div className="slab pl-6 lg:pl-10">
+          <h2 data-reveal className="t-h2">Built for</h2>
         </div>
+        <ul className="mt-10 grid border-l-2 border-t-2 border-steel-200 sm:grid-cols-2 lg:grid-cols-4">
+          {business.clients.map((c) => (
+            <li key={c} data-reveal className="flex min-h-[96px] items-end border-b-2 border-r-2 border-steel-200 bg-white p-5 text-[17px] font-semibold leading-snug text-steel-900">{c}</li>
+          ))}
+        </ul>
       </section>
 
-      <section className="border-t border-line">
+      <section className="on-dark bg-navy text-white">
         <div className="wrap section flex flex-col gap-10 lg:flex-row lg:items-end lg:justify-between">
-          <h2 data-reveal className="t-h2 max-w-[14ch]">Have a job to price?</h2>
-          <div data-reveal className="flex flex-wrap items-center gap-x-10 gap-y-5">
-            <Link href="/contact" className="group inline-flex min-h-14 items-center gap-3 bg-navy px-8 text-[16px] font-semibold text-white hover:bg-navy-deep">Request a bid <span aria-hidden className="arrow">&rarr;</span></Link>
-            <a href={business.phoneHref} className="text-[20px] font-semibold text-navy">{business.phone}</a>
+          <h2 data-reveal className="t-h1 max-w-[10ch] text-white">Have a job to price?</h2>
+          <div data-reveal className="flex flex-wrap items-center gap-4">
+            <Link href="/contact" className="group cond inline-flex min-h-16 items-center gap-3 bg-white px-8 text-[22px] text-navy hover:bg-steel-200">Request a bid <span aria-hidden className="arrow">&rarr;</span></Link>
+            <a href={business.phoneHref} className="cond text-[28px] text-white">{business.phone}</a>
           </div>
         </div>
       </section>

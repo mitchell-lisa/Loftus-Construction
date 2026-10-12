@@ -14,10 +14,15 @@
   --color-navy-deep: #1a234b;
   --color-ink: #15181f;
   --color-steel: #5a606b;
-  --color-stone: #f3f3f1;
-  --color-line: #d9dadd;
+  --color-stone: #e9ebee;
+  --color-line: #c9cdd3;
   --color-mist: #b9bfcf;
-  --font-sans: var(--font-public-sans), "Helvetica Neue", Arial, sans-serif;
+  --font-sans: var(--font-barlow), "Helvetica Neue", Arial, sans-serif;
+  --font-cond: var(--font-cond-face), "Arial Narrow", sans-serif;
+  --color-steel-900: #2b3038;
+  --color-steel-700: #4a515c;
+  --color-steel-200: #d5d8dd;
+  --color-steel-100: #e9ebee;
 }
 
 :root {
@@ -42,9 +47,11 @@ body {
   overflow-x: clip;
 }
 h1, h2, h3 {
-  font-weight: 600;
-  letter-spacing: -0.02em;
-  line-height: 1.05;
+  font-family: var(--font-cond);
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: -0.005em;
+  line-height: 0.92;
   color: var(--color-navy);
   text-wrap: balance;
 }
@@ -100,3 +107,13 @@ h1, h2, h3 {
   .js [data-reveal] { opacity: 1; transform: none; transition: none; }
   .zoom, .hero-img, .arrow { transition: none; animation: none; transform: none !important; }
 }
+
+/* Direction E, Industrial Bold. Condensed heavy caps, steel and navy blocks, hard edges. */
+.cond { font-family: var(--font-cond); font-weight: 800; text-transform: uppercase; letter-spacing: 0; }
+.t-display { font-size: clamp(3.5rem, 12vw, 11.5rem); line-height: 0.86; letter-spacing: -0.01em; }
+.t-h1 { font-size: clamp(3rem, 8.5vw, 8rem); line-height: 0.88; letter-spacing: -0.005em; }
+.t-h2 { font-size: clamp(2.4rem, 5.4vw, 4.75rem); line-height: 0.9; letter-spacing: 0; }
+.t-h3 { font-size: clamp(1.6rem, 2.4vw, 2.1rem); line-height: 0.95; letter-spacing: 0.005em; }
+.t-numeral { font-family: var(--font-cond); font-weight: 800; letter-spacing: -0.01em; font-size: clamp(6rem, 16vw, 14rem); }
+.label { font-family: var(--font-cond); font-weight: 600; font-size: 15px; letter-spacing: 0.06em; }
+.slab { border-left: 10px solid var(--color-navy); }
