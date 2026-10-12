@@ -18,7 +18,7 @@ export default function Home() {
           <div className="type-hero-side">
             <Pic k="st-peters-3" className="aspect-[4/5]" sizes="(min-width:1024px) 26vw, 60vw" priority pos="50% 40%" caption="St. Peters Road and its new wall, May 2026" />
           </div>
-          <p className="type-hero-by">Loftus Construction, Inc. Engineers and contractors, Cinnaminson, New Jersey. Since {firm.founded}.</p>
+          <p className="type-hero-by">Loftus Construction, Inc. Engineers and contractors, King of Prussia, Pennsylvania. Since {firm.founded}.</p>
         </div>
       </section>
 

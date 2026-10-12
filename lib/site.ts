@@ -14,11 +14,11 @@ export const firm = {
   email: "kloftus@loftusconstruction.com",
   careersEmail: "kdivece@loftusconstruction.com",
   careersContact: "Karin DiVece",
-  street: "1903 Taylor's Lane",
-  city: "Cinnaminson",
-  state: "NJ",
-  zip: "08077",
-  directionsUrl: "https://www.google.com/maps/search/?api=1&query=1903+Taylors+Lane+Cinnaminson+NJ+08077",
+  street: "410 Feheley Drive",
+  city: "King of Prussia",
+  state: "PA",
+  zip: "19406",
+  directionsUrl: "https://www.google.com/maps/search/?api=1&query=410+Feheley+Drive+King+of+Prussia+PA+19406",
   mission:
     "The purpose of Loftus Construction, Inc. is to complete difficult heavy construction projects, in a safe and timely fashion, and to provide a superior product to the client.",
   missionTail:
@@ -28,7 +28,7 @@ export const firm = {
 export const addressLine = `${firm.street}, ${firm.city}, ${firm.state} ${firm.zip}`;
 
 export const history = [
-  { year: "1994", title: "Founded in Cinnaminson", text: "Kevin J. Loftus founded the firm to take on difficult, heavily engineered projects that call for innovative and aggressive approaches. Early work included the Exton Bypass and the reconstruction of the Philadelphia Art Museum steps." },
+  { year: "1994", title: "Founded", text: "Kevin J. Loftus founded the firm to take on difficult, heavily engineered projects that call for innovative and aggressive approaches. Early work included the Exton Bypass and the reconstruction of the Philadelphia Art Museum steps." },
   { year: "1997", title: "Prequalified in two states", text: "Carmen J. Valerio, PE joined to run operations, and the firm gained prequalification from PennDOT and NJDOT, opening the markets it works in today." },
   { year: "2015", title: "Country Lakes Dam", text: "Dams 1 and 3 in Pemberton Township reopened to traffic, finished ahead of schedule despite contract changes, weather and flooding." },
   { year: "2016", title: "41st Street reopens", text: "The two span steel bridge over Amtrak and SEPTA opened after 18 months of construction and almost twenty years closed to traffic." },
