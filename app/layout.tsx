@@ -1,5 +1,6 @@
 import type { Metadata, Viewport } from "next";
 import localFont from "next/font/local";
+import { Newsreader } from "next/font/google";
 import "./globals.css";
 import { business, addressLine } from "@/lib/business";
 import { localBusinessSchema } from "@/lib/schema";
@@ -16,6 +17,8 @@ const publicSans = localFont({
   display: "swap",
 });
 
+const serif = Newsreader({ subsets: ["latin"], weight: ["400", "500"], style: ["normal", "italic"], variable: "--font-serif-face", display: "swap" });
+
 export const SITE_URL =
   process.env.NEXT_PUBLIC_SITE_URL ?? "https://loftus-construction.vercel.app";
 
@@ -23,7 +26,7 @@ const title = `${business.legalName} | Bridges and heavy civil construction`;
 const description =
   "Heavy civil contractor in Cinnaminson, New Jersey, since 1994. Bridges, culverts, retaining walls, foundations, rehabilitation and dams.";
 
-export const viewport: Viewport = { themeColor: "#222e61" };
+export const viewport: Viewport = { themeColor: "#f6f3ec" };
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
@@ -47,7 +50,7 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
   return (
-    <html lang="en" className={publicSans.variable} suppressHydrationWarning>
+    <html lang="en" className={`${publicSans.variable} ${serif.variable}`} suppressHydrationWarning>
       <body>
         <script dangerouslySetInnerHTML={{ __html: "document.documentElement.classList.add('js')" }} />
         <a href="#content" className="skip">Skip to content</a>

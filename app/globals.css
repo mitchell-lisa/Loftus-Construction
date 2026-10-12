@@ -14,10 +14,13 @@
   --color-navy-deep: #1a234b;
   --color-ink: #15181f;
   --color-steel: #5a606b;
-  --color-stone: #f3f3f1;
-  --color-line: #d9dadd;
+  --color-stone: #ece7dc;
+  --color-line: #d8d2c4;
   --color-mist: #b9bfcf;
   --font-sans: var(--font-public-sans), "Helvetica Neue", Arial, sans-serif;
+  --font-serif: var(--font-serif-face), Georgia, serif;
+  --color-paper: #f6f3ec;
+  --color-sand: #ece7dc;
 }
 
 :root {
@@ -33,7 +36,7 @@ html {
   overflow-x: clip;
 }
 body {
-  background: #fff;
+  background: var(--color-paper);
   color: var(--color-ink);
   font-family: var(--font-sans);
   font-size: 17px;
@@ -42,7 +45,8 @@ body {
   overflow-x: clip;
 }
 h1, h2, h3 {
-  font-weight: 600;
+  font-family: var(--font-serif);
+  font-weight: 400;
   letter-spacing: -0.02em;
   line-height: 1.05;
   color: var(--color-navy);
@@ -100,3 +104,11 @@ h1, h2, h3 {
   .js [data-reveal] { opacity: 1; transform: none; transition: none; }
   .zoom, .hero-img, .arrow { transition: none; animation: none; transform: none !important; }
 }
+
+/* Direction D, Editorial. Serif display, warm paper, full-bleed photographs, offset columns. */
+.serif { font-family: var(--font-serif); }
+.t-display { font-size: clamp(3.25rem, 9.5vw, 9rem); line-height: 0.92; letter-spacing: -0.03em; }
+.t-h1 { letter-spacing: -0.025em; }
+.t-numeral { font-family: var(--font-serif); font-weight: 400; font-style: italic; letter-spacing: -0.03em; }
+.label { letter-spacing: 0.14em; font-size: 12px; }
+.lede { font-family: var(--font-serif); font-size: clamp(1.5rem, 2.6vw, 2.25rem); line-height: 1.3; letter-spacing: -0.01em; color: var(--color-navy); }

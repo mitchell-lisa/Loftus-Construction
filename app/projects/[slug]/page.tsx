@@ -51,21 +51,21 @@ export default async function ProjectPage({ params }: { params: Promise<{ slug: 
       <div className="wrap pb-10 pt-12 lg:pb-16 lg:pt-24">
         <Link href="/projects" className="group text-[15px] text-steel hover:text-navy"><span aria-hidden className="mr-2">&larr;</span>Projects</Link>
         <div className="mt-6 grid gap-6 lg:grid-cols-12 lg:items-end lg:gap-8">
-          <h1 className="t-h1 lg:col-span-9">{p.name}</h1>
+          <h1 className="t-display lg:col-span-9">{p.name}</h1>
           <p className="text-[15px] text-steel lg:col-span-3 lg:pb-2 lg:text-right">{p.structure}</p>
         </div>
       </div>
-      <div className="mx-auto max-w-[1600px] md:px-10 xl:px-14">
-        <Pic id={p.lead} sizes="100vw" priority className="aspect-[4/3] md:aspect-[21/9]" />
+      <div>
+        <Pic id={p.lead} sizes="100vw" priority className="aspect-[4/3] md:aspect-[16/7]" />
       </div>
 
       <section className="wrap grid gap-12 py-16 lg:grid-cols-12 lg:gap-8 lg:py-28">
-        <p data-reveal className="text-[clamp(1.3rem,2.1vw,1.75rem)] leading-[1.4] tracking-[-0.012em] text-navy lg:col-span-7">{p.summary}</p>
-        <dl data-reveal className="self-start border-t border-navy lg:sticky lg:top-[calc(var(--header-h)+32px)] lg:col-span-4 lg:col-start-9">
+        <p data-reveal className="lede lg:col-span-7 lg:col-start-2">{p.summary}</p>
+        <dl data-reveal className="self-start border-t border-navy lg:sticky lg:top-[calc(var(--header-h)+32px)] lg:col-span-3 lg:col-start-10">
           {p.sheet.map((row) => (
-            <div key={row.label} className="flex justify-between gap-6 border-b border-line py-4 text-[15px]">
-              <dt className="text-steel">{row.label}</dt>
-              <dd className="text-right font-semibold text-navy">{row.value}</dd>
+            <div key={row.label} className="border-b border-line py-4 text-[15px]">
+              <dt className="label">{row.label}</dt>
+              <dd className="serif mt-1 text-[20px] leading-snug text-navy">{row.value}</dd>
             </div>
           ))}
         </dl>
@@ -74,7 +74,7 @@ export default async function ProjectPage({ params }: { params: Promise<{ slug: 
       {p.story.filter((s) => s.photos.length).map((s) => (
         <section key={s.heading} className="wrap py-16 lg:py-24">
           <div data-reveal className="grid gap-4 border-t border-line pt-8 lg:grid-cols-12 lg:gap-8 lg:pt-10">
-            <h2 className="t-h3 text-[clamp(1.6rem,2.6vw,2.25rem)] lg:col-span-4">{s.heading}</h2>
+            <h2 className="t-h2 italic lg:col-span-5">{s.heading}</h2>
             <p className="max-w-[52ch] text-steel lg:col-span-6 lg:col-start-6">{s.text}</p>
           </div>
           <div className="mt-10 lg:mt-14">
@@ -86,7 +86,7 @@ export default async function ProjectPage({ params }: { params: Promise<{ slug: 
       <Link href={`/projects/${next.slug}`} className="group block border-t border-line">
         <div className="wrap flex items-center justify-between gap-6 py-14 lg:py-24">
           <span>
-            <span className="block t-h2 font-semibold text-navy">{next.short}</span>
+            <span className="serif block t-h1 italic text-navy">{next.short}</span>
           </span>
           <span aria-hidden className="arrow text-[clamp(1.75rem,3vw,2.75rem)] text-navy">&rarr;</span>
         </div>

@@ -18,13 +18,13 @@ export default function ProjectsPage() {
   return (
     <>
       <PageHead title="Projects" />
-      <section className="wrap grid gap-x-8 gap-y-14 pb-20 md:grid-cols-3 lg:pb-32">
+      <section className="wrap grid gap-x-8 gap-y-14 pb-20 md:grid-cols-12 lg:pb-32">
         {business.photoProjects.map((p, i) => (
-          <Link key={p.slug} href={`/projects/${p.slug}`} data-reveal style={{ ["--d" as string]: `${i * 120}ms` }} className="group block">
-            <Pic id={cover[p.slug]} sizes="(min-width:768px) 32vw, 100vw" className="aspect-[4/3] md:aspect-[3/4]" />
-            <div className="mt-5 flex items-baseline justify-between gap-4 border-t border-navy pt-4">
+          <Link key={p.slug} href={`/projects/${p.slug}`} data-reveal style={{ ["--d" as string]: `${i * 120}ms` }} className={`group block ${["md:col-span-7", "md:col-span-5 md:mt-40", "md:col-span-6 md:col-start-4"][i]}`}>
+            <Pic id={cover[p.slug]} sizes="(min-width:768px) 58vw, 100vw" className={i === 1 ? "aspect-[4/3] md:aspect-[3/4]" : "aspect-[4/3]"} />
+            <div className="mt-5 flex items-baseline justify-between gap-4">
               <div>
-                <h2 className="t-h3">{p.short}</h2>
+                <h2 className="t-h2 text-[clamp(1.75rem,3vw,2.75rem)]">{p.short}</h2>
                 <p className="mt-1 text-[15px] text-steel">{p.structure}</p>
               </div>
               <span aria-hidden className="arrow text-[22px] text-navy">&rarr;</span>
@@ -45,7 +45,7 @@ export default function ProjectsPage() {
             </div>
             {record.map((r) => (
               <div role="row" key={r.name} className="grid grid-cols-1 gap-1 border-b border-line py-5 transition-colors hover:bg-stone md:grid-cols-12 md:gap-6">
-                <span role="cell" className="text-[17px] font-semibold text-navy md:col-span-5">{r.name}</span>
+                <span role="cell" className="serif text-[20px] leading-snug text-navy md:col-span-5">{r.name}</span>
                 <span role="cell" className="text-[15px] text-steel md:col-span-3 md:text-ink">{r.owner ?? ""}</span>
                 <span role="cell" className="text-[15px] text-steel md:col-span-2">{r.location ?? ""}</span>
                 <span role="cell" className="text-[15px] tabular-nums text-ink md:col-span-2 md:text-right">{r.value ? formatUSD(r.value) : ""}</span>

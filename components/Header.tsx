@@ -22,7 +22,7 @@ export default function Header() {
   const active = (href: string) => pathname === href || pathname.startsWith(href + "/");
 
   return (
-    <header className="sticky top-0 z-40 border-b border-line bg-white">
+    <header className="sticky top-0 z-40 border-b border-line bg-paper">
       <div className="wrap flex h-[var(--header-h)] items-center justify-between gap-6">
         <Link href="/" aria-label={`${business.shortName}, home`} className="flex shrink-0 items-center">
           <Image
@@ -36,7 +36,7 @@ export default function Header() {
         </Link>
 
         <nav aria-label="Main" className="hidden lg:block">
-          <ul className="flex items-center gap-9 text-[15px]">
+          <ul className="flex items-center gap-9 text-[13px] uppercase tracking-[0.12em]">
             {nav.map((item) => (
               <li key={item.href}>
                 <Link
@@ -49,7 +49,7 @@ export default function Header() {
               </li>
             ))}
             <li>
-              <a href={business.phoneHref} className="font-semibold text-navy">
+              <a href={business.phoneHref} className="serif text-[18px] normal-case tracking-normal text-navy">
                 {business.phone}
               </a>
             </li>
@@ -77,11 +77,11 @@ export default function Header() {
         aria-modal="true"
         aria-label="Menu"
         hidden={!open}
-        className="on-dark fixed inset-0 z-50 h-[100dvh] overflow-y-auto bg-navy text-white lg:hidden"
+        className="fixed inset-0 z-50 h-[100dvh] overflow-y-auto bg-paper text-navy lg:hidden"
       >
         <div className="wrap flex h-[var(--header-h)] items-center justify-between">
           <Image
-            src="/images/logos/current-logo-white.png"
+            src="/images/logos/current-logo.png"
             alt=""
             width={1200}
             height={285}
@@ -90,31 +90,31 @@ export default function Header() {
           <button type="button" onClick={() => setOpen(false)} className="flex h-11 items-center gap-3 px-1 text-[15px] font-semibold">
             Close
             <span aria-hidden className="relative block h-5 w-5">
-              <span className="absolute left-0 top-1/2 h-[2px] w-5 rotate-45 bg-white" />
-              <span className="absolute left-0 top-1/2 h-[2px] w-5 -rotate-45 bg-white" />
+              <span className="absolute left-0 top-1/2 h-[2px] w-5 rotate-45 bg-navy" />
+              <span className="absolute left-0 top-1/2 h-[2px] w-5 -rotate-45 bg-navy" />
             </span>
           </button>
         </div>
         <nav aria-label="Mobile" className="wrap pb-12 pt-8">
-          <ul className="border-t border-white/20">
-            <li className="border-b border-white/20">
-              <Link href="/" className="flex min-h-16 items-center text-[28px] font-semibold tracking-tight">Home</Link>
+          <ul>
+            <li>
+              <Link href="/" className="serif flex min-h-16 items-center text-[40px] leading-none">Home</Link>
             </li>
             {nav.map((item) => (
-              <li key={item.href} className="border-b border-white/20">
+              <li key={item.href}>
                 <Link
                   href={item.href}
                   aria-current={active(item.href) ? "page" : undefined}
-                  className="flex min-h-16 items-center text-[28px] font-semibold tracking-tight"
+                  className="serif flex min-h-16 items-center text-[40px] leading-none"
                 >
                   {item.label}
                 </Link>
               </li>
             ))}
           </ul>
-          <div className="mt-10 space-y-2 text-[17px]">
+          <div className="mt-10 space-y-2 border-t border-line pt-6 text-[17px]">
             <a href={business.phoneHref} className="block font-semibold">{business.phone}</a>
-            <a href={`mailto:${business.email}`} className="block break-all text-mist">{business.email}</a>
+            <a href={`mailto:${business.email}`} className="block break-all text-steel">{business.email}</a>
           </div>
         </nav>
       </div>

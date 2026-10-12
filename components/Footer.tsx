@@ -13,7 +13,7 @@ export default function Footer() {
             alt={business.legalName}
             width={1200}
             height={285}
-            className="h-auto w-[200px]"
+            className="h-auto w-[240px]"
           />
         </div>
         <div className="text-[15px] leading-7 md:col-span-4">
