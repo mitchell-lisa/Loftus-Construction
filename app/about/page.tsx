@@ -1,49 +1,107 @@
 import PageHead from "@/components/PageHead";
 import Pic from "@/components/Pic";
-import { business } from "@/lib/business";
-import { photos } from "@/lib/photos";
-import { pageMeta } from "@/lib/pageMeta";
+import { firm, history, people, prequalifications, associations, clients, award, careers } from "@/lib/site";
+import { role } from "@/lib/alloc";
+import { meta } from "@/lib/meta";
 
-export const metadata = pageMeta("About", "Loftus Construction was founded in 1994 by Kevin J. Loftus in Cinnaminson, New Jersey.", "/about", photos.bContext);
+export const metadata = meta("About", "Founded in 1994 by Kevin J. Loftus. Heavy civil engineers and contractors in Cinnaminson, New Jersey.", "/about");
 
-const years = [
-  ["1994", "Founded by Kevin J. Loftus."],
-  ["1997", "Prequalified by PennDOT and NJDOT."],
-  ["2019", "ASHE Delaware Valley Project of the Year for the SR 13 masonry arch."],
-];
-
-function List({ title, items }: { title: string; items: string[] }) {
-  return (
-    <div>
-      <h2 data-reveal className="t-h2 text-[clamp(1.75rem,3vw,2.5rem)]">{title}</h2>
-      <ul className="mt-6 border-t border-line">
-        {items.map((i) => <li key={i} className="border-b border-line py-3 text-[16px]">{i}</li>)}
-      </ul>
-    </div>
-  );
-}
-
-export default function AboutPage() {
+export default function About() {
   return (
     <>
-      <PageHead title="About" line="Difficult heavy construction, built safely and on time." />
-      <div className="wrap">
-        <Pic id="bContext" sizes="100vw" priority className="aspect-[4/3] md:aspect-[21/9]" />
-      </div>
-      <section className="wrap py-20 lg:py-32">
-        <dl className="border-t border-navy">
-          {years.map(([y, t]) => (
-            <div key={y} className="grid gap-1 border-b border-line py-8 md:grid-cols-12 md:gap-8">
-              <dt className="text-[clamp(2.5rem,5vw,4.5rem)] font-semibold leading-none tracking-[-0.04em] text-navy tabular-nums md:col-span-3">{y}</dt>
-              <dd className="self-center text-[18px] md:col-span-8">{t}</dd>
-            </div>
-          ))}
-        </dl>
+      <PageHead title={`Since ${firm.founded}`} lede="Founded to take on difficult, heavily engineered projects that call for innovative and aggressive approaches. Still in Cinnaminson, New Jersey." photo={role.aboutHero} />
+
+      <section className="section">
+        <div className="wrap grid gap-10 lg:grid-cols-12">
+          <blockquote className="mission lg:col-span-9" data-reveal>
+            <p>{firm.mission}</p>
+            <footer className="muted mt-6 text-[15px]">Mission statement, {firm.legalName}</footer>
+          </blockquote>
+        </div>
       </section>
-      <section className="bg-stone">
-        <div className="wrap grid gap-16 py-20 lg:grid-cols-2 lg:gap-16 lg:py-28">
-          <List title="Prequalified with" items={business.prequalifications} />
-          <List title="Member of" items={business.associations} />
+
+      <section className="section section-alt" id="history">
+        <div className="wrap">
+          <h2 className="h1" data-reveal>History</h2>
+          <ol className="history mt-12 lg:mt-16">
+            {history.map((h) => (
+              <li key={h.year} className="history-row" data-reveal>
+                <span className="history-year tnum">{h.year}</span>
+                <h3 className="h3">{h.title}</h3>
+                <p>{h.text}</p>
+              </li>
+            ))}
+          </ol>
+        </div>
+      </section>
+
+      <section className="section" id="leadership">
+        <div className="wrap">
+          <div className="grid gap-6 lg:grid-cols-12">
+            <h2 className="h1 lg:col-span-5" data-reveal>Leadership</h2>
+            <p className="lede lg:col-span-6 lg:col-start-7" data-reveal>Engineers who build. Two of the three hold PE licenses, and two are certified Design-Build Professionals.</p>
+          </div>
+          <ul className="people mt-12 lg:mt-16">
+            {people.map((p) => (
+              <li key={p.name} className="person" data-reveal>
+                <h3 className="h3">{p.name}</h3>
+                <p className="person-role">{p.role}</p>
+                <p className="mt-4">{p.text}</p>
+              </li>
+            ))}
+          </ul>
+        </div>
+      </section>
+
+      <section className="section section-dark" id="safety">
+        <div className="wrap grid gap-12 lg:grid-cols-12">
+          <div className="lg:col-span-5" data-reveal>
+            <h2 className="h1">Safety and quality</h2>
+            <p className="lede mt-6">Safe and timely is in the first sentence of the company&apos;s purpose.</p>
+          </div>
+          <div className="lg:col-span-6 lg:col-start-7 space-y-8" data-reveal>
+            <div>
+              <h3 className="h3">Owned at the top</h3>
+              <p className="mt-2">Jobsite safety sits with operations leadership,, together with the equipment fleet.</p>
+            </div>
+            <div>
+              <h3 className="h3">Trained from the first year</h3>
+              <p className="mt-2">Safety and risk management are part of the {careers.program} every new graduate goes through.</p>
+            </div>
+            <div>
+              <h3 className="h3">Recognized work</h3>
+              <p className="mt-2">{award.year} {award.title}, {award.body}. {award.detail}</p>
+            </div>
+            <Pic k={role.aboutSafety} className="aspect-[3/2]" sizes="(min-width:1024px) 45vw, 100vw" />
+          </div>
+        </div>
+      </section>
+
+      <section className="section" id="prequalifications">
+        <div className="wrap grid gap-12 lg:grid-cols-12">
+          <div className="lg:col-span-4" data-reveal>
+            <h2 className="h2">Prequalifications</h2>
+            <p className="mt-4 muted">Prequalified to bid public work with these agencies.</p>
+          </div>
+          <ul className="list-cols lg:col-span-8" data-reveal>
+            {prequalifications.map((p) => <li key={p}>{p}</li>)}
+          </ul>
+        </div>
+        <div className="wrap mt-16 grid gap-12 lg:grid-cols-12">
+          <div className="lg:col-span-4" data-reveal>
+            <h2 className="h2">Clients</h2>
+          </div>
+          <ul className="list-cols lg:col-span-8" data-reveal>
+            {clients.map((p) => <li key={p}>{p}</li>)}
+          </ul>
+        </div>
+        <div className="wrap mt-16 grid gap-12 lg:grid-cols-12">
+          <div className="lg:col-span-4" data-reveal>
+            <h2 className="h2">Associations</h2>
+          </div>
+          <ul className="list-cols lg:col-span-8" data-reveal>
+            {associations.map((p) => <li key={p}>{p}</li>)}
+          </ul>
         </div>
       </section>
     </>

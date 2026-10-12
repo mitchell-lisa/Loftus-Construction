@@ -1,10 +1,17 @@
-export default function PageHead({ title, line }: { title: string; line?: string }) {
+import Pic from "./Pic";
+
+export default function PageHead({ title, lede, photo, pos }: { title: string; lede?: string; photo?: string | null; pos?: string }) {
   return (
-    <div className="on-dark bg-navy text-white">
-      <div className="wrap pb-10 pt-16 lg:pb-14 lg:pt-28">
-        <h1 className="t-display text-white">{title}</h1>
-        {line ? <p className="mt-6 max-w-[40ch] text-[clamp(1.1rem,1.6vw,1.3rem)] text-mist">{line}</p> : null}
+    <section className={`page-head ${photo ? "has-photo" : ""}`}>
+      <div className="wrap page-head-grid">
+        <h1 className="display page-title" data-reveal>{title}</h1>
+        {lede ? <p className="lede page-lede" data-reveal>{lede}</p> : null}
       </div>
-    </div>
+      {photo ? (
+        <div className="page-head-photo" data-reveal>
+          <Pic k={photo} className="aspect-[16/9] lg:aspect-[21/8]" sizes="100vw" priority pos={pos} />
+        </div>
+      ) : null}
+    </section>
   );
 }

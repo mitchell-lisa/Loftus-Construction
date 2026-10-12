@@ -1,110 +1,116 @@
 import Link from "next/link";
-import Image from "next/image";
 import Pic from "@/components/Pic";
-import { business } from "@/lib/business";
-import type { PhotoKey } from "@/lib/photos";
+import { firm, record, studies, capabilities, prequalifications, associations, careers, usdShort } from "@/lib/site";
 
-const cards: { slug: string; photo: PhotoKey }[] = [
-  { slug: "brownsville-road", photo: "bSpan" },
-  { slug: "university-avenue", photo: "uUnder" },
-  { slug: "st-peters-road", photo: "sAerial" },
-];
+const film: Record<string, string> = { "brownsville-road": "brownsville-19", "university-avenue": "university-avenue-13", "st-peters-road": "st-peters-6" };
 
 export default function Home() {
-  const hero = business.hero;
-  const work = cards.map((c) => ({ ...c, project: business.photoProjects.find((p) => p.slug === c.slug)! }));
-  const years = new Date().getFullYear() - (business.foundedYear ?? 1994);
+  const largest = Math.max(...record.map((r) => (r.approx ? 0 : r.value ?? 0)));
+  const picks = ["41st-street", "country-lakes-dam", "sr-13-group-t", "db-155"].map((s) => record.find((r) => r.slug === s)!);
   return (
     <>
-      <section className="on-dark bg-navy text-white">
-        <div className="grid lg:grid-cols-12">
-          <div className="flex flex-col justify-end px-5 pb-10 pt-12 md:px-10 lg:col-span-6 lg:pb-16 lg:pl-14 lg:pr-10 xl:pl-[max(56px,calc((100vw-1360px)/2+56px))]">
-            <h1 data-reveal className="t-display text-white">Bridges. Heavy civil.</h1>
-            <div data-reveal className="mt-10 flex flex-wrap items-center gap-4">
-              <Link href="/contact" className="group cond inline-flex min-h-14 items-center gap-3 bg-white px-7 text-[20px] text-navy hover:bg-steel-200">Request a bid <span aria-hidden className="arrow">&rarr;</span></Link>
-              <a href={business.phoneHref} className="cond inline-flex min-h-14 items-center border-2 border-white px-7 text-[20px]">{business.phone}</a>
+      <section className="mosaic">
+        <div className="mosaic-grid">
+          <div className="m-title">
+            <h1 className="m-h1">Bridges. Walls. Dams.</h1>
+            <p className="m-sub">Heavy civil engineers and contractors since {firm.founded}.</p>
+            <div className="mt-8 flex flex-wrap gap-3">
+              <Link href="/projects" className="btn btn-white">The work</Link>
+              <a href={firm.phoneHref} className="btn btn-outline">{firm.phone}</a>
             </div>
           </div>
-          <div className="relative aspect-[4/3] lg:col-span-6 lg:aspect-auto lg:min-h-[calc(100svh-var(--header-h))]">
-            <Image src={hero.src} alt={hero.alt} fill priority sizes="(min-width:1024px) 50vw, 100vw" quality={85} className="hero-img object-cover object-[center_58%]" />
+          <div className="m-a"><Pic k="brownsville-16" className="h-full" sizes="(min-width:1024px) 42vw, 100vw" priority /></div>
+          <div className="m-b"><Pic k="university-avenue-untitled-01" className="h-full" sizes="(min-width:1024px) 28vw, 50vw" priority /></div>
+          <div className="m-c"><Pic k="st-peters-12" className="h-full" sizes="(min-width:1024px) 28vw, 50vw" /></div>
+          <div className="m-d"><Pic k="brownsville-start-3454" className="h-full" sizes="(min-width:1024px) 21vw, 50vw" /></div>
+          <div className="m-e"><Pic k="brownsville-04" className="h-full" sizes="(min-width:1024px) 21vw, 50vw" /></div>
+        </div>
+      </section>
+
+      <section className="section">
+        <div className="wrap flex flex-col gap-6 sm:flex-row sm:items-end sm:justify-between">
+          <h2 className="h1" data-reveal>On the job</h2>
+          <p className="muted" data-reveal>Scroll sideways</p>
+        </div>
+        <div className="film mt-10" data-reveal>
+          <ul className="film-track">
+            {studies.map((s) => (
+              <li key={s.slug} className="film-cell film-photo">
+                <Link href={`/projects/${s.slug}`} className="block">
+                  <Pic k={film[s.slug]} className="aspect-[4/5]" sizes="(min-width:1024px) 30vw, 80vw" />
+                  <h3 className="film-h">{s.short}</h3>
+                  <p className="muted text-[15px]">{s.structure}</p>
+                </Link>
+              </li>
+            ))}
+            {picks.map((r) => (
+              <li key={r.slug} className="film-cell">
+                <Link href={`/projects/${r.slug}`} className="film-card">
+                  <span className="rcard-type">{r.type}</span>
+                  <span className="film-card-h">{r.name}</span>
+                  <span className="film-card-n">{r.note ?? r.owner}</span>
+                  <span className="film-card-v tnum">{r.value ? usdShort(r.value) : r.when}</span>
+                </Link>
+              </li>
+            ))}
+            <li className="film-cell">
+              <Link href="/projects" className="film-card film-all">
+                <span className="film-card-h">All {record.length} projects</span>
+              </Link>
+            </li>
+          </ul>
+        </div>
+      </section>
+
+      <section className="section section-alt">
+        <div className="wrap">
+          <h2 className="h1" data-reveal>What we build</h2>
+          <div className="tiles mt-12">
+            {capabilities.map((c) => (
+              <Link key={c.key} href={`/capabilities#${c.key}`} className="tile" data-reveal>
+                <span className="tile-h">{c.name}</span>
+                <span className="tile-items">{c.items.join(", ")}</span>
+              </Link>
+            ))}
           </div>
         </div>
       </section>
 
-      <section className="bg-steel-900 text-white">
-        <div className="wrap grid sm:grid-cols-3">
+      <section className="band">
+        <div className="wrap band-grid">
           {[
-            [String(business.foundedYear), "Founded"],
-            [String(years), "Years in heavy civil"],
-            ["PA NJ DE", "Working area"],
-          ].map(([v, k], i) => (
-            <div key={k} data-reveal className={`py-8 sm:px-6 lg:py-12 ${i ? "border-t border-white/15 sm:border-l sm:border-t-0" : "sm:pl-0"}`}>
-              <p className="cond text-[clamp(3rem,6vw,5.5rem)] leading-none">{v}</p>
-              <p className="mt-2 text-[15px] text-steel-200">{k}</p>
+            [String(firm.founded), "Founded in Cinnaminson, NJ"],
+            [String(prequalifications.length), "Agencies prequalified with"],
+            [String(associations.length), "Industry associations"],
+            [usdShort(largest), "Largest published contract"],
+          ].map(([n, l]) => (
+            <div key={l} className="band-cell" data-reveal>
+              <span className="band-n tnum">{n}</span>
+              <span className="band-l">{l}</span>
             </div>
           ))}
         </div>
       </section>
 
-      <section className="wrap section">
-        <div data-reveal className="flex items-end justify-between gap-6 border-b-4 border-navy pb-5">
-          <h2 className="t-h2">Current work</h2>
-          <Link href="/projects" className="group cond shrink-0 text-[18px] text-navy">All projects <span aria-hidden className="arrow">&rarr;</span></Link>
-        </div>
-        <div className="mt-10 grid gap-6 lg:mt-14 lg:grid-cols-12">
-          {work.map((c, i) => (
-            <Link key={c.slug} href={`/projects/${c.slug}`} data-reveal style={{ ["--d" as string]: `${i * 100}ms` }} className={`group block ${i === 0 ? "lg:col-span-12" : "lg:col-span-6"}`}>
-              <Pic id={c.photo} sizes={i === 0 ? "(min-width:1360px) 1250px, 100vw" : "(min-width:1024px) 48vw, 100vw"} className={i === 0 ? "aspect-[4/3] md:aspect-[16/7]" : "aspect-[4/3]"} />
-              <div className="flex items-center justify-between gap-6 bg-navy px-5 py-4 text-white group-hover:bg-navy-deep lg:px-7 lg:py-5">
-                <div>
-                  <h3 className="t-h3 text-white">{c.project.short}</h3>
-                  <p className="mt-1 text-[14px] text-mist">{c.project.structure}</p>
-                </div>
-                <span aria-hidden className="arrow text-[26px]">&rarr;</span>
-              </div>
-            </Link>
-          ))}
-        </div>
-      </section>
-
-      <section className="bg-steel-100">
-        <div className="wrap section grid gap-12 lg:grid-cols-12 lg:gap-8">
-          <div className="lg:col-span-7">
-            <h2 data-reveal className="t-h1">What we build</h2>
-            <ul className="mt-10 grid sm:grid-cols-2">
-              {business.capabilities.map((c, i) => (
-                <li key={c.name} data-reveal style={{ ["--d" as string]: `${i * 60}ms` }} className="border-t-2 border-steel-900">
-                  <Link href="/capabilities" className="group cond flex items-center justify-between py-4 pr-6 text-[clamp(1.4rem,2vw,1.75rem)] text-steel-900 hover:text-navy">
-                    {c.name}
-                    <span aria-hidden className="arrow text-[20px]">&rarr;</span>
-                  </Link>
-                </li>
-              ))}
-            </ul>
+      <section className="section">
+        <div className="wrap grid gap-10 lg:grid-cols-12 lg:items-end">
+          <div className="lg:col-span-7" data-reveal>
+            <h2 className="h1">{careers.philosophy}</h2>
+            <p className="lede mt-6 max-w-[44ch]">The {careers.program}: one year for recent graduates across estimating, project engineering, equipment, contracts and safety.</p>
           </div>
-          <div data-reveal className="lg:col-span-5">
-            <Pic id="bLow" sizes="(min-width:1024px) 40vw, 100vw" className="aspect-[4/3] lg:aspect-[4/5]" />
+          <div className="lg:col-span-4 lg:col-start-9" data-reveal>
+            <Link href="/careers" className="btn">Careers</Link>
           </div>
         </div>
       </section>
 
-      <section className="wrap section">
-        <div className="slab pl-6 lg:pl-10">
-          <h2 data-reveal className="t-h2">Built for</h2>
-        </div>
-        <ul className="mt-10 grid border-l-2 border-t-2 border-steel-200 sm:grid-cols-2 lg:grid-cols-4">
-          {business.clients.map((c) => (
-            <li key={c} data-reveal className="flex min-h-[96px] items-end border-b-2 border-r-2 border-steel-200 bg-white p-5 text-[17px] font-semibold leading-snug text-steel-900">{c}</li>
-          ))}
-        </ul>
-      </section>
-
-      <section className="on-dark bg-navy text-white">
-        <div className="wrap section flex flex-col gap-10 lg:flex-row lg:items-end lg:justify-between">
-          <h2 data-reveal className="t-h1 max-w-[10ch] text-white">Have a job to price?</h2>
-          <div data-reveal className="flex flex-wrap items-center gap-4">
-            <Link href="/contact" className="group cond inline-flex min-h-16 items-center gap-3 bg-white px-8 text-[22px] text-navy hover:bg-steel-200">Request a bid <span aria-hidden className="arrow">&rarr;</span></Link>
-            <a href={business.phoneHref} className="cond text-[28px] text-white">{business.phone}</a>
+      <section className="section section-dark">
+        <div className="wrap grid gap-10 lg:grid-cols-12 lg:items-end">
+          <h2 className="h1 lg:col-span-7" data-reveal>Out for bid?</h2>
+          <div className="lg:col-span-5" data-reveal>
+            <a href={firm.phoneHref} className="contact-big block">{firm.phone}</a>
+            <a href={`mailto:${firm.email}`} className="mt-2 inline-block break-all underline underline-offset-4">{firm.email}</a>
+            <div className="mt-8"><Link href="/contact" className="btn">Request a bid</Link></div>
           </div>
         </div>
       </section>
