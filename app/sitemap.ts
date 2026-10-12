@@ -3,7 +3,7 @@ import { business } from "@/lib/business";
 import { SITE_URL } from "./layout";
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const pages = ["", "/projects", "/capabilities", "/record", "/about", "/careers", "/contact"];
+  const pages = ["", "/projects", "/capabilities", "/about", "/careers", "/contact"];
   const projects = business.photoProjects.map((project) => `/projects/${project.slug}`);
 
   return [...pages, ...projects].map((path) => ({

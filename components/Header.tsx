@@ -1,112 +1,123 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
 import { usePathname } from "next/navigation";
-import { useCallback, useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
+import { nav } from "./nav";
 import { business } from "@/lib/business";
-import Logo from "./Logo";
-import MenuDrawer from "./MenuDrawer";
-import { currentHref, nav } from "./nav";
 
 export default function Header() {
   const pathname = usePathname();
-  const active = currentHref(pathname);
   const [open, setOpen] = useState(false);
-  const [scrolled, setScrolled] = useState(false);
-  const buttonRef = useRef<HTMLButtonElement>(null);
-  const close = useCallback(() => {
-    setOpen(false);
-    requestAnimationFrame(() => buttonRef.current?.focus());
-  }, []);
 
+  useEffect(() => setOpen(false), [pathname]);
   useEffect(() => {
-    setOpen(false);
-  }, [pathname]);
+    document.documentElement.style.overflow = open ? "hidden" : "";
+    const onKey = (e: KeyboardEvent) => e.key === "Escape" && setOpen(false);
+    window.addEventListener("keydown", onKey);
+    return () => window.removeEventListener("keydown", onKey);
+  }, [open]);
 
-  useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 8);
-    onScroll();
-    window.addEventListener("scroll", onScroll, { passive: true });
-    return () => window.removeEventListener("scroll", onScroll);
-  }, []);
+  const active = (href: string) => pathname === href || pathname.startsWith(href + "/");
 
   return (
-    <>
-      <header
-        data-header=""
-        className={`on-dark sticky top-0 z-50 bg-navy text-white transition-shadow duration-300 ${
-          scrolled ? "shadow-[0_1px_0_rgb(255_255_255/0.14)]" : ""
-        }`}
-      >
-        <a href="#content" className="skip-link">
-          Skip to content
-        </a>
-        <div className="wrap flex h-[var(--header-h)] items-center gap-6">
-          <Link href="/" aria-label={`${business.legalName}, home`} className="flex shrink-0 items-center py-2">
-            <Logo className="w-[156px] sm:w-[176px] lg:w-[206px]" />
-          </Link>
+    <header className="sticky top-0 z-40 border-b border-line bg-white">
+      <div className="wrap flex h-[var(--header-h)] items-center justify-between gap-6">
+        <Link href="/" aria-label={`${business.shortName}, home`} className="flex shrink-0 items-center">
+          <Image
+            src="/images/logos/current-logo.png"
+            alt={business.legalName}
+            width={1200}
+            height={285}
+            priority
+            className="h-[38px] w-auto lg:h-[50px]"
+          />
+        </Link>
 
-          <div aria-hidden="true" className="hidden min-w-6 flex-1 lg:block">
-            <div className="speed text-white" style={{ "--speed-1": "3px", "--speed-gap": "5px" } as React.CSSProperties}>
-              <span />
-              <span />
-              <span />
-            </div>
-          </div>
-
-          <nav aria-label="Primary" className="hidden items-center gap-x-5 lg:flex xl:gap-x-7">
-            {nav.map((item) => {
-              const on = active === item.href;
-              return (
+        <nav aria-label="Main" className="hidden lg:block">
+          <ul className="flex items-center gap-9 text-[15px]">
+            {nav.map((item) => (
+              <li key={item.href}>
                 <Link
-                  key={item.href}
                   href={item.href}
-                  aria-current={on ? "page" : undefined}
-                  className={`relative inline-flex min-h-11 items-center whitespace-nowrap text-[15px] transition-colors ${
-                    on ? "text-white" : "text-mist hover:text-white"
-                  }`}
+                  aria-current={active(item.href) ? "page" : undefined}
+                  className={`py-2 ${active(item.href) ? "text-navy underline decoration-1 underline-offset-[10px]" : "text-steel hover:text-navy"}`}
                 >
                   {item.label}
-                  <span
-                    aria-hidden="true"
-                    className={`absolute inset-x-0 bottom-2 h-[2px] origin-left bg-white transition-transform duration-300 ${
-                      on ? "scale-x-100" : "scale-x-0"
-                    }`}
-                  />
                 </Link>
-              );
-            })}
-            <a
-              href={business.phoneHref}
-              data-primary="true"
-              className="inline-flex min-h-11 items-center whitespace-nowrap border border-white/70 px-4 text-[15px] font-semibold text-white transition-colors hover:bg-white hover:text-navy"
-            >
-              {business.phone}
-            </a>
-          </nav>
+              </li>
+            ))}
+            <li>
+              <a href={business.phoneHref} className="font-semibold text-navy">
+                {business.phone}
+              </a>
+            </li>
+          </ul>
+        </nav>
 
-          <button
-            ref={buttonRef}
-            type="button"
-            aria-expanded={open}
-            aria-controls="site-menu"
-            onClick={() => setOpen(true)}
-            className="ml-auto inline-flex min-h-11 items-center gap-3 pl-3 text-[15px] font-semibold lg:hidden"
-          >
-            Menu
-            <span aria-hidden="true" className="flex w-7 flex-col items-end gap-[5px]">
-              <span className="block h-[3px] w-7 bg-white" />
-              <span className="block h-[2px] w-[22px] bg-white" />
-              <span className="block h-px w-[17px] bg-white" />
+        <button
+          type="button"
+          onClick={() => setOpen(true)}
+          aria-expanded={open}
+          aria-controls="menu"
+          className="flex h-11 items-center gap-3 px-1 text-[15px] font-semibold text-navy lg:hidden"
+        >
+          Menu
+          <span aria-hidden className="flex w-5 flex-col gap-[5px]">
+            <span className="h-[2px] bg-navy" />
+            <span className="h-[2px] bg-navy" />
+          </span>
+        </button>
+      </div>
+
+      <div
+        id="menu"
+        role="dialog"
+        aria-modal="true"
+        aria-label="Menu"
+        hidden={!open}
+        className="on-dark fixed inset-0 z-50 h-[100dvh] overflow-y-auto bg-navy text-white lg:hidden"
+      >
+        <div className="wrap flex h-[var(--header-h)] items-center justify-between">
+          <Image
+            src="/images/logos/current-logo-white.png"
+            alt=""
+            width={1200}
+            height={285}
+            className="h-[38px] w-auto"
+          />
+          <button type="button" onClick={() => setOpen(false)} className="flex h-11 items-center gap-3 px-1 text-[15px] font-semibold">
+            Close
+            <span aria-hidden className="relative block h-5 w-5">
+              <span className="absolute left-0 top-1/2 h-[2px] w-5 rotate-45 bg-white" />
+              <span className="absolute left-0 top-1/2 h-[2px] w-5 -rotate-45 bg-white" />
             </span>
           </button>
         </div>
-      </header>
-      <MenuDrawer
-        open={open}
-        active={active}
-        onClose={close}
-      />
-    </>
+        <nav aria-label="Mobile" className="wrap pb-12 pt-8">
+          <ul className="border-t border-white/20">
+            <li className="border-b border-white/20">
+              <Link href="/" className="flex min-h-16 items-center text-[28px] font-semibold tracking-tight">Home</Link>
+            </li>
+            {nav.map((item) => (
+              <li key={item.href} className="border-b border-white/20">
+                <Link
+                  href={item.href}
+                  aria-current={active(item.href) ? "page" : undefined}
+                  className="flex min-h-16 items-center text-[28px] font-semibold tracking-tight"
+                >
+                  {item.label}
+                </Link>
+              </li>
+            ))}
+          </ul>
+          <div className="mt-10 space-y-2 text-[17px]">
+            <a href={business.phoneHref} className="block font-semibold">{business.phone}</a>
+            <a href={`mailto:${business.email}`} className="block break-all text-mist">{business.email}</a>
+          </div>
+        </nav>
+      </div>
+    </header>
   );
 }

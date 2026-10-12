@@ -1,155 +1,85 @@
-import type { Metadata } from "next";
-import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import Pic from "@/components/Pic";
-import SpeedLines from "@/components/SpeedLines";
 import { business, projectBySlug } from "@/lib/business";
-import { photos } from "@/lib/photos";
-
-type Props = { params: Promise<{ slug: string }> };
+import { photos, type PhotoKey } from "@/lib/photos";
+import { pageMeta } from "@/lib/pageMeta";
 
 export function generateStaticParams() {
-  return business.photoProjects.map((project) => ({ slug: project.slug }));
+  return business.photoProjects.map((p) => ({ slug: p.slug }));
 }
 
-export async function generateMetadata({ params }: Props): Promise<Metadata> {
-  const { slug } = await params;
-  const project = projectBySlug(slug);
-  if (!project) return {};
-  const lead = photos[project.lead];
-  return {
-    title: project.name,
-    description: project.summary,
-    alternates: { canonical: `/projects/${project.slug}` },
-    openGraph: {
-      title: `${project.name} | ${business.legalName}`,
-      description: project.summary,
-      url: `/projects/${project.slug}`,
-      images: [{ url: lead.src, width: lead.width, height: lead.height, alt: lead.alt }],
-    },
-  };
+export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }) {
+  const p = projectBySlug((await params).slug);
+  if (!p) return {};
+  return pageMeta(p.short, p.summary, `/projects/${p.slug}`, photos[p.lead]);
 }
 
-/** Layout for a run of photos in a chapter. Varies with the count so pages do not repeat one grid. */
-function frames(count: number): { cls: string; sizes: string }[] {
-  if (count === 1) return [{ cls: "aspect-[4/3] lg:aspect-[16/10]", sizes: "(min-width: 1024px) 62vw, 100vw" }];
-  if (count === 2)
-    return [
-      { cls: "aspect-[4/3]", sizes: "(min-width: 1024px) 31vw, 100vw" },
-      { cls: "aspect-[4/3] sm:mt-16", sizes: "(min-width: 1024px) 31vw, 100vw" },
-    ];
-  if (count === 3)
-    return [
-      { cls: "aspect-[4/3] sm:col-span-2 sm:aspect-[16/9]", sizes: "(min-width: 1024px) 62vw, 100vw" },
-      { cls: "aspect-[4/3]", sizes: "(min-width: 1024px) 31vw, 100vw" },
-      { cls: "aspect-[4/3]", sizes: "(min-width: 1024px) 31vw, 100vw" },
-    ];
-  return Array.from({ length: count }, () => ({
-    cls: "aspect-[4/3]",
-    sizes: "(min-width: 1024px) 31vw, 100vw",
-  }));
+function Gallery({ ids }: { ids: readonly PhotoKey[] }) {
+  if (ids.length === 1) return <Pic id={ids[0]} sizes="100vw" className="aspect-[4/3] md:aspect-[2/1]" caption />;
+  if (ids.length === 3)
+    return (
+      <div className="grid gap-6 md:grid-cols-2 md:gap-8">
+        <div className="md:col-span-2"><Pic id={ids[0]} sizes="100vw" className="aspect-[4/3] md:aspect-[2/1]" caption /></div>
+        {ids.slice(1).map((id) => <Pic key={id} id={id} sizes="(min-width:768px) 48vw, 100vw" className="aspect-[4/3]" caption />)}
+      </div>
+    );
+  return (
+    <div className="grid gap-6 md:grid-cols-2 md:gap-8">
+      {ids.map((id) => (
+        <Pic key={id} id={id} sizes="(min-width:768px) 48vw, 100vw" className="aspect-[4/3]" position={photos[id].height > photos[id].width ? "object-[center_60%]" : "object-center"} caption />
+      ))}
+    </div>
+  );
 }
 
-export default async function ProjectPage({ params }: Props) {
-  const { slug } = await params;
-  const project = projectBySlug(slug);
-  if (!project) notFound();
-
-  const lead = photos[project.lead];
-  const index = business.photoProjects.findIndex((p) => p.slug === project.slug);
-  const next = business.photoProjects[(index + 1) % business.photoProjects.length];
-
+export default async function ProjectPage({ params }: { params: Promise<{ slug: string }> }) {
+  const p = projectBySlug((await params).slug);
+  if (!p) notFound();
+  const i = business.photoProjects.indexOf(p);
+  const next = business.photoProjects[(i + 1) % business.photoProjects.length];
   return (
     <>
-      <section className="on-dark grid-paper bg-navy text-white">
-        <div className="wrap grid gap-10 pb-12 pt-12 lg:grid-cols-12 lg:items-end lg:gap-12 lg:pb-16 lg:pt-20">
-          <div className="lg:col-span-7">
-            <Link href="/projects" className="inline-flex min-h-11 items-center text-[15px] text-mist hover:text-white">
-              Projects
-            </Link>
-            <h1 className="mt-3 text-[clamp(2.6rem,6.4vw,5.6rem)] leading-[0.92]">{project.name}</h1>
-            <p className="mt-6 max-w-[54ch] text-[1.1rem] leading-relaxed text-mist">{project.summary}</p>
-          </div>
-          <aside aria-label="Job sheet" className="lg:col-span-5">
-            <div className="border border-white/50">
-              <div className="flex items-center gap-4 border-b border-white/50 px-4 py-3">
-                <span className="caps text-white">{business.shortName}</span>
-                <SpeedLines weight="fine" from="right" reveal className="flex-1 text-white" />
-              </div>
-              <dl>
-                {project.sheet.map((row) => (
-                  <div key={row.label} className="grid grid-cols-[10.5rem_1fr] border-b border-white/25 last:border-b-0">
-                    <dt className="caps border-r border-white/25 px-4 py-3 text-mist">{row.label}</dt>
-                    <dd className="px-4 py-3 text-[15px] text-white">{row.value}</dd>
-                  </div>
-                ))}
-              </dl>
-            </div>
-          </aside>
-        </div>
-      </section>
-
-      <div className="relative h-[52svh] min-h-[300px] overflow-hidden bg-navy lg:h-[78svh] lg:max-h-[900px]">
-        <Image
-          src={lead.src}
-          alt={lead.alt}
-          fill
-          priority
-          quality={82}
-          sizes="100vw"
-          className="settle object-cover object-center"
-        />
+      <div className="wrap pb-10 pt-12 lg:pb-14 lg:pt-20">
+        <Link href="/projects" className="text-[15px] text-steel hover:text-navy">Projects</Link>
+        <h1 className="mt-4 max-w-[18ch] text-[clamp(2.3rem,5.5vw,4.5rem)]">{p.name}</h1>
+      </div>
+      <div className="wrap">
+        <Pic id={p.lead} sizes="100vw" priority className="aspect-[4/3] md:aspect-[21/9]" />
       </div>
 
-      {project.story.map((chapter, ci) => {
-        const f = frames(chapter.photos.length);
-        return (
-          <section key={chapter.heading} className={ci % 2 === 1 ? "grid-paper-light bg-white" : "bg-white"}>
-            <div className="wrap grid gap-10 py-16 lg:grid-cols-12 lg:gap-12 lg:py-24">
-              <div className="lg:col-span-4">
-                <div className="lg:sticky lg:top-[calc(var(--header-h)+2rem)]">
-                  <SpeedLines reveal className="w-24 text-brand" />
-                  <h2 className="mt-6 text-[clamp(2rem,3.6vw,3rem)] leading-[1] text-navy">{chapter.heading}</h2>
-                  <p className="mt-5 max-w-[40ch] text-[1.08rem] leading-relaxed text-ink">{chapter.text}</p>
-                </div>
-              </div>
-              {chapter.photos.length ? (
-                <div className="grid gap-x-6 gap-y-10 sm:grid-cols-2 lg:col-span-8">
-                  {chapter.photos.map((key, i) => (
-                    <div
-                      key={key}
-                      data-rise
-                      className={chapter.photos.length === 1 ? "sm:col-span-2" : f[i].cls.includes("col-span-2") ? "sm:col-span-2" : ""}
-                    >
-                      <Pic
-                        id={key}
-                        sizes={f[i].sizes}
-                        className={f[i].cls.replace("sm:col-span-2 ", "")}
-                        position={photos[key].height > photos[key].width ? "object-[center_60%]" : "object-center"}
-                      />
-                    </div>
-                  ))}
-                </div>
-              ) : null}
+      <section className="wrap grid gap-10 py-14 lg:grid-cols-12 lg:gap-8 lg:py-20">
+        <p className="text-[clamp(1.15rem,1.6vw,1.35rem)] leading-relaxed text-ink lg:col-span-7">{p.summary}</p>
+        <dl className="border-t border-navy lg:col-span-4 lg:col-start-9">
+          {p.sheet.map((row) => (
+            <div key={row.label} className="flex justify-between gap-6 border-b border-line py-3 text-[15px]">
+              <dt className="text-steel">{row.label}</dt>
+              <dd className="text-right font-semibold text-navy">{row.value}</dd>
             </div>
-          </section>
-        );
-      })}
-
-      <section className="on-dark bg-navy text-white">
-        <Link href={`/projects/${next.slug}`} className="group block">
-          <div className="wrap py-14 lg:py-20">
-            <p className="text-[15px] text-mist">Next job</p>
-            <div className="mt-3 flex items-end gap-8">
-              <p className="min-w-0 font-display text-[clamp(2rem,5vw,4.2rem)] leading-[0.98] transition-colors group-hover:text-mist">
-                {next.name}
-              </p>
-              <SpeedLines weight="bold" className="mb-4 hidden flex-1 text-white transition-transform duration-500 group-hover:translate-x-2 md:flex" />
-            </div>
-          </div>
-        </Link>
+          ))}
+        </dl>
       </section>
+
+      {p.story.filter((s) => s.photos.length).map((s) => (
+        <section key={s.heading} className="wrap border-t border-line py-14 lg:py-20">
+          <div className="grid gap-4 lg:grid-cols-12 lg:gap-8">
+            <h2 className="text-[clamp(1.6rem,2.6vw,2.25rem)] lg:col-span-4">{s.heading}</h2>
+            <p className="max-w-[52ch] text-steel lg:col-span-6 lg:col-start-6">{s.text}</p>
+          </div>
+          <div className="mt-10">
+            <Gallery ids={s.photos as PhotoKey[]} />
+          </div>
+        </section>
+      ))}
+
+      <Link href={`/projects/${next.slug}`} className="group block border-t border-line">
+        <div className="wrap flex items-center justify-between gap-6 py-12 lg:py-16">
+          <span>
+            <span className="block text-[clamp(1.6rem,3vw,2.5rem)] font-semibold tracking-tight text-navy group-hover:underline">{next.short}</span>
+          </span>
+          <span aria-hidden className="text-[28px] text-navy">&rarr;</span>
+        </div>
+      </Link>
     </>
   );
 }

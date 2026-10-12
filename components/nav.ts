@@ -1,13 +1,7 @@
 export const nav = [
-  { label: "Projects", href: "/projects" },
-  { label: "Capabilities", href: "/capabilities" },
-  { label: "Record", href: "/record" },
-  { label: "About", href: "/about" },
-  { label: "Careers", href: "/careers" },
-  { label: "Contact", href: "/contact" },
+  { href: "/projects", label: "Projects" },
+  { href: "/capabilities", label: "Capabilities" },
+  { href: "/about", label: "About" },
+  { href: "/careers", label: "Careers" },
+  { href: "/contact", label: "Contact" },
 ];
-
-export function currentHref(pathname: string) {
-  if (pathname === "/projects" || pathname.startsWith("/projects/")) return "/projects";
-  return nav.find((item) => item.href === pathname)?.href ?? "";
-}

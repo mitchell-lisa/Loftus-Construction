@@ -1,77 +1,51 @@
 import Link from "next/link";
-import PageLead from "@/components/PageLead";
+import PageHead from "@/components/PageHead";
 import Pic from "@/components/Pic";
-import { business } from "@/lib/business";
+import { business, formatUSD } from "@/lib/business";
 import type { PhotoKey } from "@/lib/photos";
-import { photos } from "@/lib/photos";
 import { pageMeta } from "@/lib/pageMeta";
 
-const description =
-  "Three current Loftus jobs in photographs: a new bridge on Brownsville Road over Neshaminy Creek, the University Avenue Bridge over the Schuylkill River, and the St. Peters Road retaining wall.";
-
-export const metadata = pageMeta("Projects", description, "/projects", photos.bWide);
+export const metadata = pageMeta("Projects", "Bridges, walls and heavy civil projects by Loftus Construction.", "/projects");
 
 const cover: Record<string, PhotoKey> = {
-  "brownsville-road": "bWide",
+  "brownsville-road": "bMixer",
   "university-avenue": "uDeep",
   "st-peters-road": "sWall",
 };
 
 export default function ProjectsPage() {
+  const record = [...business.projects].sort((a, b) => (b.value ?? 0) - (a.value ?? 0));
   return (
     <>
-      <PageLead
-        title="Projects"
-        line="Three jobs from the last two years, in photographs from the job sites. Older contracts, with owners and amounts, are on the record page."
-      />
-      <div className="bg-white">
-        {business.photoProjects.map((project, i) => {
-          const flip = i % 2 === 1;
-          return (
-            <article key={project.slug} className="wrap border-b border-rule py-14 last:border-b-0 lg:py-24">
-              <Link
-                href={`/projects/${project.slug}`}
-                className={`group grid gap-7 lg:grid-cols-12 lg:items-center lg:gap-12 ${flip ? "lg:[&>*:first-child]:order-2" : ""}`}
-              >
-                <div data-rise className="lg:col-span-7">
-                  <Pic
-                    id={cover[project.slug]}
-                    sizes="(min-width: 1024px) 56vw, 100vw"
-                    className="aspect-[4/3] lg:aspect-[7/5]"
-                    caption={false}
-                  />
-                </div>
-                <div className="lg:col-span-5">
-                  <h2 className="text-[clamp(2.1rem,4vw,3.4rem)] leading-[0.98] text-navy transition-colors group-hover:text-brand">
-                    {project.name}
-                  </h2>
-                  <p className="mt-5 text-[1.05rem] leading-relaxed text-ink">{project.summary}</p>
-                  <dl className="mt-7 border-t border-navy">
-                    {project.sheet.map((row) => (
-                      <div key={row.label} className="grid grid-cols-[8.5rem_1fr] gap-4 border-b border-rule py-2.5 text-[15px]">
-                        <dt className="caps text-navy">{row.label}</dt>
-                        <dd className="text-ink">{row.value}</dd>
-                      </div>
-                    ))}
-                  </dl>
-                  <span className="mt-7 inline-flex min-h-11 items-center border-b-2 border-brand font-semibold text-brand">
-                    See the job
-                  </span>
-                </div>
-              </Link>
-            </article>
-          );
-        })}
-      </div>
-      <section className="on-dark grid-paper bg-navy text-white">
-        <div className="wrap py-16 lg:py-20">
-          <div className="flex flex-wrap items-end justify-between gap-6">
-            <p className="max-w-[30ch] font-display text-[clamp(1.7rem,3vw,2.5rem)] leading-tight">
-              Fourteen published contracts, from the Strasburg Railroad to the Pennsylvania Turnpike.
-            </p>
-            <Link href="/record" className="inline-flex min-h-11 items-center border-b-2 border-white font-semibold">
-              See the record
-            </Link>
+      <PageHead title="Projects" />
+      <section className="wrap grid gap-x-8 gap-y-14 pb-20 md:grid-cols-3 lg:pb-32">
+        {business.photoProjects.map((p) => (
+          <Link key={p.slug} href={`/projects/${p.slug}`} className="group">
+            <Pic id={cover[p.slug]} sizes="(min-width:768px) 32vw, 100vw" className="aspect-[4/5]" />
+            <h2 className="mt-5 text-[22px] group-hover:underline">{p.short}</h2>
+            <p className="mt-1 text-[15px] text-steel">{p.structure}</p>
+          </Link>
+        ))}
+      </section>
+
+      <section id="record" className="border-t border-line">
+        <div className="wrap py-20 lg:py-28">
+          <h2 className="text-[clamp(2rem,4vw,3.25rem)]">Project record</h2>
+          <div role="table" aria-label="Project record" className="mt-10 lg:mt-14">
+            <div role="row" className="hidden border-b border-navy pb-3 md:grid md:grid-cols-12 md:gap-6">
+              <span role="columnheader" className="label col-span-5">Project</span>
+              <span role="columnheader" className="label col-span-3">Owner</span>
+              <span role="columnheader" className="label col-span-2">Location</span>
+              <span role="columnheader" className="label col-span-2 text-right">Contract</span>
+            </div>
+            {record.map((r) => (
+              <div role="row" key={r.name} className="grid grid-cols-1 gap-1 border-b border-line py-5 md:grid-cols-12 md:gap-6">
+                <span role="cell" className="text-[17px] font-semibold text-navy md:col-span-5">{r.name}</span>
+                <span role="cell" className="text-[15px] text-steel md:col-span-3 md:text-ink">{r.owner ?? ""}</span>
+                <span role="cell" className="text-[15px] text-steel md:col-span-2">{r.location ?? ""}</span>
+                <span role="cell" className="text-[15px] tabular-nums text-ink md:col-span-2 md:text-right">{r.value ? formatUSD(r.value) : ""}</span>
+              </div>
+            ))}
           </div>
         </div>
       </section>
