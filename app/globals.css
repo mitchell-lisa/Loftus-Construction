@@ -19,10 +19,13 @@
 @media (min-width: 1024px) { .type-hero-grid { grid-template-columns: 1fr 26vw; column-gap: 56px; align-items: end; max-width: 1440px; } .type-hero-by { grid-column: 1 / -1; } }
 .type-hero-title { font-size: clamp(46px, 8.4vw, 148px); line-height: .96; letter-spacing: -0.035em; }
 .type-hero-title em { font-style: italic; }
+@media (min-width: 1024px) { .type-hero-title .line > span { white-space: nowrap; } }
+@media (min-width: 1024px) and (max-width: 1279px) { .type-hero-title { font-size: 6.4vw; } }
 .type-hero-title .line { display: block; overflow: hidden; padding-bottom: .06em; }
 .type-hero-title .line > span { display: inline-block; animation: d-up 1.2s cubic-bezier(.2,.7,.2,1) both; }
 .type-hero-title .line:nth-child(2) > span { animation-delay: .12s; }
 .type-hero-title .line:nth-child(3) > span { animation-delay: .24s; }
+.type-hero-title .line:nth-child(4) > span { animation-delay: .36s; }
 @keyframes d-up { from { transform: translateY(105%); } to { transform: none; } }
 .type-hero-side { max-width: 360px; animation: d-fade 1.4s .4s both; }
 @keyframes d-fade { from { opacity: 0; } to { opacity: 1; } }
@@ -42,7 +45,7 @@
 .story-year { font-family: var(--display); font-size: clamp(96px, 14vw, 220px); line-height: .8; color: var(--head); letter-spacing: -0.05em; }
 .story-title { font-size: clamp(36px, 4vw, 60px); font-style: italic; }
 .story-p { margin-top: 18px; font-size: 19px; line-height: 1.65; max-width: 60ch; }
-.dropcap::first-letter { float: left; font-family: var(--display); font-size: 4.2em; line-height: .82; padding: 6px 10px 0 0; color: var(--head); }
+.dropcap::first-letter { float: left; font-family: var(--display); font-size: 3.4em; line-height: .86; margin: .06em .06em 0 0; padding: 0; color: var(--head); }
 .ledger-name { font-size: clamp(24px, 2.6vw, 38px); }
 .page-title { font-style: italic; }
 /* Case: essay */

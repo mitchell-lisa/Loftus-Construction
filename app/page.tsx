@@ -11,7 +11,8 @@ export default function Home() {
         <div className="wrap type-hero-grid">
           <h1 className="type-hero-title">
             <span className="line"><span>Difficult heavy</span></span>{" "}
-            <span className="line"><span>construction, in a safe</span></span>{" "}
+            <span className="line"><span>construction,</span></span>{" "}
+            <span className="line"><span>in a safe</span></span>{" "}
             <span className="line"><span>and timely <em>fashion.</em></span></span>
           </h1>
           <div className="type-hero-side">
