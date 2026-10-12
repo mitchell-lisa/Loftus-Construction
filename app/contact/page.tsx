@@ -1,34 +1,47 @@
 import PageHead from "@/components/PageHead";
 import Pic from "@/components/Pic";
 import RfqForm from "@/components/RfqForm";
-import { business } from "@/lib/business";
-import { photos } from "@/lib/photos";
-import { pageMeta } from "@/lib/pageMeta";
+import { firm } from "@/lib/site";
+import { role } from "@/lib/alloc";
+import { meta } from "@/lib/meta";
 
-export const metadata = pageMeta("Contact", "Phone, email and address for Loftus Construction in Cinnaminson, New Jersey.", "/contact", photos.bLift);
+export const metadata = meta("Contact and bid requests", "Call (856) 786-6607 or send a bid request to Loftus Construction in Cinnaminson, New Jersey.", "/contact");
 
-export default function ContactPage() {
+export default function Contact() {
   return (
     <>
-      <PageHead title="Contact" />
-      <section className="wrap grid gap-16 pb-20 lg:grid-cols-12 lg:gap-8 lg:pb-28">
-        <div className="lg:col-span-4">
-          <a href={business.phoneHref} className="block text-[clamp(1.8rem,3vw,2.5rem)] font-semibold tracking-tight text-chalk">{business.phone}</a>
-          {business.fax ? <p className="mt-1 text-[15px] text-steel">Fax {business.fax}</p> : null}
-          <a href={`mailto:${business.email}`} className="link mt-4 inline-block break-all text-chalk">{business.email}</a>
-          <address className="mt-10 border-t border-rule pt-6 not-italic text-[16px] leading-7">
-            {business.street}<br />{business.city}, {business.state} {business.zip}
-          </address>
-          <a href={business.directionsUrl} target="_blank" rel="noopener noreferrer" className="link mt-3 inline-block text-[15px] font-semibold text-chalk">Directions</a>
-        </div>
-        <div className="lg:col-span-7 lg:col-start-6">
-          <h2 className="text-[clamp(1.8rem,3vw,2.5rem)]">Request a bid</h2>
-          <div className="mt-8"><RfqForm /></div>
+      <PageHead title="Contact" lede="Bid invitations, design-build inquiries and subcontractor quotes. A phone call is still the fastest way in." />
+      <section className="section pt-0">
+        <div className="wrap grid gap-14 lg:grid-cols-12">
+          <div className="lg:col-span-4 space-y-10" data-reveal>
+            <div>
+              <h2 className="h3">Office</h2>
+              <a href={firm.phoneHref} className="contact-big block mt-3">{firm.phone}</a>
+              <p className="mt-2 muted">Fax {firm.fax}</p>
+              <a href={`mailto:${firm.email}`} className="link mt-2 inline-block break-all">{firm.email}</a>
+            </div>
+            <div>
+              <h2 className="h3">Address</h2>
+              <address className="not-italic mt-3">{firm.legalName}<br />{firm.street}<br />{firm.city}, {firm.state} {firm.zip}</address>
+              <a href={firm.directionsUrl} className="link mt-3 inline-block">Directions</a>
+            </div>
+            <div>
+              <h2 className="h3">Careers</h2>
+              <p className="mt-3">{firm.careersContact}<br /><a className="link break-all" href={`mailto:${firm.careersEmail}`}>{firm.careersEmail}</a></p>
+            </div>
+          </div>
+          <div className="lg:col-span-7 lg:col-start-6" data-reveal>
+            <h2 className="h2">Request a bid</h2>
+            <p className="mt-3 mb-8 muted">Tell us the structure, the owner and the bid date.</p>
+            <RfqForm />
+          </div>
         </div>
       </section>
-      <div className="wrap pb-20 lg:pb-28">
-        <Pic id="bLift" sizes="100vw" className="aspect-[4/3] md:aspect-[21/9]" />
-      </div>
+      {role.contact ? (
+        <section className="contact-photo" data-reveal>
+          <Pic k={role.contact} className="aspect-[16/9] lg:aspect-[3/1]" sizes="100vw" />
+        </section>
+      ) : null}
     </>
   );
 }

@@ -1,125 +1,101 @@
 import Link from "next/link";
-import Image from "next/image";
 import Pic from "@/components/Pic";
-import { business } from "@/lib/business";
-import type { PhotoKey } from "@/lib/photos";
+import Sequence from "@/components/Sequence";
+import { firm, record, studies, services, careers } from "@/lib/site";
 
-const cards: { slug: string; photo: PhotoKey; position?: string }[] = [
-  { slug: "brownsville-road", photo: "bSpan" },
-  { slug: "university-avenue", photo: "uUnder" },
-  { slug: "st-peters-road", photo: "sAerial" },
-];
+const byYear = [2026, 2025, 2019, 2018, 2017, 2016, 2015];
 
 export default function Home() {
-  const hero = business.hero;
-  const [first, ...rest] = cards.map((c) => ({ ...c, project: business.photoProjects.find((p) => p.slug === c.slug)! }));
-  const years = new Date().getFullYear() - (business.foundedYear ?? 1994);
+  const ua = studies.find((s) => s.slug === "university-avenue")!;
+  const sp = studies.find((s) => s.slug === "st-peters-road")!;
   return (
     <>
-      <section className="relative h-[calc(100svh-var(--header-h))] min-h-[560px] max-h-[980px] overflow-hidden bg-girder">
-        <Image src={hero.src} alt={hero.alt} fill priority sizes="100vw" quality={85} className="hero-img object-cover object-[center_58%]" />
-        <div className="absolute inset-0 bg-gradient-to-t from-[#0e1013]/90 via-[#0e1013]/35 to-[#0e1013]/10" />
-        <div className="absolute inset-x-0 bottom-0 h-2/3 bg-gradient-to-tr from-[#0e1013]/55 to-transparent" />
-        <div className="wrap relative flex h-full flex-col justify-end pb-10 lg:pb-16">
-          <h1 data-reveal className="t-display max-w-[12ch] text-white">Bridges and heavy civil work.</h1>
-          <div data-reveal style={{ ["--d" as string]: "150ms" }} className="mt-8 flex flex-col gap-2 border-t border-white/25 pt-5 text-[15px] text-white/80 sm:flex-row sm:items-center sm:justify-between lg:mt-12">
-            <p>Cinnaminson, New Jersey</p>
-            <p>Pennsylvania, New Jersey, Delaware</p>
-          </div>
+      <Sequence />
+
+      <section className="section">
+        <div className="wrap grid gap-10 lg:grid-cols-12">
+          <blockquote className="mission lg:col-span-10" data-reveal>
+            <p>&ldquo;{firm.mission}&rdquo;</p>
+          </blockquote>
+          <p className="muted lg:col-span-6" data-reveal>From the company&apos;s statement of purpose. Founded by Kevin J. Loftus in Cinnaminson, New Jersey.</p>
         </div>
       </section>
 
-      <section className="border-b border-line">
-        <div className="wrap grid lg:grid-cols-12">
-          <div data-reveal className="flex items-end gap-5 py-10 lg:col-span-5 lg:py-16">
-            <span className="t-numeral">{business.foundedYear}</span>
-            <span className="pb-2 text-[15px] leading-snug text-steel">{years} years<br />in heavy civil</span>
-          </div>
-          <dl className="grid border-t border-line sm:grid-cols-2 lg:col-span-7 lg:border-l lg:border-t-0">
+      <section className="section section-alt">
+        <div className="wrap">
+          <h2 className="h1 max-w-[16ch]" data-reveal>From first price to final pour</h2>
+          <div className="flow mt-14 lg:mt-20">
             {[
-              ["Prequalified", "PennDOT, NJDOT, PA Turnpike"],
-              ["Award", "ASHE Project of the Year, 2019"],
-            ].map(([k, v], i) => (
-              <div key={k} data-reveal style={{ ["--d" as string]: `${i * 120}ms` }} className={`flex flex-col justify-end py-8 lg:px-10 lg:py-16 ${i ? "border-t border-line sm:border-l sm:border-t-0 sm:pl-8" : "sm:pr-8"}`}>
-                <dt className="text-[14px] text-steel">{k}</dt>
-                <dd className="mt-2 text-[clamp(1.25rem,1.8vw,1.5rem)] font-semibold leading-tight tracking-[-0.015em] text-chalk">{v}</dd>
-              </div>
+              { t: "Preconstruction", d: services[1].text, items: services[1].items.slice(0, 4), href: "/capabilities#preconstruction" },
+              { t: "Design-build", d: services[0].text, items: services[0].items.slice(0, 4), href: "/capabilities#design-build" },
+              { t: "Construction", d: "Bridges, rehabilitation, retaining walls, foundations, culverts and dams.", items: ["Steel girder and concrete bridges", "Masonry arch rehabilitation", "Retaining walls", "Dam reconstruction"], href: "/capabilities#bridges" },
+            ].map((s) => (
+              <Link key={s.t} href={s.href} className="flow-step" data-reveal>
+                <h3 className="h2">{s.t}</h3>
+                <p className="mt-4 muted">{s.d}</p>
+                <ul className="mt-6 flow-list">{s.items.map((x) => <li key={x}>{x}</li>)}</ul>
+              </Link>
             ))}
-          </dl>
-        </div>
-      </section>
-
-      <section className="wrap section">
-        <div data-reveal className="flex items-end justify-between gap-6 border-b border-rule pb-6">
-          <h2 className="t-h2">Current work</h2>
-          <Link href="/projects" className="group shrink-0 text-[15px] font-semibold text-chalk">All projects <span aria-hidden className="arrow">&rarr;</span></Link>
-        </div>
-        <Link href={`/projects/${first.slug}`} data-reveal className="group mt-10 block lg:mt-14">
-          <Pic id={first.photo} sizes="(min-width:1360px) 1250px, 100vw" className="aspect-[4/3] md:aspect-[16/8]" />
-          <div className="mt-5 flex items-baseline justify-between gap-6">
-            <div>
-              <h3 className="t-h3">{first.project.name}</h3>
-              <p className="mt-1 text-[15px] text-steel">{first.project.structure}</p>
-            </div>
-            <span aria-hidden className="arrow text-[24px] text-chalk">&rarr;</span>
-          </div>
-        </Link>
-        <div className="mt-14 grid gap-14 md:grid-cols-2 md:gap-8 lg:mt-20">
-          {rest.map((c, i) => (
-            <Link key={c.slug} href={`/projects/${c.slug}`} data-reveal style={{ ["--d" as string]: `${i * 120}ms` }} className="group block">
-              <Pic id={c.photo} sizes="(min-width:768px) 48vw, 100vw" className="aspect-[4/3] md:aspect-[5/4]" />
-              <div className="mt-5 flex items-baseline justify-between gap-6">
-                <div>
-                  <h3 className="t-h3">{c.project.short}</h3>
-                  <p className="mt-1 text-[15px] text-steel">{c.project.structure}</p>
-                </div>
-                <span aria-hidden className="arrow text-[24px] text-chalk">&rarr;</span>
-              </div>
-            </Link>
-          ))}
-        </div>
-      </section>
-
-      <section className="bg-panel">
-        <div className="wrap section grid gap-12 lg:grid-cols-12 lg:gap-8">
-          <div data-reveal className="lg:col-span-6">
-            <Pic id="bLow" sizes="(min-width:1024px) 48vw, 100vw" className="aspect-[4/5] sm:aspect-[4/3] lg:aspect-[4/5]" />
-          </div>
-          <div className="lg:col-span-5 lg:col-start-8 lg:self-end">
-            <h2 data-reveal className="t-h2">What we build</h2>
-            <ul className="mt-10 border-t border-rule">
-              {business.capabilities.map((c, i) => (
-                <li key={c.name} data-reveal style={{ ["--d" as string]: `${i * 60}ms` }} className="border-b border-line">
-                  <Link href="/capabilities" className="group flex items-center justify-between py-5 text-[clamp(1.25rem,1.8vw,1.5rem)] font-semibold tracking-[-0.015em] text-chalk">
-                    {c.name}
-                    <span aria-hidden className="arrow text-[20px] text-steel group-hover:text-chalk">&rarr;</span>
-                  </Link>
-                </li>
-              ))}
-            </ul>
           </div>
         </div>
       </section>
 
-      <section className="wrap section">
-        <div className="grid gap-10 lg:grid-cols-12 lg:gap-8">
-          <h2 data-reveal className="t-h2 lg:col-span-4">Built for</h2>
-          <ul className="grid grid-cols-1 border-t border-line sm:grid-cols-2 lg:col-span-8">
-            {business.clients.map((c, i) => (
-              <li key={c} data-reveal style={{ ["--d" as string]: `${(i % 2) * 80}ms` }} className="flex min-h-[76px] items-center border-b border-line py-5 text-[18px] font-semibold leading-snug tracking-[-0.01em] text-chalk sm:min-h-[104px] sm:odd:pr-8 sm:even:border-l sm:even:pl-8">
-                {c}
+      <section className="section">
+        <div className="wrap grid gap-8 lg:grid-cols-12">
+          <h2 className="h1 lg:col-span-5" data-reveal>Year by year</h2>
+          <p className="lede lg:col-span-6 lg:col-start-7" data-reveal>The published record, newest first. Contracts named by Loftus or by the owners who awarded them.</p>
+        </div>
+        <ol className="wrap years mt-12 lg:mt-16">
+          {byYear.map((y) => {
+            const list = record.filter((r) => r.year === y);
+            return (
+              <li key={y} className="years-row" data-reveal>
+                <span className="years-y tnum">{y}</span>
+                <ul className="years-list">
+                  {list.map((r) => <li key={r.slug}><Link href={`/projects/${r.slug}`} className="years-link">{r.name}</Link></li>)}
+                </ul>
               </li>
-            ))}
-          </ul>
+            );
+          })}
+        </ol>
+        <div className="wrap mt-10"><Link href="/projects" className="link">The full timeline</Link></div>
+      </section>
+
+      <section className="section pt-0">
+        <div className="wrap grid gap-16 md:grid-cols-2 md:gap-8">
+          {[[ua, "university-avenue-untitled-03"], [sp, "st-peters-12"]].map(([s, k]) => {
+            const st = s as typeof ua;
+            return (
+              <Link key={st.slug} href={`/projects/${st.slug}`} className="tall" data-reveal>
+                <Pic k={k as string} className="aspect-[4/5]" sizes="(min-width:768px) 48vw, 100vw" />
+                <p className="muted mt-6">{st.facts.find((f) => f.label === "Photographed" || f.label === "Completed")?.value}</p>
+                <h3 className="h2 mt-2">{st.name}</h3>
+                <p className="mt-3 max-w-[44ch] muted">{st.summary}</p>
+              </Link>
+            );
+          })}
         </div>
       </section>
 
-      <section className="border-t border-line">
-        <div className="wrap section flex flex-col gap-10 lg:flex-row lg:items-end lg:justify-between">
-          <h2 data-reveal className="t-h2 max-w-[14ch]">Have a job to price?</h2>
-          <div data-reveal className="flex flex-wrap items-center gap-x-10 gap-y-5">
-            <Link href="/contact" className="group inline-flex min-h-14 items-center gap-3 bg-chalk px-8 text-[16px] font-semibold text-girder hover:bg-white">Request a bid <span aria-hidden className="arrow">&rarr;</span></Link>
-            <a href={business.phoneHref} className="text-[20px] font-semibold text-chalk">{business.phone}</a>
+      <section className="section section-alt">
+        <div className="wrap grid gap-10 lg:grid-cols-12 lg:items-end">
+          <div className="lg:col-span-7" data-reveal>
+            <h2 className="h1">{careers.philosophy}</h2>
+            <p className="lede mt-6 max-w-[42ch]">The {careers.program} puts recent graduates through a year in every part of the business.</p>
+          </div>
+          <div className="lg:col-span-4 lg:col-start-9" data-reveal>
+            <Link href="/careers" className="btn">Careers</Link>
+          </div>
+        </div>
+      </section>
+
+      <section className="section">
+        <div className="wrap grid gap-10 lg:grid-cols-12">
+          <h2 className="h1 lg:col-span-6" data-reveal>Call the office</h2>
+          <div className="lg:col-span-5 lg:col-start-8" data-reveal>
+            <a href={firm.phoneHref} className="contact-big block">{firm.phone}</a>
+            <a href={`mailto:${firm.email}`} className="link mt-3 inline-block break-all">{firm.email}</a>
+            <div className="mt-8"><Link href="/contact" className="btn">Request a bid</Link></div>
           </div>
         </div>
       </section>

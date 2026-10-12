@@ -1,57 +1,42 @@
 import Link from "next/link";
-import PageHead from "@/components/PageHead";
 import Pic from "@/components/Pic";
-import { business, formatUSD } from "@/lib/business";
-import type { PhotoKey } from "@/lib/photos";
-import { pageMeta } from "@/lib/pageMeta";
+import RecordIndex from "@/components/RecordIndex";
+import { studies } from "@/lib/site";
+import { covers } from "@/lib/alloc";
+import { meta } from "@/lib/meta";
 
-export const metadata = pageMeta("Projects", "Bridges, walls and heavy civil projects by Loftus Construction.", "/projects");
+export const metadata = meta("Projects", "Bridges, masonry arches, walls and dams, year by year since 2015, plus three recent jobs in photographs.", "/projects");
 
-const cover: Record<string, PhotoKey> = {
-  "brownsville-road": "bMixer",
-  "university-avenue": "uDeep",
-  "st-peters-road": "sWall",
-};
-
-export default function ProjectsPage() {
-  const record = [...business.projects].sort((a, b) => (b.value ?? 0) - (a.value ?? 0));
+export default function Projects() {
   return (
     <>
-      <PageHead title="Projects" />
-      <section className="wrap grid gap-x-8 gap-y-14 pb-20 md:grid-cols-3 lg:pb-32">
-        {business.photoProjects.map((p, i) => (
-          <Link key={p.slug} href={`/projects/${p.slug}`} data-reveal style={{ ["--d" as string]: `${i * 120}ms` }} className="group block">
-            <Pic id={cover[p.slug]} sizes="(min-width:768px) 32vw, 100vw" className="aspect-[4/3] md:aspect-[3/4]" />
-            <div className="mt-5 flex items-baseline justify-between gap-4 border-t border-rule pt-4">
-              <div>
-                <h2 className="t-h3">{p.short}</h2>
-                <p className="mt-1 text-[15px] text-steel">{p.structure}</p>
-              </div>
-              <span aria-hidden className="arrow text-[22px] text-chalk">&rarr;</span>
-            </div>
-          </Link>
-        ))}
+      <section className="page-head">
+        <div className="wrap page-head-grid">
+          <h1 className="display page-title" data-reveal>Projects</h1>
+          <p className="lede page-lede" data-reveal>Three recent jobs told in photographs, then the record year by year.</p>
+        </div>
       </section>
-
-      <section id="record" className="border-t border-line">
-        <div className="wrap py-20 lg:py-28">
-          <h2 data-reveal className="t-h2">Project record</h2>
-          <div role="table" aria-label="Project record" className="mt-10 lg:mt-14">
-            <div role="row" className="hidden border-b border-rule pb-3 md:grid md:grid-cols-12 md:gap-6">
-              <span role="columnheader" className="label col-span-5">Project</span>
-              <span role="columnheader" className="label col-span-3">Owner</span>
-              <span role="columnheader" className="label col-span-2">Location</span>
-              <span role="columnheader" className="label col-span-2 text-right">Contract</span>
-            </div>
-            {record.map((r) => (
-              <div role="row" key={r.name} className="grid grid-cols-1 gap-1 border-b border-line py-5 transition-colors hover:bg-panel md:grid-cols-12 md:gap-6">
-                <span role="cell" className="text-[17px] font-semibold text-chalk md:col-span-5">{r.name}</span>
-                <span role="cell" className="text-[15px] text-steel md:col-span-3 md:text-body">{r.owner ?? ""}</span>
-                <span role="cell" className="text-[15px] text-steel md:col-span-2">{r.location ?? ""}</span>
-                <span role="cell" className="text-[15px] tabular-nums text-body md:col-span-2 md:text-right">{r.value ? formatUSD(r.value) : ""}</span>
-              </div>
-            ))}
-          </div>
+      <section className="wrap pb-20">
+        <ul className="studyrows">
+          {studies.map((s) => (
+            <li key={s.slug} data-reveal>
+              <Link href={`/projects/${s.slug}`} className="studyrow">
+                <Pic k={covers[s.slug]} className="aspect-[3/2]" sizes="(min-width:1024px) 34vw, 100vw" />
+                <div>
+                  <p className="muted">{s.type}</p>
+                  <h2 className="h2 mt-2">{s.name}</h2>
+                  <p className="mt-4 max-w-[46ch]">{s.summary}</p>
+                </div>
+              </Link>
+            </li>
+          ))}
+        </ul>
+      </section>
+      <section className="section section-alt" id="record">
+        <div className="wrap">
+          <h2 className="h1" data-reveal>Timeline</h2>
+          <p className="lede mt-5 mb-12 max-w-[50ch]" data-reveal>Twenty three projects named by Loftus or by their owners. Filter by type, owner or period.</p>
+          <RecordIndex variant="timeline" />
         </div>
       </section>
     </>
