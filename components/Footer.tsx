@@ -1,40 +1,42 @@
 import Link from "next/link";
-import Image from "next/image";
-import { nav } from "./nav";
-import { business } from "@/lib/business";
+import { firm, nav, prequalifications } from "@/lib/site";
+import { theme } from "@/lib/theme";
+import Logo from "./Logo";
 
 export default function Footer() {
   return (
-    <footer className="on-dark grid-blue text-white">
-      <div className="wrap grid gap-12 py-16 md:grid-cols-12 lg:py-20">
-        <div className="md:col-span-5">
-          <Image
-            src="/images/logos/current-logo-white.png"
-            alt={business.legalName}
-            width={1200}
-            height={285}
-            className="h-auto w-[200px]"
-          />
+    <footer className="site-footer">
+      <div className="wrap grid gap-12 py-16 lg:grid-cols-12 lg:py-20">
+        <div className="lg:col-span-4">
+          <Logo white={theme.footerWhite} className="h-[40px] w-auto" />
+          <p className="mt-6 max-w-[34ch] foot-muted">Heavy civil construction from Cinnaminson, New Jersey, since {firm.founded}.</p>
         </div>
-        <div className="text-[15px] leading-7 md:col-span-4">
-          <p>{business.street}</p>
-          <p>{business.city}, {business.state} {business.zip}</p>
-          <p className="mt-4"><a href={business.phoneHref} className="mono">{business.phone}</a></p>
-          <p><a href={`mailto:${business.email}`} className="break-all text-mist hover:text-white">{business.email}</a></p>
+        <div className="lg:col-span-3">
+          <p className="foot-h">Office</p>
+          <address className="not-italic">
+            {firm.street}<br />{firm.city}, {firm.state} {firm.zip}
+          </address>
+          <p className="mt-4">
+            <a href={firm.phoneHref} className="foot-link">{firm.phone}</a><br />
+            <span className="foot-muted">Fax {firm.fax}</span><br />
+            <a href={`mailto:${firm.email}`} className="foot-link break-all">{firm.email}</a>
+          </p>
         </div>
-        <nav aria-label="Footer" className="md:col-span-3">
-          <ul className="space-y-1 text-[15px] leading-7">
-            {nav.map((item) => (
-              <li key={item.href}>
-                <Link href={item.href} className="text-mist hover:text-white">{item.label}</Link>
-              </li>
-            ))}
+        <div className="lg:col-span-2">
+          <p className="foot-h">Site</p>
+          <ul className="space-y-1">
+            {nav.map((n) => <li key={n.href}><Link href={n.href} className="foot-link">{n.label}</Link></li>)}
           </ul>
-        </nav>
+        </div>
+        <div className="lg:col-span-3">
+          <p className="foot-h">Prequalified with</p>
+          <p className="foot-muted text-[14px] leading-relaxed">{prequalifications.slice(0, 7).join(", ")} and more.</p>
+          <Link href="/about#prequalifications" className="foot-link mt-2 inline-block text-[14px]">Full list</Link>
+        </div>
       </div>
-      <div className="wrap flex flex-col gap-2 border-t border-white/15 py-6 text-[13px] text-mist sm:flex-row sm:justify-between">
-        <p>&copy; {new Date().getFullYear()} {business.legalName}</p>
-        {business.status === "demo" ? <p>Preview by {business.builder.name}. Not the official site.</p> : null}
+      <div className="wrap foot-base flex flex-col gap-2 py-6 text-[13px] sm:flex-row sm:justify-between">
+        <p>{firm.legalName}, {firm.descriptor}</p>
+        <p>Design preview by MJL Collective. Not the live site.</p>
       </div>
     </footer>
   );

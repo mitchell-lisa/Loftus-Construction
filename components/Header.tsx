@@ -1,15 +1,16 @@
 "use client";
 
 import Link from "next/link";
-import Image from "next/image";
 import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
-import { nav } from "./nav";
-import { business } from "@/lib/business";
+import { firm, nav } from "@/lib/site";
+import { theme } from "@/lib/theme";
+import Logo from "./Logo";
 
 export default function Header() {
   const pathname = usePathname();
   const [open, setOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
 
   useEffect(() => setOpen(false), [pathname]);
   useEffect(() => {
@@ -18,103 +19,71 @@ export default function Header() {
     window.addEventListener("keydown", onKey);
     return () => window.removeEventListener("keydown", onKey);
   }, [open]);
+  useEffect(() => {
+    const on = () => setScrolled(window.scrollY > 24);
+    on();
+    window.addEventListener("scroll", on, { passive: true });
+    return () => window.removeEventListener("scroll", on);
+  }, []);
 
   const active = (href: string) => pathname === href || pathname.startsWith(href + "/");
+  const overlay = theme.overlayHeader && pathname === "/" && !scrolled;
+  const white = theme.headerWhite || overlay;
 
   return (
-    <header className="sticky top-0 z-40 border-b border-navy bg-white">
-      <div className="wrap flex h-[var(--header-h)] items-center justify-between gap-6">
-        <Link href="/" aria-label={`${business.shortName}, home`} className="flex shrink-0 items-center">
-          <Image
-            src="/images/logos/current-logo.png"
-            alt={business.legalName}
-            width={1200}
-            height={285}
-            priority
-            className="h-[38px] w-auto lg:h-[50px]"
-          />
+    <header className={`site-header ${overlay ? "is-overlay" : ""} ${scrolled ? "is-scrolled" : ""}`}>
+      <div className="wrap header-row">
+        <Link href="/" aria-label={`${firm.shortName}, home`} className="header-logo">
+          <Logo white={white} className="h-[34px] w-auto lg:h-[44px]" />
         </Link>
-
         <nav aria-label="Main" className="hidden lg:block">
-          <ul className="flex items-center gap-9 text-[15px]">
+          <ul className="header-nav">
             {nav.map((item) => (
               <li key={item.href}>
-                <Link
-                  href={item.href}
-                  aria-current={active(item.href) ? "page" : undefined}
-                  className={`py-2 ${active(item.href) ? "text-navy underline decoration-1 underline-offset-[10px]" : "text-steel hover:text-navy"}`}
-                >
+                <Link href={item.href} aria-current={active(item.href) ? "page" : undefined} className="nav-link">
                   {item.label}
                 </Link>
               </li>
             ))}
             <li>
-              <a href={business.phoneHref} className="mono text-[14px] text-navy">
-                {business.phone}
-              </a>
+              <a href={firm.phoneHref} className="nav-phone">{firm.phone}</a>
             </li>
           </ul>
         </nav>
-
-        <button
-          type="button"
-          onClick={() => setOpen(true)}
-          aria-expanded={open}
-          aria-controls="menu"
-          className="flex h-11 items-center gap-3 px-1 text-[15px] font-semibold text-navy lg:hidden"
-        >
+        <button type="button" onClick={() => setOpen(true)} aria-expanded={open} aria-controls="menu" className="menu-btn lg:hidden">
           Menu
-          <span aria-hidden className="flex w-5 flex-col gap-[5px]">
-            <span className="h-[2px] bg-navy" />
-            <span className="h-[2px] bg-navy" />
+          <span aria-hidden className="flex w-6 flex-col gap-[6px]">
+            <span className="block h-[2px] bg-current" />
+            <span className="block h-[2px] bg-current" />
           </span>
         </button>
       </div>
 
-      <div
-        id="menu"
-        role="dialog"
-        aria-modal="true"
-        aria-label="Menu"
-        hidden={!open}
-        className="on-dark grid-blue fixed inset-0 z-50 h-[100dvh] overflow-y-auto text-white lg:hidden"
-      >
-        <div className="wrap flex h-[var(--header-h)] items-center justify-between">
-          <Image
-            src="/images/logos/current-logo-white.png"
-            alt=""
-            width={1200}
-            height={285}
-            className="h-[38px] w-auto"
-          />
-          <button type="button" onClick={() => setOpen(false)} className="flex h-11 items-center gap-3 px-1 text-[15px] font-semibold">
+      <div id="menu" role="dialog" aria-modal="true" aria-label="Menu" hidden={!open} className="menu fixed inset-0 z-50 h-[100dvh] w-screen overflow-y-auto lg:hidden">
+        <div className="wrap header-row">
+          <Logo white={theme.menuWhite} className="h-[34px] w-auto" />
+          <button type="button" onClick={() => setOpen(false)} className="menu-btn">
             Close
-            <span aria-hidden className="relative block h-5 w-5">
-              <span className="absolute left-0 top-1/2 h-[2px] w-5 rotate-45 bg-white" />
-              <span className="absolute left-0 top-1/2 h-[2px] w-5 -rotate-45 bg-white" />
+            <span aria-hidden className="relative block h-6 w-6">
+              <span className="absolute left-0 top-1/2 h-[2px] w-6 rotate-45 bg-current" />
+              <span className="absolute left-0 top-1/2 h-[2px] w-6 -rotate-45 bg-current" />
             </span>
           </button>
         </div>
-        <nav aria-label="Mobile" className="wrap pb-12 pt-8">
-          <ul className="border-t border-white/20">
-            <li className="border-b border-white/20">
-              <Link href="/" className="flex min-h-16 items-center text-[28px] font-medium tracking-tight">Home</Link>
-            </li>
-            {nav.map((item) => (
-              <li key={item.href} className="border-b border-white/20">
-                <Link
-                  href={item.href}
-                  aria-current={active(item.href) ? "page" : undefined}
-                  className="flex min-h-16 items-center text-[28px] font-medium tracking-tight"
-                >
+        <nav aria-label="Mobile" className="wrap pb-12 pt-6">
+          <ul className="menu-list">
+            {[{ href: "/", label: "Home" }, ...nav].map((item) => (
+              <li key={item.href}>
+                <Link href={item.href} aria-current={(item.href === "/" ? pathname === "/" : active(item.href)) ? "page" : undefined} className="menu-link">
                   {item.label}
                 </Link>
               </li>
             ))}
           </ul>
-          <div className="mt-10 space-y-2 text-[17px]">
-            <a href={business.phoneHref} className="mono block">{business.phone}</a>
-            <a href={`mailto:${business.email}`} className="block break-all text-mist">{business.email}</a>
+          <div className="menu-meta">
+            <a href={firm.phoneHref} className="block">{firm.phone}</a>
+            <a href={`mailto:${firm.email}`} className="block break-all">{firm.email}</a>
+            <p>{firm.street}, {firm.city}, {firm.state}</p>
           </div>
         </nav>
       </div>

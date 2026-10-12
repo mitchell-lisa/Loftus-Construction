@@ -1,29 +1,31 @@
 import Image from "next/image";
-import { photos, type PhotoKey } from "@/lib/photos";
+import { photo } from "@/lib/photos";
 
 export default function Pic({
-  id,
+  k,
   className = "aspect-[3/2]",
   sizes,
-  position = "object-center",
   priority = false,
-  caption = false,
+  caption,
+  pos = "50% 50%",
+  imgClass = "",
 }: {
-  id: PhotoKey;
+  k: string | null | undefined;
   className?: string;
   sizes: string;
-  position?: string;
   priority?: boolean;
-  caption?: boolean | string;
+  caption?: string | null;
+  pos?: string;
+  imgClass?: string;
 }) {
-  const photo = photos[id];
-  const text = typeof caption === "string" ? caption : caption ? (photo as { caption?: string }).caption : null;
+  if (!k) return null;
+  const p = photo(k);
   return (
-    <figure className="min-w-0">
-      <div className={`relative overflow-hidden bg-stone ${className}`}>
-        <Image src={photo.src} alt={photo.alt} fill sizes={sizes} priority={priority} quality={82} className={`zoom object-cover ${position}`} />
+    <figure className="pic min-w-0">
+      <div className={`pic-frame relative overflow-hidden ${className}`}>
+        <Image src={p.src} alt={p.alt} fill sizes={sizes} priority={priority} quality={82} className={`object-cover ${imgClass}`} style={{ objectPosition: pos }} />
       </div>
-      {text ? <figcaption className="mono mt-3 text-[12px] text-steel">{text}</figcaption> : null}
+      {caption ? <figcaption className="figcap">{caption}</figcaption> : null}
     </figure>
   );
 }
