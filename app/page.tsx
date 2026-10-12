@@ -51,10 +51,10 @@ export default function Home() {
           </div>
           <div className="atlas mt-14 lg:mt-20">
             {[["Philadelphia", phl], ["Pennsylvania", pa], ["New Jersey", nj]].map(([label, list]) => (
-              <div key={label as string} className="atlas-col" data-reveal>
+              <div key={label as string} className={`atlas-col atlas-${(label as string).toLowerCase().replace(" ", "-")}`} data-reveal>
                 <h3 className="atlas-h"><span>{label as string}</span><span className="atlas-n tnum">{(list as typeof pa).length}</span></h3>
                 <ul>
-                  {(list as typeof pa).slice(0, 9).map((r) => (
+                  {(list as typeof pa).map((r) => (
                     <li key={r.slug}>
                       <Link href={`/projects/${r.slug}`} className="atlas-row">
                         <span>{r.name}</span>

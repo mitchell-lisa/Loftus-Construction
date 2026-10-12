@@ -41,7 +41,7 @@
 .keyfacts dt { color: var(--muted); }
 .keyfacts dd { font-family: var(--display); font-weight: 600; font-size: 34px; color: var(--head); letter-spacing: -0.02em; }
 .atlas { display: grid; gap: 48px; }
-@media (min-width: 1024px) { .atlas { grid-template-columns: repeat(3, 1fr); gap: 40px; } }
+@media (min-width: 1024px) { .atlas { grid-template-columns: 1fr 2fr; gap: 56px 40px; align-items: start; } .atlas-philadelphia { grid-column: 1; grid-row: 1; } .atlas-new-jersey { grid-column: 1; grid-row: 2; } .atlas-pennsylvania { grid-column: 2; grid-row: 1 / span 2; } .atlas-pennsylvania ul { columns: 2; column-gap: 40px; } .atlas-pennsylvania li { break-inside: avoid; } }
 .atlas-h { display: flex; justify-content: space-between; align-items: baseline; font-size: 30px; padding-bottom: 14px; border-bottom: 2px solid var(--head); }
 .atlas-n { font-family: var(--body); font-size: 15px; font-weight: 400; color: var(--muted); }
 .atlas-row { display: grid; gap: 2px; padding: 14px 0; border-bottom: 1px solid var(--line); font-weight: 600; }
