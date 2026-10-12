@@ -81,15 +81,21 @@ export default function CaseStudy({ s }: { s: Study }) {
                   <p className="chapter-p">{c.text}</p>
                 </div>
                 <div className="chapter-photos">
-                  {keys.map((k, j) => (
-                    <Pic
-                      key={k}
-                      k={k}
-                      className={portrait(k) ? "aspect-[3/4]" : j === 0 ? "aspect-[3/2]" : "aspect-[4/3]"}
-                      sizes={style === "strip" ? "(min-width:1024px) 50vw, 85vw" : "(min-width:1024px) 60vw, 100vw"}
-                      caption={c.date}
-                    />
-                  ))}
+                  {keys.map((k, j) => {
+                    const anyPortrait = keys.some(portrait);
+                    const solo = keys.length === 1;
+                    const lead = !solo && keys.length % 2 === 1 && j === 0 && !portrait(k);
+                    const cls = solo ? (portrait(k) ? "aspect-[4/5]" : "aspect-[16/9]") : lead ? "aspect-[16/9]" : anyPortrait ? "aspect-[4/5]" : "aspect-[4/3]";
+                    return (
+                      <div key={k} className={solo ? (portrait(k) ? "solo-portrait" : "span-all") : lead ? "span-all" : ""}>
+                        <Pic
+                          k={k}
+                          className={cls}
+                          sizes={style === "strip" ? "(min-width:1024px) 50vw, 85vw" : "(min-width:1024px) 60vw, 100vw"}
+                        />
+                      </div>
+                    );
+                  })}
                 </div>
               </div>
             </div>
