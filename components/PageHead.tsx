@@ -1,8 +1,17 @@
-export default function PageHead({ title, line }: { title: string; line?: string }) {
+import Pic from "./Pic";
+
+export default function PageHead({ title, lede, photo, pos }: { title: string; lede?: string; photo?: string | null; pos?: string }) {
   return (
-    <div className="wrap grid gap-6 pb-10 pt-14 lg:grid-cols-12 lg:gap-8 lg:pb-20 lg:pt-28">
-      <h1 className="t-display lg:col-span-8">{title}</h1>
-      {line ? <p className="serif self-end text-[clamp(1.25rem,1.8vw,1.6rem)] italic leading-snug text-steel lg:col-span-4 lg:pb-3">{line}</p> : null}
-    </div>
+    <section className={`page-head ${photo ? "has-photo" : ""}`}>
+      <div className="wrap page-head-grid">
+        <h1 className="display page-title" data-reveal>{title}</h1>
+        {lede ? <p className="lede page-lede" data-reveal>{lede}</p> : null}
+      </div>
+      {photo ? (
+        <div className="page-head-photo" data-reveal>
+          <Pic k={photo} className="aspect-[16/9] lg:aspect-[21/8]" sizes="100vw" priority pos={pos} />
+        </div>
+      ) : null}
+    </section>
   );
 }

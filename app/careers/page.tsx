@@ -1,30 +1,66 @@
 import PageHead from "@/components/PageHead";
 import Pic from "@/components/Pic";
-import { business } from "@/lib/business";
-import { photos } from "@/lib/photos";
-import { pageMeta } from "@/lib/pageMeta";
+import { firm, careers } from "@/lib/site";
+import { role } from "@/lib/alloc";
+import { meta } from "@/lib/meta";
 
-export const metadata = pageMeta("Careers", "The Bench Strength Program: one year of training for recent engineering graduates.", "/careers", photos.bCrew);
+export const metadata = meta("Careers", "The Bench Strength Program: a one year training program for recent civil engineering graduates.", "/careers");
 
-export default function CareersPage() {
-  const c = business.careers!;
+export default function Careers() {
   return (
     <>
-      <PageHead title="Careers" line="We grow engineers from within." />
-      <div className="wrap">
-        <Pic id="bCrew" sizes="100vw" priority className="aspect-[4/3] md:aspect-[21/9]" position="object-[center_45%]" />
-      </div>
-      <section className="wrap grid gap-12 py-20 lg:grid-cols-12 lg:gap-8 lg:py-28">
-        <div className="lg:col-span-7">
-          <h2 className="text-[clamp(2rem,4vw,3.25rem)]">{c.program}</h2>
-          <p className="mt-6 max-w-[54ch] text-[18px] text-steel">
-            One year of training for recent graduates, preferably in civil engineering. Estimating, project engineering, equipment, contracts and safety.
-          </p>
+      <PageHead title={careers.philosophy} lede="Loftus hires graduates and builds its project managers, estimators and leaders from inside the company." photo={role.careersHero} />
+
+      <section className="section">
+        <div className="wrap grid gap-12 lg:grid-cols-12">
+          <div className="lg:col-span-5" data-reveal>
+            <h2 className="h1">{careers.program}</h2>
+            <p className="lede mt-6">{careers.blurb} One year, rotating through the whole business.</p>
+          </div>
+          <ol className="rotations lg:col-span-6 lg:col-start-7" data-reveal>
+            {careers.rotations.map((r) => <li key={r}>{r}</li>)}
+          </ol>
         </div>
-        <div className="border-t border-navy pt-6 text-[16px] lg:col-span-4 lg:col-start-9">
-          <p className="font-semibold text-navy">Resumes to {business.careersContact}</p>
-          <a href={`mailto:${business.careersEmail}`} className="link mt-2 inline-block break-all text-navy">{business.careersEmail}</a>
-          <p className="mt-6 text-[14px] text-steel">An equal opportunity employer.</p>
+      </section>
+
+      <section className="section section-alt">
+        <div className="wrap grid gap-12 lg:grid-cols-12">
+          <div className="lg:col-span-6" data-reveal>
+            <h2 className="h2">A path that stays in the firm</h2>
+            <p className="mt-4 max-w-[46ch]">One of the firm&apos;s directors joined as a Drexel student in 1997 and moved through every field and office role on the way up.</p>
+            <ol className="path mt-8">
+              {careers.path.map((p) => <li key={p}>{p}</li>)}
+            </ol>
+          </div>
+          <div className="lg:col-span-5 lg:col-start-8" data-reveal>
+            <Pic k={role.careersDetail} className="aspect-[4/5]" sizes="(min-width:1024px) 38vw, 100vw" />
+          </div>
+        </div>
+      </section>
+
+      <section className="section">
+        <div className="wrap">
+          <h2 className="h2 max-w-[22ch]" data-reveal>People stay. In 2019 the company honored crew and staff for these years of service.</h2>
+          <ul className="service-years mt-12" data-reveal>
+            {careers.service.map((s) => (
+              <li key={s.years}>
+                <span className="sy-n tnum">{s.years}</span>
+                <span className="sy-l">years</span>
+                <span className="sy-r">{s.roles}</span>
+              </li>
+            ))}
+          </ul>
+        </div>
+      </section>
+
+      <section className="section section-dark">
+        <div className="wrap grid gap-10 lg:grid-cols-12">
+          <h2 className="h1 lg:col-span-6" data-reveal>Apply</h2>
+          <div className="lg:col-span-6" data-reveal>
+            <p className="lede">Send a resume to {firm.careersContact}.</p>
+            <a href={`mailto:${firm.careersEmail}`} className="btn mt-8 break-all">{firm.careersEmail}</a>
+            <p className="mt-8 text-[15px] opacity-80">Loftus Construction is an Equal Opportunity Employer.</p>
+          </div>
         </div>
       </section>
     </>
