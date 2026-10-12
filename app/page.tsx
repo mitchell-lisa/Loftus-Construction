@@ -79,7 +79,7 @@ export default function Home() {
       <section className="band">
         <div className="wrap band-grid">
           {[
-            [String(firm.founded), "Founded in Cinnaminson, NJ"],
+            [String(firm.founded), "Year founded"],
             [String(prequalifications.length), "Agencies prequalified with"],
             [String(associations.length), "Industry associations"],
             [usdShort(largest), "Largest published contract"],
