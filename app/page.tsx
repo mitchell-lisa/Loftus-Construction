@@ -17,7 +17,7 @@ export default function Home() {
           <blockquote className="mission lg:col-span-10" data-reveal>
             <p>&ldquo;{firm.mission}&rdquo;</p>
           </blockquote>
-          <p className="muted lg:col-span-6" data-reveal>From the company&apos;s statement of purpose. Founded by Kevin J. Loftus in Cinnaminson, New Jersey.</p>
+          <p className="muted lg:col-span-6" data-reveal>From the company&apos;s statement of purpose. Founded by Kevin J. Loftus. Based in King of Prussia, Pennsylvania.</p>
         </div>
       </section>
 

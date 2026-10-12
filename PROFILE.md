@@ -29,7 +29,7 @@ Not published, because they were not supplied or are not safe to state:
 | Legal name | Loftus Construction, Inc. | site footer, all pages |
 | Positioning line used by the company | "Engineers and Contractors" | site header and footer, all pages |
 | Category | Heavy civil / heavy highway. Bridges, culverts, retaining walls, foundations, structural rehabilitation, streambank stabilization, dams | construction.php |
-| Address | 1903 Taylor's Lane, Cinnaminson, NJ 08077 | site footer; Yahoo Local listing gives "1903 Taylors Ln, Cinnaminson Twp, NJ 08077" |
+| Address | 410 Feheley Drive, King of Prussia, PA 19406 | confirmed by Mitchell from the signed services agreement (Oct 2026); replaces the old New Jersey office address |
 | Phone | (856) 786-6607 | site footer, all pages |
 | Fax | (856) 786-6641 | site footer, all pages |
 | General email | kloftus@loftusconstruction.com | site footer, all pages |
@@ -127,7 +127,7 @@ Loftus already has the strongest raw material of any of these: named clients, a 
 
 ## UNKNOWN. Do not fill these in.
 
-1. **Google Business Profile: rating, review count, category, hours, and the map pin's cid.** Google Maps and Yelp both refuse automated access from here. Mitchell, this is a thirty-second job on your phone: search "Loftus Construction Cinnaminson" in Google Maps and send me the rating, the review count, the hours if any are listed, and the share link. Without it there will be no hours section and no reviews section on the site.
+1. **Google Business Profile: rating, review count, category, hours, and the map pin's cid.** Google Maps and Yelp both refuse automated access from here. Mitchell, this is a thirty-second job on your phone: search "Loftus Construction King of Prussia" in Google Maps and send me the rating, the review count, the hours if any are listed, and the share link. Without it there will be no hours section and no reviews section on the site.
 2. **Office hours.** Not published anywhere. Will not be shipped.
 3. **Current headcount and current staff roster.** Third-party estimates exist but are unreliable and none belong on the site.
 4. **Whether Kevin J. Loftus is still President, and whether Valerio and Given are still there.** The team page has not been touched since 2019.

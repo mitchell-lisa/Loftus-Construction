@@ -5,7 +5,7 @@ import { firm } from "@/lib/site";
 import { role } from "@/lib/alloc";
 import { meta } from "@/lib/meta";
 
-export const metadata = meta("Contact and bid requests", "Call (856) 786-6607 or send a bid request to Loftus Construction in Cinnaminson, New Jersey.", "/contact");
+export const metadata = meta("Contact and bid requests", "Call (856) 786-6607 or send a bid request to Loftus Construction in King of Prussia, Pennsylvania.", "/contact");
 
 export default function Contact() {
   return (
