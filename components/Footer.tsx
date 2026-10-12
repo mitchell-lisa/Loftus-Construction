@@ -9,7 +9,7 @@ export default function Footer() {
       <div className="wrap grid gap-12 py-16 lg:grid-cols-12 lg:py-20">
         <div className="lg:col-span-4">
           <Logo white={theme.footerWhite} className="h-[40px] w-auto" />
-          <p className="mt-6 max-w-[34ch] foot-muted">Heavy civil construction from King of Prussia, Pennsylvania, since {firm.founded}.</p>
+          <p className="mt-6 max-w-[34ch] foot-muted">Heavy civil construction from <span className="whitespace-nowrap">King of Prussia,</span> Pennsylvania, since {firm.founded}.</p>
         </div>
         <div className="lg:col-span-3">
           <p className="foot-h">Office</p>
